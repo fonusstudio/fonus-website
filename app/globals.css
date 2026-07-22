@@ -646,7 +646,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .pricing-grid-2 { grid-template-columns: repeat(2, 1fr); }
 .pricing-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .price-card {
-  min-height: 360px;
+  min-height: 440px;
   padding: 32px;
   position: relative;
   display: flex;
@@ -660,8 +660,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .price-card-popular { border-color: var(--orange); box-shadow: 0 0 40px rgba(255,97,35,.09); }
 .popular-badge { position: absolute; right: 20px; top: 20px; padding: 5px 9px; border-radius: 999px; background: rgba(255,97,35,.13); color: var(--orange); font-family: "Lemon Milk"; font-size: 10px; font-weight: 700; text-transform: uppercase; }
 .price-card h3 { padding-right: 100px; }
-.price { margin: 44px 0 16px; color: var(--paper); font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
-.price-card > p:not(.price) { color: var(--muted); }
+.price { margin: 40px 0 26px; color: var(--paper); font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
+.price-features { margin: 0 0 34px; padding: 0; display: grid; gap: 14px; list-style: none; }
+.price-features li { display: grid; grid-template-columns: 24px 1fr; gap: 11px; align-items: center; color: var(--muted); line-height: 1.45; }
+.price-feature-icon { width: 22px; height: 22px; position: relative; display: grid; place-items: center; border: 1px solid rgba(255,97,35,.55); border-radius: 7px 50% 50% 50%; background: rgba(255,97,35,.07); transform: rotate(-8deg); }
+.price-feature-icon::before { content: ""; width: 2px; height: 10px; position: absolute; border-radius: 2px; background: var(--orange); }
+.price-feature-icon::after { content: ""; width: 2px; height: 6px; position: absolute; border-radius: 2px; background: var(--orange); box-shadow: -4px 1px 0 var(--orange), 4px 1px 0 var(--orange); }
 .price-card .button { margin-top: auto; align-self: flex-start; }
 .brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: .75rem; }
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
@@ -830,7 +834,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .service-detail-list article div { grid-template-columns: 1fr; }
   .service-detail-list small { grid-column: 1; }
   .pricing-grid-2, .pricing-grid-3 { grid-template-columns: 1fr; }
-  .price-card { min-height: 320px; }
+  .price-card { min-height: 0; }
   .work-placeholder:nth-child(n) { grid-column: span 12; }
   .editorial-duo-reverse .studio-visual { order: 2; }
   .field-grid { grid-template-columns: 1fr; }

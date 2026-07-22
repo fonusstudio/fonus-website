@@ -298,7 +298,7 @@ function HomePage({ locale }: { locale: Locale }) {
   );
 }
 
-function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; price: string; text: string; popular?: boolean }[] }) {
+function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; price: string; features: readonly string[]; popular?: boolean }[] }) {
   return (
     <div className={`pricing-grid pricing-grid-${items.length}`}>
       {items.map((item) => (
@@ -306,7 +306,14 @@ function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name
           {item.popular && <span className="popular-badge">{copy[locale].services.popular}</span>}
           <h3>{item.name}</h3>
           <p className="price">{item.price}</p>
-          <p>{item.text}</p>
+          <ul className="price-features">
+            {item.features.map((feature) => (
+              <li key={feature}>
+                <span className="price-feature-icon" aria-hidden="true" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
           <Link className="button button-secondary" href={pageHref(locale, "contact")}>{copy[locale].nav.book}</Link>
         </article>
       ))}
