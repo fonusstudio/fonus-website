@@ -34,9 +34,9 @@ function Header({ locale, page }: Props) {
             <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
             <span>{locale.toUpperCase()}</span>
           </Link>
-          <a className="button button-primary header-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
+          <Link className="button button-primary header-cta" href={pageHref(locale, "contact")}>
             {t.book}
-          </a>
+          </Link>
           <details className="mobile-menu">
             <summary aria-label={t.menu}><span /><span /></summary>
             <nav>
@@ -45,7 +45,7 @@ function Header({ locale, page }: Props) {
                 <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
                 <span>{locale.toUpperCase()}</span>
               </Link>
-              <a href={BOOKING_URL} target="_blank" rel="noreferrer">{t.book}</a>
+              <Link href={pageHref(locale, "contact")}>{t.book}</Link>
             </nav>
           </details>
         </div>
@@ -105,7 +105,7 @@ function ButtonRow({ locale, secondary = true }: { locale: Locale; secondary?: b
   const t = copy[locale].home;
   return (
     <div className="button-row">
-      <a className="button button-primary" href={BOOKING_URL} target="_blank" rel="noreferrer">{t.primary}</a>
+      <Link className="button button-primary" href={pageHref(locale, "contact")}>{t.primary}</Link>
       {secondary && <Link className="button button-secondary" href={pageHref(locale, "services")}>{t.secondary}</Link>}
     </div>
   );
@@ -172,11 +172,9 @@ function HomePage({ locale }: { locale: Locale }) {
 
       <div className="motion-ribbon" aria-hidden="true">
         <div className="motion-ribbon-track">
-          {[0, 1].map((group) => (
-            <div className="motion-ribbon-group" key={group}>
-              {ribbonItems.map((item) => <span key={`${group}-${item}`}>{item}<i>✦</i></span>)}
-            </div>
-          ))}
+          <div className="motion-ribbon-group">
+            {ribbonItems.map((item) => <span key={item}>{item}<i>✦</i></span>)}
+          </div>
         </div>
       </div>
 
@@ -217,7 +215,6 @@ function HomePage({ locale }: { locale: Locale }) {
                 <Image src={serviceImages[index]} alt="" fill sizes="(max-width: 800px) 100vw, 50vw" unoptimized />
               </div>
               <div className="service-card-body">
-                <span className="card-index">0{index + 1}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
                 <span className="card-link">{locale === "es" ? "Ver servicio" : "View service"} <b>↗</b></span>
@@ -288,11 +285,6 @@ function HomePage({ locale }: { locale: Locale }) {
           <h2>{t.home.testimonialsTitle}</h2>
           <p>{t.home.testimonialsText}</p>
         </div>
-        <div className="trust-stats">
-          <div><strong>4</strong><span>{locale === "es" ? "micrófonos" : "microphones"}</span></div>
-          <div><strong>3</strong><span>{locale === "es" ? "cámaras 4K" : "4K cameras"}</span></div>
-          <div><strong>48h</strong><span>{locale === "es" ? "archivos originales" : "original files"}</span></div>
-        </div>
       </section>
 
       <section className="section-shell section-pad faq-section">
@@ -315,7 +307,7 @@ function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name
           <h3>{item.name}</h3>
           <p className="price">{item.price}</p>
           <p>{item.text}</p>
-          <a className="button button-secondary" href={BOOKING_URL} target="_blank" rel="noreferrer">{copy[locale].nav.book}</a>
+          <Link className="button button-secondary" href={pageHref(locale, "contact")}>{copy[locale].nav.book}</Link>
         </article>
       ))}
     </div>
