@@ -335,10 +335,10 @@ function ServicesPage({ locale }: { locale: Locale }) {
         />
       </section>
       <section className="section-shell section-pad">
-        <SectionHeading eyebrow="01—04" title={t.detailTitle} />
+        <SectionHeading eyebrow={locale === "es" ? "Lo que hacemos" : "What we do"} title={t.detailTitle} />
         <div className="service-detail-list">
           {serviceDetails[locale].map(([number, title, text, features]) => (
-            <article key={number}><span>{number}</span><div><h2>{title}</h2><p>{text}</p><small>{features}</small></div></article>
+            <article key={number}><div><h2>{title}</h2><p>{text}</p><small>{features}</small></div></article>
           ))}
         </div>
       </section>

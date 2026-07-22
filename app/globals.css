@@ -33,6 +33,7 @@
   --orange: #ff6123;
   --orange-dark: #d8470d;
   --max: 1240px;
+  --label-size: 12px;
 }
 
 @keyframes grain-drift {
@@ -208,8 +209,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 24px;
   color: var(--orange);
   font-family: "Lemon Milk";
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--label-size);
+  font-weight: 500;
   letter-spacing: .1em;
   line-height: 1.4;
   font-synthesis: none;
@@ -630,10 +631,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   gap: 8vw;
 }
 .page-hero h1 { font-size: clamp(3rem, 5.5vw, 6.1rem); }
+.page-hero h1 { margin-bottom: clamp(24px, 2.6vw, 36px); }
 .page-hero .studio-visual { min-height: 500px; }
 .service-detail-list { border-top: 1px solid var(--line); }
-.service-detail-list article { padding: 48px 0; display: grid; grid-template-columns: 100px 1fr; gap: 30px; border-bottom: 1px solid var(--line); }
-.service-detail-list article > span { color: var(--orange); font-family: "Lemon Milk"; }
+.service-detail-list article { padding: 48px 0; border-bottom: 1px solid var(--line); }
 .service-detail-list article div { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: baseline; }
 .service-detail-list h2 { font-size: clamp(1.8rem, 3vw, 3.2rem); }
 .service-detail-list p { color: var(--paper); }
@@ -658,7 +659,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .price-card:hover { transform: translateY(-5px); border-color: #4a4540; }
 .price-card-popular { border-color: var(--orange); box-shadow: 0 0 40px rgba(255,97,35,.09); }
-.popular-badge { position: absolute; right: 20px; top: 20px; padding: 5px 9px; border-radius: 999px; background: rgba(255,97,35,.13); color: var(--orange); font-family: "Lemon Milk"; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.popular-badge { position: absolute; right: 20px; top: 20px; padding: 5px 9px; border-radius: 999px; background: rgba(255,97,35,.13); color: var(--orange); font-family: "Lemon Milk"; font-size: var(--label-size); font-weight: 500; line-height: 1.4; letter-spacing: .1em; font-synthesis: none; text-transform: uppercase; }
 .price-card h3 { padding-right: 100px; }
 .price { margin: 40px 0 26px; color: var(--paper); font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
 .price-features { margin: 0 0 34px; padding: 0; display: grid; gap: 14px; list-style: none; }
@@ -667,7 +668,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .price-feature-icon::before { content: ""; width: 2px; height: 10px; position: absolute; border-radius: 2px; background: var(--orange); }
 .price-feature-icon::after { content: ""; width: 2px; height: 6px; position: absolute; border-radius: 2px; background: var(--orange); box-shadow: -4px 1px 0 var(--orange), 4px 1px 0 var(--orange); }
 .price-card .button { margin-top: auto; align-self: flex-start; }
-.brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: .75rem; }
+.brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: var(--label-size); font-weight: 500; line-height: 1.4; letter-spacing: .1em; font-synthesis: none; text-transform: uppercase; }
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
 
 .portfolio-full-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
@@ -830,7 +831,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .process-list li:nth-child(even) { margin-left: 0; }
   .final-cta { align-items: flex-start; flex-direction: column; }
   .page-hero { min-height: auto; }
-  .service-detail-list article { grid-template-columns: 46px 1fr; }
   .service-detail-list article div { grid-template-columns: 1fr; }
   .service-detail-list small { grid-column: 1; }
   .pricing-grid-2, .pricing-grid-3 { grid-template-columns: 1fr; }
