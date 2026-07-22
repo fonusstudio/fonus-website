@@ -432,6 +432,13 @@ function ContactPage({ locale }: { locale: Locale }) {
 export function SitePage({ locale, page }: Props) {
   return (
     <div className="site-root">
+      <div className="ambient-waveform" aria-hidden="true">
+        {[0, 1].map((line) => (
+          <div className={`waveform-line waveform-line-${line + 1}`} key={line}>
+            {Array.from({ length: 24 }, (_, segment) => <i key={`${line}-${segment}`} />)}
+          </div>
+        ))}
+      </div>
       <Header locale={locale} page={page} />
       <main>
         {page === "home" && <HomePage locale={locale} />}
