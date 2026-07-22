@@ -8,6 +8,7 @@ type Props = { locale: Locale; page: PageName };
 function Header({ locale, page }: Props) {
   const t = copy[locale].nav;
   const opposite: Locale = locale === "es" ? "en" : "es";
+  const languageLabel = opposite === "es" ? "Switch to Spanish" : "Cambiar a inglés";
   const links: [PageName, string][] = [
     ["home", t.home],
     ["services", t.services],
@@ -29,8 +30,9 @@ function Header({ locale, page }: Props) {
           ))}
         </nav>
         <div className="header-actions">
-          <Link className="language-link" href={pageHref(opposite, page)} hrefLang={opposite}>
-            {opposite.toUpperCase()}
+          <Link className="language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
+            <span className={`language-flag language-flag-${opposite}`} aria-hidden="true" />
+            <span>{opposite.toUpperCase()}</span>
           </Link>
           <a className="button button-primary header-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
             {t.book}
@@ -39,7 +41,10 @@ function Header({ locale, page }: Props) {
             <summary aria-label={t.menu}><span /><span /></summary>
             <nav>
               {links.map(([name, label]) => <Link key={name} href={pageHref(locale, name)}>{label}</Link>)}
-              <Link href={pageHref(opposite, page)}>{opposite.toUpperCase()}</Link>
+              <Link className="mobile-language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
+                <span className={`language-flag language-flag-${opposite}`} aria-hidden="true" />
+                <span>{opposite.toUpperCase()}</span>
+              </Link>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer">{t.book}</a>
             </nav>
           </details>

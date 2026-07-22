@@ -279,6 +279,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   letter-spacing: .05em;
   transition: color .2s ease;
 }
+.language-link { display: inline-flex; align-items: center; gap: 8px; }
+.mobile-language-link { display: flex; align-items: center; gap: 9px; }
+.language-flag {
+  width: 22px;
+  height: 14px;
+  display: inline-block;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.32);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.language-flag-es {
+  background: linear-gradient(to bottom, #aa151b 0 25%, #f1bf00 25% 75%, #aa151b 75% 100%);
+}
+.language-flag-en {
+  background:
+    linear-gradient(34deg, transparent 43%, #fff 43% 48%, #cf142b 48% 52%, #fff 52% 57%, transparent 57%),
+    linear-gradient(-34deg, transparent 43%, #fff 43% 48%, #cf142b 48% 52%, #fff 52% 57%, transparent 57%),
+    linear-gradient(to right, transparent 38%, #fff 38% 44%, #cf142b 44% 56%, #fff 56% 62%, transparent 62%),
+    linear-gradient(to bottom, transparent 32%, #fff 32% 40%, #cf142b 40% 60%, #fff 60% 68%, transparent 68%),
+    #012169;
+}
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"], .language-link:hover { color: white; }
 .desktop-nav a[aria-current="page"]::after {
   content: "";
