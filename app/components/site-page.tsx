@@ -142,6 +142,9 @@ function HomePage({ locale }: { locale: Locale }) {
     "/images/creator-candid.png",
     "/images/team-review.png",
   ];
+  const ribbonItems = locale === "es"
+    ? ["Podcast", "Vídeo", "Contenido", "Valencia"]
+    : ["Podcast", "Video", "Content", "Valencia"];
   return (
     <>
       <section className="hero">
@@ -161,6 +164,16 @@ function HomePage({ locale }: { locale: Locale }) {
           <ButtonRow locale={locale} />
         </div>
       </section>
+
+      <div className="motion-ribbon" aria-hidden="true">
+        <div className="motion-ribbon-track">
+          {[0, 1].map((group) => (
+            <div className="motion-ribbon-group" key={group}>
+              {ribbonItems.map((item) => <span key={`${group}-${item}`}>{item}<i>✦</i></span>)}
+            </div>
+          ))}
+        </div>
+      </div>
 
       <section className="manifesto section-shell section-pad">
         <div className="manifesto-copy">
