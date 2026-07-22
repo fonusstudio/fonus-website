@@ -43,7 +43,7 @@ body {
   margin: 0;
   background: var(--ink);
   color: var(--paper);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lemon Milk";
   font-size: 16px;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
@@ -70,7 +70,7 @@ img { max-width: 100%; height: auto; }
 
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 {
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -.035em;
@@ -95,7 +95,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   gap: 10px;
   margin-bottom: 24px;
   color: var(--orange);
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-size: .72rem;
   font-weight: 500;
   letter-spacing: .13em;
@@ -120,7 +120,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   justify-content: center;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-size: .7rem;
   font-weight: 500;
   letter-spacing: .04em;
@@ -158,7 +158,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .desktop-nav a, .language-link {
   position: relative;
   color: #bbb5ae;
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-size: .78rem;
   letter-spacing: .05em;
   transition: color .2s ease;
@@ -278,7 +278,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   justify-content: space-between;
   gap: 16px;
   color: #d4cdc4;
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-size: .58rem;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -292,7 +292,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   align-items: center;
   gap: 8px;
   color: #f0eae3;
-  font-family: "Lemon Milk", Arial, sans-serif;
+  font-family: "Lemon Milk";
   font-size: .58rem;
   letter-spacing: .12em;
 }
@@ -306,7 +306,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .manifesto-copy { padding-left: clamp(0px, 2vw, 28px); }
 .manifesto-copy h2 {
   margin-bottom: 32px;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Lemon Milk";
   font-size: clamp(2.8rem, 5.2vw, 5.8rem);
   font-weight: 400;
   line-height: .96;
@@ -348,10 +348,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .service-card:nth-child(3) .service-card-image img { object-position: center 38%; }
 .service-card:hover .service-card-image img { transform: scale(1.035); }
 .service-card-body { min-height: 260px; padding: 26px 30px 30px; display: flex; flex-direction: column; }
-.card-index { color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; }
+.card-index { color: var(--orange); font-family: "Lemon Milk"; font-size: .65rem; }
 .service-card h3 { margin: 18px 0 14px; font-size: clamp(1.35rem, 2.2vw, 2rem); }
 .service-card p { color: var(--muted); font-size: .96rem; }
-.card-link { margin-top: auto; padding-top: 18px; color: #d8d1c8; font-family: "Lemon Milk", Arial, sans-serif; font-size: .61rem; }
+.card-link { margin-top: auto; padding-top: 18px; color: #d8d1c8; font-family: "Lemon Milk"; font-size: .61rem; }
 .card-link b { color: var(--orange); }
 
 .studio-section { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(50px, 7vw, 105px); align-items: center; }
@@ -360,7 +360,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .studio-copy h2 { margin-bottom: 30px; }
 .organic-studio .studio-copy > p:not(.eyebrow) { color: #625a52; font-size: 1.1rem; }
 .organic-studio .text-link { color: var(--warm-ink); }
-.text-link { display: inline-flex; gap: 12px; margin-top: 24px; font-family: "Lemon Milk", Arial, sans-serif; font-size: .7rem; }
+.text-link { display: inline-flex; gap: 12px; margin-top: 24px; font-family: "Lemon Milk"; font-size: .7rem; }
 .text-link span { color: var(--orange); }
 
 .portfolio-preview { position: relative; }
@@ -401,7 +401,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: linear-gradient(180deg, transparent 28%, rgba(0,0,0,.84) 100%);
 }
 .portfolio-card span, .portfolio-card small { z-index: 2; }
-.portfolio-card span { font-family: "Lemon Milk", Arial, sans-serif; font-size: 1.25rem; }
+.portfolio-card span { font-family: "Lemon Milk"; font-size: 1.25rem; }
 .portfolio-card small { color: var(--muted); }
 
 .process-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8vw; align-items: start; }
@@ -411,7 +411,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .process-list { margin: 40px 0 0; padding: 0; list-style: none; }
 .process-list li { margin-bottom: 14px; padding: 27px 28px; display: grid; grid-template-columns: 48px 1fr; gap: 18px; border-radius: 28px 9px 28px 9px; background: var(--surface); }
 .process-list li:nth-child(even) { margin-left: 26px; border-radius: 9px 28px 9px 28px; }
-.process-list li > span { color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; }
+.process-list li > span { color: var(--orange); font-family: "Lemon Milk"; font-size: .65rem; }
 .process-list h3 { margin-bottom: 10px; }
 .process-list p { margin-bottom: 0; color: var(--muted); }
 
@@ -419,18 +419,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .trust-card, .trust-stats { overflow: hidden; background: var(--surface); }
 .trust-card { padding: clamp(34px, 6vw, 74px); }
 .trust-card { color: var(--warm-ink); background: var(--cream); border-radius: 90px 20px 20px 20px; }
-.trust-card h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.4rem, 4vw, 4.4rem); font-weight: 400; line-height: 1; }
+.trust-card h2 { font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4.4rem); font-weight: 400; line-height: 1; }
 .trust-card > p:last-child { color: #625a52; }
 .trust-stats { border-radius: 20px 20px 90px 20px; }
 .trust-stats { display: grid; grid-template-rows: repeat(3, 1fr); }
 .trust-stats div { padding: 28px 38px; display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .trust-stats div:last-child { border-bottom: 0; }
-.trust-stats strong { color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 400; }
+.trust-stats strong { color: var(--orange); font-family: "Lemon Milk"; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 400; }
 .trust-stats span { color: var(--muted); }
 
 .faq-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8vw; }
 .faq-list details { margin-bottom: 10px; padding-inline: 24px; border-radius: 24px 8px 24px 8px; background: var(--surface); }
-.faq-list summary { padding: 24px 0; display: flex; justify-content: space-between; gap: 24px; cursor: pointer; font-family: "Lemon Milk", Arial, sans-serif; font-size: .9rem; list-style: none; }
+.faq-list summary { padding: 24px 0; display: flex; justify-content: space-between; gap: 24px; cursor: pointer; font-family: "Lemon Milk"; font-size: .9rem; list-style: none; }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary span { color: var(--orange); font-size: 1.2rem; transition: transform .2s ease; }
 .faq-list details[open] summary span { transform: rotate(45deg); }
@@ -463,7 +463,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .page-hero .studio-visual { min-height: 500px; }
 .service-detail-list { border-top: 1px solid var(--line); }
 .service-detail-list article { padding: 48px 0; display: grid; grid-template-columns: 100px 1fr; gap: 30px; border-bottom: 1px solid var(--line); }
-.service-detail-list article > span { color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; }
+.service-detail-list article > span { color: var(--orange); font-family: "Lemon Milk"; }
 .service-detail-list article div { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: baseline; }
 .service-detail-list h2 { font-size: clamp(1.8rem, 3vw, 3.2rem); }
 .service-detail-list p { color: var(--paper); }
@@ -488,12 +488,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .price-card:hover { transform: translateY(-5px); border-color: #4a4540; }
 .price-card-popular { border-color: var(--orange); box-shadow: 0 0 40px rgba(255,97,35,.09); }
-.popular-badge { position: absolute; right: 20px; top: 20px; padding: 5px 9px; border-radius: 999px; background: rgba(255,97,35,.13); color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .55rem; text-transform: uppercase; }
+.popular-badge { position: absolute; right: 20px; top: 20px; padding: 5px 9px; border-radius: 999px; background: rgba(255,97,35,.13); color: var(--orange); font-family: "Lemon Milk"; font-size: .55rem; text-transform: uppercase; }
 .price-card h3 { padding-right: 100px; }
-.price { margin: 44px 0 16px; color: var(--paper); font-family: "Lemon Milk", Arial, sans-serif; font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
+.price { margin: 44px 0 16px; color: var(--paper); font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; letter-spacing: -.06em; }
 .price-card > p:not(.price) { color: var(--muted); }
 .price-card .button { margin-top: auto; align-self: flex-start; }
-.brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk", Arial, sans-serif; font-size: .75rem; }
+.brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: .75rem; }
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
 
 .portfolio-full-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
@@ -505,7 +505,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .work-placeholder-2 { background: repeating-linear-gradient(90deg, transparent 0 70px, rgba(255,255,255,.035) 71px 72px), #111; }
 .work-placeholder-3 { background: linear-gradient(150deg, #302a26, #0a0a0a 65%); }
 .work-placeholder-4 { background: radial-gradient(circle at 30% 60%, #452416, #0b0b0b 65%); }
-.work-number { position: relative; z-index: 2; color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; }
+.work-number { position: relative; z-index: 2; color: var(--orange); font-family: "Lemon Milk"; font-size: .65rem; }
 .work-placeholder > div:last-child { position: relative; z-index: 2; }
 .work-placeholder h3 { margin-bottom: 8px; font-size: clamp(1.4rem, 2.5vw, 2.7rem); }
 .work-placeholder p { margin-bottom: 0; color: #c3bcb4; }
@@ -522,7 +522,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .contact-sidebar h2 { font-size: clamp(2rem, 3.2vw, 3.2rem); }
 .contact-item { padding-top: 22px; border-top: 1px solid var(--line); }
 .contact-item > span { display: block; margin-bottom: 8px; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
-.contact-item a, .contact-item p { font-family: "Lemon Milk", Arial, sans-serif; font-size: .86rem; }
+.contact-item a, .contact-item p { font-family: "Lemon Milk"; font-size: .86rem; }
 .contact-item small { color: var(--muted); }
 .meeting-card { padding: 32px; border: 1px solid rgba(255,97,35,.38); background: rgba(255,97,35,.055); }
 .meeting-card .live-dot { margin-bottom: 24px; }
@@ -563,7 +563,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .footer-brand p { max-width: 330px; color: var(--muted); }
 .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; color: var(--muted); font-size: .85rem; }
 .footer-column a:hover { color: var(--orange); }
-.footer-label { color: var(--paper); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; text-transform: uppercase; }
+.footer-label { color: var(--paper); font-family: "Lemon Milk"; font-size: .65rem; text-transform: uppercase; }
 .footer-bottom { margin-top: 70px; padding-top: 22px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); color: #77716b; font-size: .76rem; }
 
 .not-found { min-height: 100svh; padding: 8vw; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
@@ -579,7 +579,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu summary span { width: 17px; height: 1px; display: block; background: white; }
   .mobile-menu nav { width: min(320px, calc(100vw - 40px)); position: absolute; right: 0; top: 54px; padding: 20px; display: flex; flex-direction: column; border: 1px solid var(--line); background: #0b0b0b; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
-  .mobile-menu nav a { padding: 14px 8px; border-bottom: 1px solid var(--line); font-family: "Lemon Milk", Arial, sans-serif; font-size: .86rem; }
+  .mobile-menu nav a { padding: 14px 8px; border-bottom: 1px solid var(--line); font-family: "Lemon Milk"; font-size: .86rem; }
   .mobile-menu nav a:last-child { border-bottom: 0; color: var(--orange); }
   .hero { min-height: 100svh; }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
