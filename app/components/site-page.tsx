@@ -138,18 +138,22 @@ function HomePage({ locale }: { locale: Locale }) {
   const t = copy[locale];
   return (
     <>
-      <section className="hero section-shell">
+      <section className="hero">
+        <Image
+          className="home-hero-photo"
+          src="/images/hero-studio.webp"
+          alt={locale === "es" ? "Estudio de podcast con cámaras y micrófonos" : "Podcast studio with cameras and microphones"}
+          fill
+          sizes="100vw"
+          priority
+          unoptimized
+        />
         <div className="hero-copy">
           <p className="eyebrow"><span className="live-dot" />{t.home.badge}</p>
           <h1>{t.home.title}</h1>
           <p className="hero-lead">{t.home.intro}</p>
           <ButtonRow locale={locale} />
         </div>
-        <StudioVisual
-          label={locale === "es" ? "Estudio preparado para una sesión" : "Studio ready for a session"}
-          src="/images/hero-studio.webp"
-          alt={locale === "es" ? "Estudio de podcast con cámaras y micrófonos" : "Podcast studio with cameras and microphones"}
-        />
       </section>
 
       <section className="manifesto section-shell section-pad">
