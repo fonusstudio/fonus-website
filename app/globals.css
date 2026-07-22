@@ -211,10 +211,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 24px;
   color: var(--orange);
   font-family: "Lemon Milk";
-  font-size: .72rem;
-  font-weight: 500;
-  letter-spacing: .13em;
-  line-height: 1.35;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.4;
+  font-synthesis: none;
   text-transform: uppercase;
 }
 
