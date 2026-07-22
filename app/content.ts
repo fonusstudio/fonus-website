@@ -244,11 +244,11 @@ export const pricing = {
   recording: {
     es: [
       { name: "Audio", price: "120 €", text: "1 hora de estudio, hasta 4 micrófonos y archivos originales." },
-      { name: "Vídeo", price: "120 €", text: "1 hora de estudio, hasta 3 cámaras 4K, iluminación y audio." },
+      { name: "Vídeo", price: "180 €", text: "1 hora de estudio, hasta 3 cámaras 4K, iluminación y audio." },
     ],
     en: [
       { name: "Audio", price: "€120", text: "1 studio hour, up to 4 microphones and original files." },
-      { name: "Video", price: "€120", text: "1 studio hour, up to 3 4K cameras, lighting and audio." },
+      { name: "Video", price: "€180", text: "1 studio hour, up to 3 4K cameras, lighting and audio." },
     ],
   },
   audio: {

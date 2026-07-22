@@ -19,7 +19,7 @@ function Header({ locale, page }: Props) {
     <header className="site-header">
       <div className="header-inner">
         <Link className="brand" href={pageHref(locale, "home")} aria-label="Fonus Studio">
-          <Image src="/brand/fonus-logo-white.svg" alt="Fonus Studio" width={168} height={72} priority />
+          <Image src="/brand/fonus-logo-colour.svg" alt="Fonus Studio" width={168} height={72} priority />
         </Link>
         <nav className="desktop-nav" aria-label={locale === "es" ? "Navegación principal" : "Primary navigation"}>
           {links.map(([name, label]) => (
@@ -106,11 +106,15 @@ function ButtonRow({ locale, secondary = true }: { locale: Locale; secondary?: b
   );
 }
 
-function StudioVisual({ label, index = "01" }: { label: string; index?: string }) {
+function StudioVisual({ label, index = "01", src, alt = "" }: { label: string; index?: string; src?: string; alt?: string }) {
   return (
-    <div className="studio-visual" role="img" aria-label={label}>
+    <div className={`studio-visual ${src ? "studio-visual-has-photo" : ""}`} role="img" aria-label={label}>
       <div className="visual-noise" />
-      <Image className="visual-mark" src="/brand/fonus-mark.png" alt="" width={512} height={512} />
+      {src ? (
+        <Image className="visual-photo" src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 45vw" priority={index === "01"} />
+      ) : (
+        <Image className="visual-mark" src="/brand/fonus-mark.png" alt="" width={512} height={512} />
+      )}
       <div className="visual-caption"><span>{index}</span><span>{label}</span></div>
       <div className="rec-indicator"><i /> REC</div>
     </div>
@@ -141,7 +145,11 @@ function HomePage({ locale }: { locale: Locale }) {
           <p className="hero-lead">{t.home.intro}</p>
           <ButtonRow locale={locale} />
         </div>
-        <StudioVisual label={locale === "es" ? "Imagen de estudio próximamente" : "Studio imagery coming soon"} />
+        <StudioVisual
+          label={locale === "es" ? "Estudio preparado para una sesión" : "Studio ready for a session"}
+          src="/images/hero-studio.webp"
+          alt={locale === "es" ? "Estudio de podcast con cámaras y micrófonos" : "Podcast studio with cameras and microphones"}
+        />
       </section>
 
       <section className="manifesto section-shell section-pad">
@@ -167,7 +175,12 @@ function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="section-shell section-pad studio-section">
-        <StudioVisual label={locale === "es" ? "Fotografía del estudio" : "Studio photography"} index="02" />
+        <StudioVisual
+          label={locale === "es" ? "Equipamiento del estudio" : "Studio equipment"}
+          index="02"
+          src="/images/studio-equipment.webp"
+          alt={locale === "es" ? "Micrófono, cámara y mesa de mezclas profesional" : "Professional microphone, camera and audio mixer"}
+        />
         <div className="studio-copy">
           <p className="eyebrow">{locale === "es" ? "El estudio" : "The studio"}</p>
           <h2>{t.home.studioTitle}</h2>
@@ -181,6 +194,13 @@ function HomePage({ locale }: { locale: Locale }) {
         <div className="portfolio-grid">
           {["Podcast", "Videopodcast", locale === "es" ? "Contenido social" : "Social content"].map((label, index) => (
             <div className={`portfolio-card portfolio-card-${index + 1}`} key={label}>
+              <Image
+                className="portfolio-photo"
+                src={index === 0 ? "/images/podcast-session.webp" : index === 1 ? "/images/video-production.webp" : "/images/studio-equipment.webp"}
+                alt=""
+                fill
+                sizes="(max-width: 800px) 100vw, 50vw"
+              />
               <span>{label}</span><small>{locale === "es" ? "Proyecto próximamente" : "Project coming soon"}</small>
             </div>
           ))}
@@ -243,7 +263,12 @@ function ServicesPage({ locale }: { locale: Locale }) {
     <>
       <section className="page-hero section-shell">
         <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
-        <StudioVisual label={locale === "es" ? "Producción Fonus" : "Fonus production"} index="S" />
+        <StudioVisual
+          label={locale === "es" ? "Producción Fonus" : "Fonus production"}
+          index="S"
+          src="/images/video-production.webp"
+          alt={locale === "es" ? "Producción de entrevista multicámara" : "Multi-camera interview production"}
+        />
       </section>
       <section className="section-shell section-pad">
         <SectionHeading eyebrow="01—04" title={t.detailTitle} />
@@ -275,13 +300,25 @@ function PortfolioPage({ locale }: { locale: Locale }) {
     <>
       <section className="page-hero page-hero-portfolio section-shell">
         <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
-        <StudioVisual label={locale === "es" ? "Galería editorial" : "Editorial gallery"} index="P" />
+        <StudioVisual
+          label={locale === "es" ? "Galería editorial" : "Editorial gallery"}
+          index="P"
+          src="/images/podcast-session.webp"
+          alt={locale === "es" ? "Dos personas grabando un podcast" : "Two people recording a podcast"}
+        />
       </section>
       <section className="section-shell section-pad">
         <SectionHeading eyebrow={t.featured} title={t.featuredText} />
         <div className="portfolio-full-grid">
           {categories.map((category, index) => (
             <article className={`work-placeholder work-placeholder-${(index % 4) + 1}`} key={category}>
+              <Image
+                className="work-photo"
+                src={index % 3 === 0 ? "/images/podcast-session.webp" : index % 3 === 1 ? "/images/video-production.webp" : "/images/studio-equipment.webp"}
+                alt=""
+                fill
+                sizes="(max-width: 800px) 100vw, 55vw"
+              />
               <div className="work-number">0{index + 1}</div>
               <div><h3>{category}</h3><p>{locale === "es" ? "Contenido real próximamente" : "Real work coming soon"}</p></div>
             </article>
@@ -290,10 +327,10 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       </section>
       <section className="section-shell section-pad editorial-duo">
         <div><p className="eyebrow">{t.behind}</p><h2>{t.behind}</h2><p>{t.behindText}</p></div>
-        <StudioVisual label={t.behind} index="BTS" />
+        <StudioVisual label={t.behind} index="BTS" src="/images/video-production.webp" alt={t.behind} />
       </section>
       <section className="section-shell section-pad editorial-duo editorial-duo-reverse">
-        <StudioVisual label={t.studio} index="ST" />
+        <StudioVisual label={t.studio} index="ST" src="/images/studio-equipment.webp" alt={t.studio} />
         <div><p className="eyebrow">Fonus Studio</p><h2>{t.studio}</h2><p>{t.studioText}</p></div>
       </section>
       <FinalCta locale={locale} title={t.ctaTitle} />

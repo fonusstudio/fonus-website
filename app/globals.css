@@ -138,8 +138,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   top: 0;
   z-index: 50;
   border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(10,10,10,.84);
-  backdrop-filter: blur(18px);
+  background: rgba(10,10,10,.28);
+  backdrop-filter: blur(14px) saturate(120%);
 }
 .header-inner {
   width: min(calc(100% - 40px), var(--max));
@@ -157,7 +157,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: relative;
   color: #bbb5ae;
   font-family: "Lemon Milk", Arial, sans-serif;
-  font-size: .65rem;
+  font-size: .78rem;
   letter-spacing: .05em;
   transition: color .2s ease;
 }
@@ -211,6 +211,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   inset: 16%;
 }
 .studio-visual::after { inset: 28%; border-color: rgba(255,97,35,.18); }
+.studio-visual-has-photo::before {
+  inset: 0;
+  z-index: 1;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.04) 35%, rgba(0,0,0,.74) 100%);
+}
+.studio-visual-has-photo::after { display: none; }
+.visual-photo {
+  object-fit: cover;
+  z-index: 0;
+  transition: transform .8s ease;
+}
+.studio-visual:hover .visual-photo { transform: scale(1.025); }
 .visual-noise {
   position: absolute;
   inset: 0;
@@ -229,11 +243,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .visual-caption {
   position: absolute;
+  z-index: 2;
   inset: auto 24px 24px;
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  color: #8f8982;
+  color: #d4cdc4;
   font-family: "Lemon Milk", Arial, sans-serif;
   font-size: .58rem;
   letter-spacing: .08em;
@@ -241,12 +256,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .rec-indicator {
   position: absolute;
+  z-index: 2;
   top: 24px;
   right: 24px;
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #ccc5bc;
+  color: #f0eae3;
   font-family: "Lemon Milk", Arial, sans-serif;
   font-size: .58rem;
   letter-spacing: .12em;
@@ -306,12 +322,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   inset: 0;
   background: radial-gradient(circle at 50% 20%, rgba(255,97,35,.25), transparent 30%), linear-gradient(135deg, transparent 42%, rgba(255,255,255,.05) 43% 44%, transparent 45%);
   transition: transform .5s ease;
+  z-index: 1;
 }
 .portfolio-card:hover::before { transform: scale(1.06); }
 .portfolio-card-1 { grid-row: 1 / 3; }
 .portfolio-card-2::before { background: repeating-linear-gradient(90deg, transparent 0 60px, rgba(255,97,35,.08) 61px 62px), radial-gradient(circle at 80% 20%, #372017, #111 60%); }
 .portfolio-card-3::before { background: linear-gradient(145deg, #2b2824, #0b0b0b 70%); clip-path: inset(0); }
 .portfolio-card span, .portfolio-card small { position: relative; z-index: 1; }
+.portfolio-photo, .work-photo { object-fit: cover; transition: transform .65s ease; }
+.portfolio-card:hover .portfolio-photo, .work-placeholder:hover .work-photo { transform: scale(1.035); }
+.portfolio-card::after, .work-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 28%, rgba(0,0,0,.84) 100%);
+}
+.portfolio-card span, .portfolio-card small { z-index: 2; }
 .portfolio-card span { font-family: "Lemon Milk", Arial, sans-serif; font-size: 1.25rem; }
 .portfolio-card small { color: var(--muted); }
 
@@ -401,16 +428,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
 
 .portfolio-full-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
-.work-placeholder { min-height: 360px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(circle at 70% 20%, rgba(255,97,35,.18), transparent 28%), #131210; }
+.work-placeholder { position: relative; isolation: isolate; min-height: 360px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(circle at 70% 20%, rgba(255,97,35,.18), transparent 28%), #131210; }
 .work-placeholder:nth-child(1), .work-placeholder:nth-child(4) { grid-column: span 7; }
 .work-placeholder:nth-child(2), .work-placeholder:nth-child(3) { grid-column: span 5; }
 .work-placeholder:nth-child(5), .work-placeholder:nth-child(6) { grid-column: span 6; }
 .work-placeholder-2 { background: repeating-linear-gradient(90deg, transparent 0 70px, rgba(255,255,255,.035) 71px 72px), #111; }
 .work-placeholder-3 { background: linear-gradient(150deg, #302a26, #0a0a0a 65%); }
 .work-placeholder-4 { background: radial-gradient(circle at 30% 60%, #452416, #0b0b0b 65%); }
-.work-number { color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; }
+.work-number { position: relative; z-index: 2; color: var(--orange); font-family: "Lemon Milk", Arial, sans-serif; font-size: .65rem; }
+.work-placeholder > div:last-child { position: relative; z-index: 2; }
 .work-placeholder h3 { margin-bottom: 8px; font-size: clamp(1.4rem, 2.5vw, 2.7rem); }
-.work-placeholder p { margin-bottom: 0; color: var(--muted); }
+.work-placeholder p { margin-bottom: 0; color: #c3bcb4; }
 .editorial-duo { display: grid; grid-template-columns: .75fr 1.25fr; gap: 9vw; align-items: center; }
 .editorial-duo-reverse { grid-template-columns: 1.25fr .75fr; }
 .editorial-duo h2 { margin-bottom: 28px; }
@@ -481,7 +509,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu summary span { width: 17px; height: 1px; display: block; background: white; }
   .mobile-menu nav { width: min(320px, calc(100vw - 40px)); position: absolute; right: 0; top: 54px; padding: 20px; display: flex; flex-direction: column; border: 1px solid var(--line); background: #0b0b0b; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
-  .mobile-menu nav a { padding: 14px 8px; border-bottom: 1px solid var(--line); font-family: "Lemon Milk", Arial, sans-serif; font-size: .75rem; }
+  .mobile-menu nav a { padding: 14px 8px; border-bottom: 1px solid var(--line); font-family: "Lemon Milk", Arial, sans-serif; font-size: .86rem; }
   .mobile-menu nav a:last-child { border-bottom: 0; color: var(--orange); }
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero .studio-visual { min-height: 560px; }
