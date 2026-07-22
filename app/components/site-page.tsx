@@ -31,8 +31,8 @@ function Header({ locale, page }: Props) {
         </nav>
         <div className="header-actions">
           <Link className="language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
-            <span className={`language-flag language-flag-${opposite}`} aria-hidden="true" />
-            <span>{opposite.toUpperCase()}</span>
+            <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
+            <span>{locale.toUpperCase()}</span>
           </Link>
           <a className="button button-primary header-cta" href={BOOKING_URL} target="_blank" rel="noreferrer">
             {t.book}
@@ -42,8 +42,8 @@ function Header({ locale, page }: Props) {
             <nav>
               {links.map(([name, label]) => <Link key={name} href={pageHref(locale, name)}>{label}</Link>)}
               <Link className="mobile-language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
-                <span className={`language-flag language-flag-${opposite}`} aria-hidden="true" />
-                <span>{opposite.toUpperCase()}</span>
+                <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
+                <span>{locale.toUpperCase()}</span>
               </Link>
               <a href={BOOKING_URL} target="_blank" rel="noreferrer">{t.book}</a>
             </nav>
