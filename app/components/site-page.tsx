@@ -136,6 +136,12 @@ function FinalCta({ locale, title, text }: { locale: Locale; title: string; text
 
 function HomePage({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const serviceImages = [
+    "/images/podcast-session.webp",
+    "/images/video-production.webp",
+    "/images/creator-candid.png",
+    "/images/team-review.png",
+  ];
   return (
     <>
       <section className="hero">
@@ -157,10 +163,30 @@ function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="manifesto section-shell section-pad">
-        <p className="eyebrow">{t.home.manifestoEyebrow}</p>
-        <div className="manifesto-grid">
+        <div className="manifesto-copy">
+          <p className="eyebrow">{t.home.manifestoEyebrow}</p>
           <h2>{t.home.manifestoTitle}</h2>
           <p>{t.home.manifesto}</p>
+        </div>
+        <div className="manifesto-collage" aria-label={locale === "es" ? "Momentos en el estudio" : "Moments in the studio"}>
+          <figure className="organic-photo organic-photo-main">
+            <Image
+              src="/images/creator-candid.png"
+              alt={locale === "es" ? "Creadora sonriendo durante una grabación" : "Creator smiling during a recording"}
+              fill
+              sizes="(max-width: 800px) 75vw, 38vw"
+              unoptimized
+            />
+          </figure>
+          <figure className="organic-photo organic-photo-detail">
+            <Image
+              src="/images/audio-craft.png"
+              alt={locale === "es" ? "Manos trabajando con una mesa de mezclas" : "Hands working with an audio mixer"}
+              fill
+              sizes="(max-width: 800px) 45vw, 18vw"
+              unoptimized
+            />
+          </figure>
         </div>
       </section>
 
@@ -169,16 +195,21 @@ function HomePage({ locale }: { locale: Locale }) {
         <div className="service-grid">
           {t.servicesCards.map(([title, text], index) => (
             <Link className="service-card" href={pageHref(locale, "services")} key={title}>
-              <span className="card-index">0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-              <span className="card-link">{locale === "es" ? "Ver servicio" : "View service"} <b>↗</b></span>
+              <div className="service-card-image">
+                <Image src={serviceImages[index]} alt="" fill sizes="(max-width: 800px) 100vw, 50vw" unoptimized />
+              </div>
+              <div className="service-card-body">
+                <span className="card-index">0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <span className="card-link">{locale === "es" ? "Ver servicio" : "View service"} <b>↗</b></span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="section-shell section-pad studio-section">
+      <section className="section-shell section-pad studio-section organic-studio">
         <StudioVisual
           label={locale === "es" ? "Equipamiento del estudio" : "Studio equipment"}
           index="02"
@@ -200,7 +231,7 @@ function HomePage({ locale }: { locale: Locale }) {
             <div className={`portfolio-card portfolio-card-${index + 1}`} key={label}>
               <Image
                 className="portfolio-photo"
-                src={index === 0 ? "/images/podcast-session.webp" : index === 1 ? "/images/video-production.webp" : "/images/studio-equipment.webp"}
+                src={index === 0 ? "/images/podcast-session.webp" : index === 1 ? "/images/creator-candid.png" : "/images/team-review.png"}
                 alt=""
                 fill
                 sizes="(max-width: 800px) 100vw, 50vw"
@@ -214,7 +245,18 @@ function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="section-shell section-pad process-section">
-        <SectionHeading eyebrow={locale === "es" ? "Cómo trabajamos" : "How it works"} title={t.home.processTitle} />
+        <div className="process-intro">
+          <SectionHeading eyebrow={locale === "es" ? "Cómo trabajamos" : "How it works"} title={t.home.processTitle} />
+          <figure className="process-photo">
+            <Image
+              src="/images/team-review.png"
+              alt={locale === "es" ? "Equipo creativo revisando una grabación" : "Creative team reviewing a recording"}
+              fill
+              sizes="(max-width: 1050px) 100vw, 42vw"
+              unoptimized
+            />
+          </figure>
+        </div>
         <ol className="process-list">
           {t.process.map(([title, text], index) => (
             <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>
