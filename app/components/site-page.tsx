@@ -111,7 +111,7 @@ function StudioVisual({ label, index = "01", src, alt = "" }: { label: string; i
     <div className={`studio-visual ${src ? "studio-visual-has-photo" : ""}`} role="img" aria-label={label}>
       <div className="visual-noise" />
       {src ? (
-        <Image className="visual-photo" src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 45vw" priority={index === "01"} />
+        <Image className="visual-photo" src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 45vw" priority={index === "01"} unoptimized />
       ) : (
         <Image className="visual-mark" src="/brand/fonus-mark.png" alt="" width={512} height={512} />
       )}
@@ -200,6 +200,7 @@ function HomePage({ locale }: { locale: Locale }) {
                 alt=""
                 fill
                 sizes="(max-width: 800px) 100vw, 50vw"
+                unoptimized
               />
               <span>{label}</span><small>{locale === "es" ? "Proyecto próximamente" : "Project coming soon"}</small>
             </div>
@@ -318,6 +319,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
                 alt=""
                 fill
                 sizes="(max-width: 800px) 100vw, 55vw"
+                unoptimized
               />
               <div className="work-number">0{index + 1}</div>
               <div><h3>{category}</h3><p>{locale === "es" ? "Contenido real próximamente" : "Real work coming soon"}</p></div>
