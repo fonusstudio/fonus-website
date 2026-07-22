@@ -69,6 +69,16 @@
   50% { transform: translate3d(-55px,35px,0) scale(1.16); }
 }
 
+@keyframes sound-wave-drift-a {
+  0%, 100% { transform: translate3d(0,0,0) rotate(-11deg) scale(1); }
+  50% { transform: translate3d(-34px,24px,0) rotate(-7deg) scale(1.055); }
+}
+
+@keyframes sound-wave-drift-b {
+  0%, 100% { transform: translate3d(0,0,0) rotate(14deg) scale(1); }
+  50% { transform: translate3d(42px,-30px,0) rotate(9deg) scale(1.04); }
+}
+
 @keyframes reveal-up {
   from { opacity: .15; transform: translateY(54px); }
   to { opacity: 1; transform: translateY(0); }
@@ -130,7 +140,49 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   outline-offset: 4px;
 }
 
-.site-root { overflow: clip; }
+.site-root {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.site-root::before,
+.site-root::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    ellipse at center,
+    transparent 0 52px,
+    rgba(255,97,35,.13) 53px 55px,
+    transparent 56px 94px
+  );
+  filter: drop-shadow(0 0 18px rgba(255,97,35,.06));
+  will-change: transform;
+}
+.site-root::before {
+  width: clamp(620px, 76vw, 980px);
+  height: clamp(400px, 48vw, 610px);
+  top: 15vh;
+  right: -260px;
+  opacity: .72;
+  -webkit-mask-image: linear-gradient(135deg, #000 15%, rgba(0,0,0,.76) 48%, transparent 82%);
+  mask-image: linear-gradient(135deg, #000 15%, rgba(0,0,0,.76) 48%, transparent 82%);
+  animation: sound-wave-drift-a 18s ease-in-out infinite;
+}
+.site-root::after {
+  width: clamp(560px, 70vw, 900px);
+  height: clamp(370px, 44vw, 560px);
+  left: -320px;
+  bottom: 4vh;
+  opacity: .58;
+  -webkit-mask-image: linear-gradient(315deg, #000 10%, rgba(0,0,0,.72) 48%, transparent 84%);
+  mask-image: linear-gradient(315deg, #000 10%, rgba(0,0,0,.72) 48%, transparent 84%);
+  animation: sound-wave-drift-b 22s ease-in-out infinite;
+}
+.site-root > main,
+.site-root > .site-footer { position: relative; z-index: 1; }
 .section-shell { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
 .section-pad { padding-block: clamp(72px, 9vw, 128px); }
 
