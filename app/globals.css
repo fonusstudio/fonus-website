@@ -811,6 +811,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .contact-form input, .contact-form select { min-height: 52px; }
 .contact-form textarea { resize: vertical; }
 .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--orange); outline: none; }
+.contact-form .field-hint { color: var(--muted); font-size: 12px; }
 .contact-form .button { align-self: flex-start; }
 .website-field { position: absolute; left: -10000px; }
 .form-status { margin: 0; padding: 14px 16px; border: 1px solid var(--line); color: var(--muted); }

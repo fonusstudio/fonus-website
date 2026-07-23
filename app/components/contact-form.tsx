@@ -10,6 +10,8 @@ const labels = {
     email: "Correo electrónico",
     phone: "Teléfono (opcional)",
     message: "Cuéntanos tu proyecto",
+    messageHint: "Mínimo 10 caracteres.",
+    messageTooShort: "Escribe al menos 10 caracteres.",
     send: "Enviar solicitud",
     sending: "Enviando…",
     successTitle: "¡Solicitud enviada!",
@@ -26,6 +28,8 @@ const labels = {
     email: "Email address",
     phone: "Telephone (optional)",
     message: "Tell us about your project",
+    messageHint: "Minimum 10 characters.",
+    messageTooShort: "Please enter at least 10 characters.",
     send: "Send enquiry",
     sending: "Sending…",
     successTitle: "Enquiry sent!",
@@ -112,7 +116,23 @@ export function ContactForm({ locale }: { locale: Locale }) {
       </div>
       <label>
         <span>{t.message} *</span>
-        <textarea name="message" rows={6} required />
+        <textarea
+          name="message"
+          rows={6}
+          required
+          minLength={10}
+          maxLength={5000}
+          aria-describedby={`contact-message-hint-${locale}`}
+          onInvalid={(event) => {
+            if (event.currentTarget.validity.tooShort) {
+              event.currentTarget.setCustomValidity(t.messageTooShort);
+            }
+          }}
+          onInput={(event) => event.currentTarget.setCustomValidity("")}
+        />
+        <small id={`contact-message-hint-${locale}`} className="field-hint">
+          {t.messageHint}
+        </small>
       </label>
       <label className="website-field" aria-hidden="true">
         Website
