@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Locale } from "../content";
 
 const labels = {
@@ -9,38 +9,43 @@ const labels = {
     company: "Empresa (opcional)",
     email: "Correo electrónico",
     phone: "Teléfono (opcional)",
-    service: "Servicio de interés",
     message: "Cuéntanos tu proyecto",
     send: "Enviar solicitud",
     sending: "Enviando…",
-    success: "Gracias. Hemos recibido tu solicitud.",
+    successTitle: "¡Solicitud enviada!",
+    success: "Gracias por escribirnos. Te hemos enviado un correo de confirmación y te responderemos lo antes posible.",
+    sendAnother: "Enviar otro mensaje",
     unavailable:
       "El formulario estará activo muy pronto. Mientras tanto, escríbenos a info@fonusstudio.com.",
+    rateLimited: "Has enviado varias solicitudes. Espera unos minutos antes de intentarlo de nuevo.",
     error: "No hemos podido enviar el formulario. Inténtalo de nuevo o escríbenos por email.",
-    choose: "Selecciona un servicio",
-    services: ["Podcast", "Videopodcast", "Creación de contenido", "Branding y diseño", "Otro"],
   },
   en: {
     name: "Full name",
     company: "Company (optional)",
     email: "Email address",
     phone: "Telephone (optional)",
-    service: "Service required",
     message: "Tell us about your project",
     send: "Send enquiry",
     sending: "Sending…",
-    success: "Thank you. We have received your enquiry.",
+    successTitle: "Enquiry sent!",
+    success: "Thank you for contacting us. We have sent you a confirmation email and will reply as soon as possible.",
+    sendAnother: "Send another message",
     unavailable:
       "The form will be active shortly. In the meantime, email info@fonusstudio.com.",
+    rateLimited: "Several enquiries have been sent. Please wait a few minutes before trying again.",
     error: "We could not send the form. Please try again or contact us by email.",
-    choose: "Choose a service",
-    services: ["Podcast", "Video podcast", "Content creation", "Branding and design", "Other"],
   },
 } as const;
 
 export function ContactForm({ locale }: { locale: Locale }) {
   const t = labels[locale];
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "unavailable" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "unavailable" | "rate-limited" | "error">("idle");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,6 +63,8 @@ export function ContactForm({ locale }: { locale: Locale }) {
       if (response.ok) {
         form.reset();
         setStatus("success");
+      } else if (response.status === 429) {
+        setStatus("rate-limited");
       } else if (response.status === 503) {
         setStatus("unavailable");
       } else {
@@ -68,7 +75,20 @@ export function ContactForm({ locale }: { locale: Locale }) {
     }
   }
 
-  const message = status === "success" ? t.success : status === "unavailable" ? t.unavailable : status === "error" ? t.error : "";
+  const message = status === "unavailable" ? t.unavailable : status === "rate-limited" ? t.rateLimited : status === "error" ? t.error : "";
+
+  if (status === "success") {
+    return (
+      <div className="form-success-card" role="status" tabIndex={-1} ref={successRef}>
+        <span className="form-success-icon" aria-hidden="true">✓</span>
+        <h3>{t.successTitle}</h3>
+        <p>{t.success}</p>
+        <button className="button button-secondary" type="button" onClick={() => setStatus("idle")}>
+          {t.sendAnother}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
@@ -90,13 +110,6 @@ export function ContactForm({ locale }: { locale: Locale }) {
           <input name="phone" type="tel" autoComplete="tel" />
         </label>
       </div>
-      <label>
-        <span>{t.service}</span>
-        <select name="service" defaultValue="">
-          <option value="" disabled>{t.choose}</option>
-          {t.services.map((service) => <option key={service}>{service}</option>)}
-        </select>
-      </label>
       <label>
         <span>{t.message} *</span>
         <textarea name="message" rows={6} required />

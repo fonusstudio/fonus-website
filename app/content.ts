@@ -1,7 +1,6 @@
 export type Locale = "es" | "en";
 export type PageName = "home" | "services" | "portfolio" | "contact";
 
-export const BOOKING_URL = "https://calendar.app.google/wCq8MSKyYWTMadPW9";
 export const CONTACT_EMAIL = "info@fonusstudio.com";
 export const CONTACT_PHONE = "+34 614 69 27 75";
 
@@ -101,7 +100,6 @@ export const copy = {
       bookMeeting: "Reservar una reunión",
       formTitle: "Cuéntanos tu proyecto",
       mapTitle: "Ven a conocernos",
-      hours: "Atención con cita previa",
     },
     servicesCards: [
       ["Producción de podcast", "Grabación, edición y postproducción de audio con calidad profesional."],
@@ -203,7 +201,6 @@ export const copy = {
       bookMeeting: "Book a meeting",
       formTitle: "Tell us about your project",
       mapTitle: "Visit the studio",
-      hours: "Available by appointment",
     },
     servicesCards: [
       ["Podcast production", "Professional recording, editing and post-production for podcasts."],
@@ -248,7 +245,7 @@ export const pricing = {
     ],
     en: [
       { name: "Audio", price: "€120", features: ["1-hour recording session", "Up to 4 microphones", "Acoustically treated studio", "Recording direction and assistance"] },
-      { name: "Video", price: "€120", features: ["1-hour recording session", "Up to 4 microphones", "3 4K cameras", "Studio lighting"] },
+      { name: "Video", price: "€180", features: ["1-hour recording session", "Up to 4 microphones", "3 4K cameras", "Studio lighting"] },
     ],
   },
   audio: {

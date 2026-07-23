@@ -1,6 +1,12 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import {
+  enforceContactRateLimit,
+  getRateLimitHeaders,
+  parseContactRequest,
+  validateContactPayload,
+} from "../app/api/contact/security";
 
 interface Env {
   ASSETS: Fetcher;
@@ -38,6 +44,65 @@ const worker = {
           return result.response();
         },
       }, allowedWidths);
+    }
+
+    if (url.pathname === "/api/contact" && request.method === "POST") {
+      const parsedRequest = await parseContactRequest(request.clone());
+      if (!parsedRequest.ok) {
+        return Response.json(
+          { error: parsedRequest.error },
+          { status: parsedRequest.status },
+        );
+      }
+
+      if (parsedRequest.honeypot) {
+        return Response.json({ ok: true });
+      }
+
+      let rateLimit;
+      try {
+        rateLimit = await enforceContactRateLimit(request, env.DB);
+      } catch {
+        return Response.json(
+          { error: "Form protection is temporarily unavailable" },
+          { status: 503 },
+        );
+      }
+
+      const rateLimitHeaders = getRateLimitHeaders(rateLimit);
+      if (!rateLimit.allowed) {
+        return Response.json(
+          { error: "Too many requests" },
+          {
+            status: 429,
+            headers: {
+              ...rateLimitHeaders,
+              "Retry-After": String(
+                Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+              ),
+            },
+          },
+        );
+      }
+
+      const validation = validateContactPayload(parsedRequest.body);
+      if (!validation.ok) {
+        return Response.json(
+          { error: validation.error },
+          { status: 400, headers: rateLimitHeaders },
+        );
+      }
+
+      const appResponse = await handler.fetch(request, env, ctx);
+      const headers = new Headers(appResponse.headers);
+      for (const [name, value] of Object.entries(rateLimitHeaders)) {
+        headers.set(name, value);
+      }
+      return new Response(appResponse.body, {
+        status: appResponse.status,
+        statusText: appResponse.statusText,
+        headers,
+      });
     }
 
     return handler.fetch(request, env, ctx);

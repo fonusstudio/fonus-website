@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BOOKING_URL, CONTACT_EMAIL, CONTACT_PHONE, copy, pageHref, pricing, serviceDetails, type Locale, type PageName } from "../content";
+import { CONTACT_EMAIL, CONTACT_PHONE, copy, pageHref, pricing, serviceDetails, type Locale, type PageName } from "../content";
+import { CalBookingLink } from "./cal-booking-link";
 import { ContactForm } from "./contact-form";
 
 type Props = { locale: Locale; page: PageName };
@@ -298,12 +299,13 @@ function HomePage({ locale }: { locale: Locale }) {
   );
 }
 
-function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; price: string; features: readonly string[]; popular?: boolean }[] }) {
+function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; price: string; features: readonly string[]; popular?: boolean; recordingOnly?: boolean }[] }) {
   return (
     <div className={`pricing-grid pricing-grid-${items.length}`}>
       {items.map((item) => (
-        <article className={`price-card ${item.popular ? "price-card-popular" : ""}`} key={item.name}>
+        <article className={`price-card ${item.popular ? "price-card-popular" : ""} ${item.recordingOnly ? "price-card-recording-only" : ""}`} key={item.name}>
           {item.popular && <span className="popular-badge">{copy[locale].services.popular}</span>}
+          {item.recordingOnly && <span className="recording-badge">{copy[locale].services.recording}</span>}
           <h3>{item.name}</h3>
           <p className="price">{item.price}</p>
           <ul className="price-features">
@@ -323,31 +325,82 @@ function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name
 
 function ServicesPage({ locale }: { locale: Locale }) {
   const t = copy[locale].services;
+  const details = serviceDetails[locale];
+  const recordingPackages = pricing.recording[locale];
+  const extraPackages = pricing.extras[locale];
+  const serviceCatalog = [
+    {
+      detail: details[0],
+      groups: [
+        { title: t.audio, items: [{ ...recordingPackages[0], recordingOnly: true }, ...pricing.audio[locale]] },
+      ],
+    },
+    {
+      detail: details[1],
+      groups: [
+        { title: t.video, items: [{ ...recordingPackages[1], recordingOnly: true }, ...pricing.video[locale]] },
+      ],
+    },
+    {
+      detail: details[2],
+      groups: [
+        {
+          title: locale === "es" ? "Complementos de contenido" : "Content add-ons",
+          items: [extraPackages[2]],
+        },
+      ],
+    },
+    {
+      detail: details[3],
+      groups: [
+        {
+          title: locale === "es" ? "Packs de diseño" : "Design packs",
+          items: [extraPackages[0], extraPackages[1]],
+        },
+      ],
+    },
+  ];
+
   return (
     <>
-      <section className="page-hero section-shell">
-        <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
-        <StudioVisual
-          label={locale === "es" ? "Producción Fonus" : "Fonus production"}
-          index="S"
+      <section className="services-hero">
+        <Image
+          className="services-hero-photo"
           src="/images/video-production.webp"
           alt={locale === "es" ? "Producción de entrevista multicámara" : "Multi-camera interview production"}
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
         />
-      </section>
-      <section className="section-shell section-pad">
-        <SectionHeading eyebrow={locale === "es" ? "Lo que hacemos" : "What we do"} title={t.detailTitle} />
-        <div className="service-detail-list">
-          {serviceDetails[locale].map(([number, title, text, features]) => (
-            <article key={number}><div><h2>{title}</h2><p>{text}</p><small>{features}</small></div></article>
-          ))}
+        <div className="services-hero-copy section-shell">
+          <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
         </div>
       </section>
-      <section className="pricing-section section-shell section-pad">
-        <SectionHeading eyebrow={locale === "es" ? "Precios claros" : "Clear pricing"} title={t.pricingTitle} text={t.pricingIntro} />
-        <div className="pricing-group"><h2>{t.recording}</h2><PricingGrid locale={locale} items={pricing.recording[locale]} /></div>
-        <div className="pricing-group"><h2>{t.audio}</h2><PricingGrid locale={locale} items={pricing.audio[locale]} /></div>
-        <div className="pricing-group"><h2>{t.video}</h2><PricingGrid locale={locale} items={pricing.video[locale]} /></div>
-        <div className="pricing-group"><h2>{t.extras}</h2><PricingGrid locale={locale} items={pricing.extras[locale]} /></div>
+      <section className="services-catalog section-shell section-pad">
+        <SectionHeading eyebrow={t.pricingTitle} title={t.detailTitle} text={t.pricingIntro} />
+        <div className="service-offers">
+          {serviceCatalog.map(({ detail, groups }) => {
+            const [number, title, text, features] = detail;
+            return (
+              <article className="service-offer" key={number}>
+                <div className="service-offer-header">
+                  <span className="service-offer-number">{number}</span>
+                  <div><h2>{title}</h2><p>{text}</p></div>
+                  <small>{features}</small>
+                </div>
+                <div className="service-package-groups">
+                  {groups.map((group) => (
+                    <div className="service-package-group" key={group.title}>
+                      <h3>{group.title}</h3>
+                      <PricingGrid locale={locale} items={group.items} />
+                    </div>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
         <a className="brochure-link" href="/downloads/fonus-studio-brochure.pdf" target="_blank" rel="noreferrer">
           {locale === "es" ? "Descargar brochure de servicios" : "Download services brochure"} <span>↓</span>
         </a>
@@ -407,18 +460,31 @@ function ContactPage({ locale }: { locale: Locale }) {
   const t = copy[locale].contact;
   return (
     <>
-      <section className="contact-hero section-shell">
-        <p className="eyebrow">{t.badge}</p>
-        <h1>{t.title}</h1>
-        <p>{t.intro}</p>
+      <section className="contact-hero">
+        <Image
+          className="contact-hero-photo"
+          src="/images/podcast-session.webp"
+          alt={locale === "es" ? "Conversación grabada en Fonus Studio" : "Conversation recorded at Fonus Studio"}
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+        />
+        <div className="contact-hero-copy section-shell">
+          <p className="eyebrow">{t.badge}</p>
+          <h1>{t.title}</h1>
+          <p>{t.intro}</p>
+        </div>
       </section>
       <section className="section-shell contact-layout section-pad">
         <div className="contact-sidebar">
           <div><p className="eyebrow">{t.details}</p><h2>{locale === "es" ? "Estamos aquí para ayudarte." : "We’re here to help."}</h2></div>
-          <div className="contact-item"><span>{t.emailLabel}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
-          <div className="contact-item"><span>{t.phoneLabel}</span><a href="tel:+34614692775">{CONTACT_PHONE}</a></div>
-          <div className="contact-item"><span>{t.locationLabel}</span><p>{t.location}</p><small>{t.hours}</small></div>
-          <div className="meeting-card"><span className="live-dot" /><h3>{t.meetingTitle}</h3><p>{t.meetingText}</p><a className="button button-primary" href={BOOKING_URL} target="_blank" rel="noreferrer">{t.bookMeeting}</a></div>
+          <div className="contact-details-list">
+            <div className="contact-item"><span>{t.emailLabel}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
+            <div className="contact-item"><span>{t.phoneLabel}</span><a href="tel:+34614692775">{CONTACT_PHONE}</a></div>
+            <div className="contact-item"><span>{t.locationLabel}</span><p>{t.location}</p></div>
+          </div>
+          <div className="meeting-card"><span className="live-dot" /><h3>{t.meetingTitle}</h3><p>{t.meetingText}</p><CalBookingLink locale={locale}>{t.bookMeeting}</CalBookingLink></div>
         </div>
         <div className="form-panel"><p className="eyebrow">{locale === "es" ? "Formulario" : "Enquiry form"}</p><h2>{t.formTitle}</h2><ContactForm locale={locale} /></div>
       </section>
