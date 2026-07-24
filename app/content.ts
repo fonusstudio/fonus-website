@@ -224,16 +224,14 @@ export const copy = {
 
 export const serviceDetails = {
   es: [
-    ["01", "Producción de podcast", "Sonido profesional para conversaciones que merecen ser escuchadas.", "Hasta 4 micrófonos · Monitorización · Edición · Mezcla y masterización"],
-    ["02", "Videopodcast", "La fuerza del vídeo, sin complicaciones.", "Hasta 3 cámaras · Iluminación · Edición multicámara · Corrección de color"],
-    ["03", "Creación de contenido", "Una sola grabación. Múltiples posibilidades.", "Reels · Shorts · Entrevistas · Cursos · Vídeo CV · Contenido corporativo"],
-    ["04", "Branding y diseño", "Una identidad visual coherente en cada publicación.", "Portadas · Miniaturas · Motion graphics · Intros · Overlays"],
+    ["01", "Audio", "Sonido profesional para conversaciones que merecen ser escuchadas.", "Hasta 4 micrófonos · Monitorización de la sesion · Edición · Estudio Tratado Acousticamente"],
+    ["02", "Video", "La fuerza del vídeo, sin complicaciones.", "Hasta 3 cámaras 4k · Iluminación Profesional · Edición ·  Monitorización de la sesion"],
+    ["03", "Servicios extra", "Todo lo que necesitas para completar y reforzar tu contenido.", "Transcripción · Portadas · Miniaturas · Branding · Intros · Diseño sonoro"],
   ],
   en: [
-    ["01", "Podcast production", "Professional audio for conversations worth sharing.", "Up to 4 microphones · Monitoring · Editing · Mixing and mastering"],
-    ["02", "Video podcasting", "The power of video, without the complexity.", "Up to 3 cameras · Lighting · Multi-camera editing · Colour correction"],
-    ["03", "Content creation", "One recording session. Endless possibilities.", "Reels · Shorts · Interviews · Courses · Video CVs · Corporate content"],
-    ["04", "Branding and design", "A consistent visual identity for every publication.", "Artwork · Thumbnails · Motion graphics · Intros · Overlays"],
+    ["01", "Audio", "Professional audio for conversations worth sharing.", "Up to 4 microphones · Monitoring during the session· Editing · Mixing and mastering"],
+    ["02", "Video", "The power of video, without the complexity.", "Up to 3 cameras · Studio Lighting · Editing · Monitoring during the session"],
+    ["03", "Extra services", "Everything you need to complete and strengthen your content.", "Transcription · Artwork · Thumbnails · Branding · Intros · Sound design"],
   ],
 } as const;
 
@@ -274,14 +272,14 @@ export const pricing = {
   },
   extras: {
     es: [
-      { name: "Pack gráfico", price: "50 €", features: ["Portada por episodio", "Miniatura por episodio"] },
-      { name: "Pack branding", price: "300 €", features: ["Intro personalizada", "Diseño sonoro", "Plantillas visuales", "+150 € para vídeo"] },
-      { name: "Transcripción", price: "50 / 100 €", features: ["50 € por episodio de audio", "100 € por episodio de vídeo"] },
+      { name: "Portadas y miniaturas", description: "Una imagen visual coherente y lista para publicar en cada episodio.", price: "49 €", priceNote: "por proyecto", features: ["Portada de vídeo", "Miniatura para plataformas"] },
+      { name: "Pack de branding", description: "Creación de intros, animaciones y gráficos personalizados para tu marca, listos para utilizarse a lo largo de tu proyecto.", price: "299 €", priceOptions: [{ label: "Audio", price: "299 €" }, { label: "Vídeo", price: "449 €" }], features: ["Intro personalizada", "Gráficos personalizados", "Plantillas visuales"] },
+      { name: "Transcripción y subtitulado", description: "Texto y subtítulos claros para mejorar la accesibilidad y ampliar el alcance.", price: "49 / 99 €", priceOptions: [{ label: "Audio", price: "49 €", note: "por episodio" }, { label: "Vídeo", price: "99 €", note: "por episodio" }], features: ["Transcripción completa", "Subtítulos para vídeo"] },
     ],
     en: [
-      { name: "Graphic pack", price: "€50", features: ["Episode artwork", "Episode thumbnail"] },
-      { name: "Branding pack", price: "€300", features: ["Custom intro", "Sound design", "Visual templates", "+€150 for video"] },
-      { name: "Transcription", price: "€50 / €100", features: ["€50 per audio episode", "€100 per video episode"] },
+      { name: "Covers and thumbnails", description: "A consistent visual identity, ready to publish with every episode.", price: "€49", priceNote: "per project", features: ["Video cover", "Platform-ready thumbnail"] },
+      { name: "Branding pack", description: "Custom intros, animations and graphics for your brand, ready to use throughout your project.", price: "€299", priceOptions: [{ label: "Audio", price: "€299" }, { label: "Video", price: "€449" }], features: ["Custom intro", "Custom graphics", "Visual templates"] },
+      { name: "Transcription and subtitling", description: "Clear text and subtitles that improve accessibility and expand your reach.", price: "€49 / €99", priceOptions: [{ label: "Audio", price: "€49", note: "per episode" }, { label: "Video", price: "€99", note: "per episode" }], features: ["Full transcription", "Video subtitles"] },
     ],
   },
 } as const;

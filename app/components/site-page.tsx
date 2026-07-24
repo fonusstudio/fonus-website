@@ -299,7 +299,7 @@ function HomePage({ locale }: { locale: Locale }) {
   );
 }
 
-function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; price: string; features: readonly string[]; popular?: boolean; recordingOnly?: boolean }[] }) {
+function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; description?: string; price: string; priceNote?: string; priceTag?: string; priceOptions?: readonly { label: string; price: string; note?: string }[]; features: readonly string[]; popular?: boolean; recordingOnly?: boolean; hideCta?: boolean }[] }) {
   return (
     <div className={`pricing-grid pricing-grid-${items.length}`}>
       {items.map((item) => (
@@ -307,7 +307,7 @@ function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name
           {item.popular && <span className="popular-badge">{copy[locale].services.popular}</span>}
           {item.recordingOnly && <span className="recording-badge">{copy[locale].services.recording}</span>}
           <h3>{item.name}</h3>
-          <p className="price">{item.price}</p>
+          {item.description && <p className="price-card-description">{item.description}</p>}
           <ul className="price-features">
             {item.features.map((feature) => (
               <li key={feature}>
@@ -316,7 +316,26 @@ function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name
               </li>
             ))}
           </ul>
-          <Link className="button button-secondary" href={pageHref(locale, "contact")}>{copy[locale].nav.book}</Link>
+          {item.priceOptions ? (
+            <div className="price-options-wrap">
+              <div className="price-options">
+                {item.priceOptions.map((option) => (
+                  <div className="price-option" key={option.label}>
+                    <span className="price-option-label">{option.label}</span>
+                    <span className="price-option-value">{option.price}</span>
+                    {option.note && <span className="price-option-note">{option.note}</span>}
+                  </div>
+                ))}
+              </div>
+              {item.priceTag && <span className="price-options-tag">{item.priceTag}</span>}
+            </div>
+          ) : (
+            <div className="price-line">
+              <p className="price">{item.price}</p>
+              {item.priceNote && <span className="price-note">{item.priceNote}</span>}
+            </div>
+          )}
+          {!item.hideCta && <Link className="button button-secondary" href={pageHref(locale, "contact")}>{copy[locale].nav.book}</Link>}
         </article>
       ))}
     </div>
@@ -345,17 +364,8 @@ function ServicesPage({ locale }: { locale: Locale }) {
       detail: details[2],
       groups: [
         {
-          title: locale === "es" ? "Complementos de contenido" : "Content add-ons",
-          items: [extraPackages[2]],
-        },
-      ],
-    },
-    {
-      detail: details[3],
-      groups: [
-        {
-          title: locale === "es" ? "Packs de diseño" : "Design packs",
-          items: [extraPackages[0], extraPackages[1]],
+          title: locale === "es" ? "Packs y complementos" : "Packs and add-ons",
+          items: extraPackages.map((item) => ({ ...item, hideCta: true })),
         },
       ],
     },
