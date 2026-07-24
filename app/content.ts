@@ -72,6 +72,8 @@ export const copy = {
         "Si tienes previsto grabar de forma recurrente, podemos preparar un acuerdo a largo plazo con un precio por sesión negociado según el volumen y la frecuencia.",
       repeatBenefit:
         "El plan puede incluir extras seleccionados para ofrecerte una solución más completa y previsible.",
+      repeatCulture:
+        "También valoramos especialmente los proyectos creativos y con potencial. Podemos ofrecer condiciones especiales a iniciativas que contribuyen al arte y la cultura, ayudando a que las buenas ideas encuentren el espacio y los recursos para crecer.",
       repeatCta: "Ponte en contacto",
       ctaTitle: "Cuéntanos tu proyecto.",
       ctaText: "Encontraremos la forma de convertir tu idea en contenido profesional.",
@@ -180,6 +182,8 @@ export const copy = {
         "If you plan to record regularly, we can create a long-term agreement with a per-session rate negotiated around your volume and frequency.",
       repeatBenefit:
         "Your plan can include selected extras for a more complete and predictable production setup.",
+      repeatCulture:
+        "We also place special value on creative projects with real promise. We can offer special terms to initiatives that contribute to the arts and culture, helping strong ideas find the space and resources to grow.",
       repeatCta: "Get in touch",
       ctaTitle: "Tell us about your project.",
       ctaText: "We’ll help turn your idea into professional content.",

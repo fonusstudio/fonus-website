@@ -417,6 +417,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
             <h2>{t.repeatTitle}</h2>
             <p>{t.repeatText}</p>
             <p>{t.repeatBenefit}</p>
+            <p className="repeat-sessions-culture">{t.repeatCulture}</p>
             <Link className="button button-primary" href={pageHref(locale, "contact")}>{t.repeatCta}</Link>
           </div>
           <div className="repeat-sessions-media">
