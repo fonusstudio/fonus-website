@@ -56,3 +56,36 @@ Import trace:
     at <unknown> (Error: ./app/content.ts:280:63)
     at <unknown> (Error: (./app/content.ts:280:63)
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+⨯ TypeError: Cannot read properties of undefined (reading 'map')
+    at ServicesPage (app\components\site-page.tsx:425:33)
+  423 |               <span>{t.repeatExtrasLabel}</span>
+  424 |               <ul>
+> 425 |                 {t.repeatExtras.map((extra) => <li key={extra}>{extra}</li>)}
+      |                                 ^
+  426 |               </ul>
+  427 |             </div>
+  428 |             <Link className="button button-primary" href={pageHref(locale, "contact")}>{t... {
+  digest: '326389958'
+}
+⨯ TypeError: Cannot read properties of undefined (reading 'map')
+    at ServicesPage (app\components\site-page.tsx:425:33)
+  423 |               <span>{t.repeatExtrasLabel}</span>
+  424 |               <ul>
+> 425 |                 {t.repeatExtras.map((extra) => <li key={extra}>{extra}</li>)}
+      |                                 ^
+  426 |               </ul>
+  427 |             </div>
+  428 |             <Link className="button button-primary" href={pageHref(locale, "contact")}>{t... {
+  digest: '326389958'
+}
+[browser] Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+    at ServicesPage (app\components\site-page.tsx:425:33)
+    at CatchAllPage (app\[...slug]\page.tsx:53:10)
+  423 |               <span>{t.repeatExtrasLabel}</span>
+  424 |               <ul>
+> 425 |                 {t.repeatExtras.map((extra) => <li key={extra}>{extra}</li>)}
+      |                                 ^
+  426 |               </ul>
+  427 |             </div>
+  428 |             <Link className="button button-primary" href={pageHref(locale, "contact")}>{t...
+[browser] Image with src "http://127.0.0.1:3000/images/team-review.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
