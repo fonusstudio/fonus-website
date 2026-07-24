@@ -84,7 +84,6 @@ export const copy = {
       intro:
         "Estamos preparando una selección de producciones reales. Mientras tanto, esta versión muestra la dirección editorial y el comportamiento de la futura galería.",
       featured: "Trabajos destacados",
-      featuredText: "Una galería preparada para podcasts, vídeo, campañas y contenido social.",
       behind: "Detrás de las cámaras",
       behindText:
         "La futura fotografía mostrará sesiones reales, conversaciones, iluminación, monitorización y el equipo trabajando.",
@@ -194,7 +193,6 @@ export const copy = {
       intro:
         "We are preparing a selection of real productions. For now, this version shows the editorial direction and behaviour of the future gallery.",
       featured: "Featured work",
-      featuredText: "A gallery ready for podcasts, video, campaigns and social content.",
       behind: "Behind the scenes",
       behindText:
         "Future photography will capture real sessions, conversations, lighting, monitoring and the team at work.",

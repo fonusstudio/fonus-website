@@ -444,17 +444,22 @@ function PortfolioPage({ locale }: { locale: Locale }) {
   const categories = locale === "es" ? ["Podcast", "Videopodcast", "Campaña", "Contenido social", "Entrevista", "Producción corporativa"] : ["Podcast", "Video podcast", "Campaign", "Social content", "Interview", "Corporate production"];
   return (
     <>
-      <section className="page-hero page-hero-portfolio section-shell">
-        <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
-        <StudioVisual
-          label={locale === "es" ? "Galería editorial" : "Editorial gallery"}
-          index="P"
+      <section className="portfolio-hero">
+        <Image
+          className="portfolio-hero-photo"
           src="/images/podcast-session.webp"
           alt={locale === "es" ? "Dos personas grabando un podcast" : "Two people recording a podcast"}
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
         />
+        <div className="portfolio-hero-copy section-shell">
+          <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
+        </div>
       </section>
       <section className="section-shell section-pad">
-        <SectionHeading eyebrow={t.featured} title={t.featuredText} />
+        <p className="eyebrow portfolio-grid-eyebrow">{t.featured}</p>
         <div className="portfolio-full-grid">
           {categories.map((category, index) => (
             <article className={`work-placeholder work-placeholder-${(index % 4) + 1}`} key={category}>

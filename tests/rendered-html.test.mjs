@@ -129,6 +129,24 @@ test("renders the services page with a full hero image", async () => {
   assert.match(html, /services-hero-photo/i);
 });
 
+test("renders the portfolio with a full hero image and a compact work label", async () => {
+  const response = await request("/portfolio");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /<section class="portfolio-hero">/i);
+  assert.match(html, /podcast-session\.webp/i);
+  assert.match(html, /portfolio-hero-photo/i);
+  assert.match(html, /portfolio-grid-eyebrow[^>]*>Trabajos destacados/i);
+  assert.doesNotMatch(html, /Una galer.a preparada para podcasts/i);
+
+  const englishResponse = await request("/en/portfolio");
+  assert.equal(englishResponse.status, 200);
+  const englishHtml = await englishResponse.text();
+  assert.match(englishHtml, /portfolio-grid-eyebrow[^>]*>Featured work/i);
+  assert.doesNotMatch(englishHtml, /A gallery ready for podcasts/i);
+});
+
 test("groups packages beneath their matching service", async () => {
   const response = await request("/services");
   assert.equal(response.status, 200);

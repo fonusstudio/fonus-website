@@ -785,6 +785,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: var(--label-size); font-weight: 500; line-height: 1.4; letter-spacing: .1em; font-synthesis: none; text-transform: uppercase; }
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
 
+.portfolio-hero {
+  min-height: clamp(680px, 84svh, 860px);
+  padding-block: clamp(110px, 13vw, 180px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+  background: #080808;
+}
+.portfolio-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(4,4,4,.95) 0%, rgba(4,4,4,.82) 38%, rgba(4,4,4,.28) 70%, rgba(4,4,4,.08) 100%),
+    linear-gradient(180deg, rgba(4,4,4,.08) 42%, rgba(4,4,4,.68) 100%);
+}
+.portfolio-hero-photo { z-index: 0; object-fit: cover; object-position: center 46%; filter: saturate(.88) contrast(1.04); }
+.portfolio-hero-copy { position: relative; z-index: 2; }
+.portfolio-hero-copy > div { max-width: 780px; }
+.portfolio-hero h1 { max-width: 780px; margin-bottom: clamp(24px, 2.6vw, 36px); font-size: clamp(3.2rem, 6vw, 6.5rem); text-shadow: 0 10px 42px rgba(0,0,0,.7); }
+.portfolio-hero-copy > div > p:last-child { max-width: 650px; margin: 0; color: #d8d1ca; font-size: clamp(1rem, 1.25vw, 1.2rem); text-shadow: 0 4px 22px rgba(0,0,0,.78); }
+.portfolio-grid-eyebrow { margin-bottom: 34px; }
 .portfolio-full-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
 .work-placeholder { position: relative; isolation: isolate; min-height: 360px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border: 1px solid var(--line); border-radius: 34px 10px 34px 10px; background: radial-gradient(circle at 70% 20%, rgba(255,97,35,.18), transparent 28%), #131210; }
 .work-placeholder:nth-child(even) { border-radius: 10px 60px 10px 60px; }
@@ -985,6 +1011,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   }
   .services-hero-photo { object-position: 58% center; }
   .services-hero h1 { font-size: clamp(2.8rem, 12vw, 4.8rem); }
+  .portfolio-hero { min-height: 700px; padding-block: 110px 82px; align-items: flex-end; }
+  .portfolio-hero::before {
+    background:
+      linear-gradient(90deg, rgba(4,4,4,.88) 0%, rgba(4,4,4,.52) 100%),
+      linear-gradient(180deg, rgba(4,4,4,.08) 16%, rgba(4,4,4,.92) 88%);
+  }
+  .portfolio-hero-photo { object-position: 58% center; }
+  .portfolio-hero h1 { font-size: clamp(2.8rem, 12vw, 4.8rem); }
   .page-hero .studio-visual { min-height: 430px; }
   .manifesto, .studio-section, .page-hero, .editorial-duo, .editorial-duo-reverse, .map-section { grid-template-columns: 1fr; }
   .manifesto { gap: 46px; }
