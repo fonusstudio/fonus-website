@@ -1,0 +1,58 @@
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+⨯ ./app/content.ts:280:63
+Expected ',', got 'ident'
+  [90m278 |[0m ...
+  [90m279 |[0m ...
+[31m[1m>[0m [90m280 |[0m ...[32m pack"[0m, price: [32m"€50"[0m, priceNote:  per project[32m", features: ["[0m[33mEpisode[0m [33mCover[0m and [33mThumbnai.[0m[32m..[0m
+  [90m    |[0m                                          [31m[1m^^^^^^^[0m
+  [90m281 |[0m ...[33mg[0m pack[32m", price: "[0m€[35m300[0m[32m", priceNote: "[0m+€[35m150[0m [36mfor[0m video[32m", features: ["[0m[33mCustom[0m intro[32m", "[0m[33mSoun.[0m..
+  [90m282 |[0m ...[33miption[0m and [33mSubtitiling[0m[32m", price: "[0m€[35m50[0m / €[35m100[0m[32m", priceOptions: [{ label: "[0m[33mAudio[0m[32m", price: .[0m..
+  [90m283 |[0m ...
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/content.ts
+    ./app/[...slug]/page.tsx
+
+
+⨯ ./app/content.ts:280:63
+Expected ',', got 'ident'
+  [90m278 |[0m ...
+  [90m279 |[0m ...
+[31m[1m>[0m [90m280 |[0m ...[32m pack"[0m, price: [32m"€50"[0m, priceNote:  per project[32m", features: ["[0m[33mEpisode[0m [33mCover[0m and [33mThumbnai.[0m[32m..[0m
+  [90m    |[0m                                          [31m[1m^^^^^^^[0m
+  [90m281 |[0m ...[33mg[0m pack[32m", price: "[0m€[35m300[0m[32m", priceNote: "[0m+€[35m150[0m [36mfor[0m video[32m", features: ["[0m[33mCustom[0m intro[32m", "[0m[33mSoun.[0m..
+  [90m282 |[0m ...[33miption[0m and [33mSubtitiling[0m[32m", price: "[0m€[35m50[0m / €[35m100[0m[32m", priceOptions: [{ label: "[0m[33mAudio[0m[32m", price: .[0m..
+  [90m283 |[0m ...
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/content.ts
+    ./app/[...slug]/page.tsx
+
+
+[browser] Uncaught Error: ./app/content.ts:280:63
+Expected ',', got 'ident'
+  278 | ...
+  279 | ...
+> 280 | ... pack", price: "€50", priceNote:  per project", features: ["Episode Cover and Thumbnai...
+      |                                          ^^^^^^^
+  281 | ...g pack", price: "€300", priceNote: "+€150 for video", features: ["Custom intro", "Soun...
+  282 | ...iption and Subtitiling", price: "€50 / €100", priceOptions: [{ label: "Audio", price: ...
+  283 | ...
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/content.ts
+    ./app/[...slug]/page.tsx
+
+
+    at <unknown> (Error: ./app/content.ts:280:63)
+    at <unknown> (Error: (./app/content.ts:280:63)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior

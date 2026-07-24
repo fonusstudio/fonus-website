@@ -1,0 +1,11 @@
+? The modules directory at "C:\Users\tobia\Documents\fonus\website\site\node_mod
+ules" will be removed and reinstalled from scratch. Proceed? (Y/n)[1A[148G[ERR_PNPM_META_FETCH_FAIL] GET https://registry.npmjs.org/pnpm: fetch failed
+
+   ╭──────────────────────────────────────────╮
+   │                                          │
+   │   Update available! 11.9.0 → 11.15.1.    │
+   │   Changelog: https://pnpm.io/v/11.15.1   │
+   │     To update, run: pnpm add -g pnpm     │
+   │                                          │
+   ╰──────────────────────────────────────────╯
+
