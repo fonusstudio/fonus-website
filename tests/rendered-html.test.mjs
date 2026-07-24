@@ -148,14 +148,17 @@ test("offers negotiated long-term plans in both languages", async () => {
   const spanishHtml = await spanishResponse.text();
   assert.match(spanishHtml, /Acuerdos para sesiones recurrentes/i);
   assert.match(spanishHtml, /precio por sesi.n negociado/i);
-  assert.match(spanishHtml, /Posibles extras incluidos/i);
+  assert.match(spanishHtml, /team-review\.png/i);
+  assert.match(spanishHtml, /<a href="\/contact" class="button button-primary">Ponte en contacto<\/a>/i);
+  assert.doesNotMatch(spanishHtml, /Posibles extras incluidos/i);
 
   const englishResponse = await request("/en/services");
   assert.equal(englishResponse.status, 200);
   const englishHtml = await englishResponse.text();
   assert.match(englishHtml, /Long-term deals for repeat sessions/i);
   assert.match(englishHtml, /per-session rate negotiated/i);
-  assert.match(englishHtml, /Possible included extras/i);
+  assert.match(englishHtml, /<a href="\/en\/contact" class="button button-primary">Get in touch<\/a>/i);
+  assert.doesNotMatch(englishHtml, /Possible included extras/i);
 });
 
 test("uses Cal.com for discovery meeting bookings", async () => {

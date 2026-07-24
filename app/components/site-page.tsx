@@ -416,16 +416,17 @@ function ServicesPage({ locale }: { locale: Locale }) {
             <p className="eyebrow">{t.repeatEyebrow}</p>
             <h2>{t.repeatTitle}</h2>
             <p>{t.repeatText}</p>
-          </div>
-          <div className="repeat-sessions-details">
             <p>{t.repeatBenefit}</p>
-            <div>
-              <span>{t.repeatExtrasLabel}</span>
-              <ul>
-                {t.repeatExtras.map((extra) => <li key={extra}>{extra}</li>)}
-              </ul>
-            </div>
             <Link className="button button-primary" href={pageHref(locale, "contact")}>{t.repeatCta}</Link>
+          </div>
+          <div className="repeat-sessions-media">
+            <Image
+              src="/images/team-review.png"
+              alt={locale === "es" ? "Equipo creativo revisando una producción" : "Creative team reviewing a production"}
+              fill
+              sizes="(max-width: 800px) 100vw, 45vw"
+              unoptimized
+            />
           </div>
         </section>
         <a className="brochure-link" href="/downloads/fonus-studio-brochure.pdf" target="_blank" rel="noreferrer">
