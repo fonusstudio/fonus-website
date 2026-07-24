@@ -135,12 +135,27 @@ test("groups packages beneath their matching service", async () => {
 
   const html = await response.text();
   assert.doesNotMatch(html, /service-detail-list|pricing-section/i);
-  assert.match(html, /<article class="service-offer">[\s\S]*?Producci.n de podcast[\s\S]*?Producci.n de audio[\s\S]*?Solo grabaci.n/i);
-  assert.match(html, /<article class="service-offer">[\s\S]*?Videopodcast[\s\S]*?Producci.n de v.deo[\s\S]*?Solo grabaci.n/i);
+  assert.match(html, /<article class="service-offer">[\s\S]*?<h2>Audio<\/h2>[\s\S]*?Producci.n de audio[\s\S]*?Solo grabaci.n/i);
+  assert.match(html, /<article class="service-offer">[\s\S]*?<h2>Video<\/h2>[\s\S]*?Producci.n de v.deo[\s\S]*?Solo grabaci.n/i);
   assert.ok((html.match(/pricing-grid pricing-grid-4/g) ?? []).length >= 2);
   assert.ok((html.match(/price-card-recording-only/g) ?? []).length >= 2);
-  assert.match(html, /<article class="service-offer">[\s\S]*?Creaci.n de contenido[\s\S]*?Transcripci.n/i);
-  assert.match(html, /<article class="service-offer">[\s\S]*?Branding y dise.o[\s\S]*?Pack gr.fico[\s\S]*?Pack branding/i);
+  assert.match(html, /<article class="service-offer">[\s\S]*?Servicios extra[\s\S]*?Packs y complementos[\s\S]*?Portadas y miniaturas[\s\S]*?Pack de branding[\s\S]*?Transcripci.n y subtitulado/i);
+});
+
+test("offers negotiated long-term plans in both languages", async () => {
+  const spanishResponse = await request("/services");
+  assert.equal(spanishResponse.status, 200);
+  const spanishHtml = await spanishResponse.text();
+  assert.match(spanishHtml, /Acuerdos para sesiones recurrentes/i);
+  assert.match(spanishHtml, /precio por sesi.n negociado/i);
+  assert.match(spanishHtml, /Posibles extras incluidos/i);
+
+  const englishResponse = await request("/en/services");
+  assert.equal(englishResponse.status, 200);
+  const englishHtml = await englishResponse.text();
+  assert.match(englishHtml, /Long-term deals for repeat sessions/i);
+  assert.match(englishHtml, /per-session rate negotiated/i);
+  assert.match(englishHtml, /Possible included extras/i);
 });
 
 test("uses Cal.com for discovery meeting bookings", async () => {

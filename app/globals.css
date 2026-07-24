@@ -754,6 +754,54 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .price-feature-icon::before { content: ""; width: 2px; height: 10px; position: absolute; border-radius: 2px; background: var(--orange); }
 .price-feature-icon::after { content: ""; width: 2px; height: 6px; position: absolute; border-radius: 2px; background: var(--orange); box-shadow: -4px 1px 0 var(--orange), 4px 1px 0 var(--orange); }
 .price-card .button { margin-top: 0; align-self: flex-start; }
+.repeat-sessions {
+  margin-top: clamp(72px, 8vw, 112px);
+  padding: clamp(34px, 5vw, 64px);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: clamp(42px, 7vw, 96px);
+  overflow: hidden;
+  border: 1px solid rgba(255,97,35,.62);
+  border-radius: 52px 12px 52px 12px;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(255,97,35,.24), transparent 34%),
+    linear-gradient(145deg, #28160f, #120d0a 72%);
+}
+.repeat-sessions::after {
+  content: "";
+  width: 240px;
+  height: 240px;
+  position: absolute;
+  right: -90px;
+  bottom: -140px;
+  border: 1px solid rgba(255,97,35,.28);
+  border-radius: 50%;
+}
+.repeat-sessions > * { position: relative; z-index: 1; }
+.repeat-sessions h2 { max-width: 680px; margin-bottom: 22px; font-size: clamp(2rem, 3.8vw, 4rem); }
+.repeat-sessions-copy > p:last-child { max-width: 650px; margin: 0; color: #d7cfc8; font-size: 1rem; line-height: 1.7; }
+.repeat-sessions-details {
+  padding-left: clamp(28px, 4vw, 54px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  border-left: 1px solid rgba(255,255,255,.14);
+}
+.repeat-sessions-details > p { margin: 0; color: var(--muted); line-height: 1.65; }
+.repeat-sessions-details > div > span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--orange);
+  font-family: "Lemon Milk";
+  font-size: var(--label-size);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.repeat-sessions-details ul { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.repeat-sessions-details li { padding: 7px 11px; border: 1px solid rgba(255,97,35,.35); border-radius: 999px; background: rgba(8,8,8,.3); color: #d9d1ca; font-size: .78rem; }
 .brochure-link { margin-top: 60px; padding: 24px 0; display: flex; justify-content: space-between; border-block: 1px solid var(--line); font-family: "Lemon Milk"; font-size: var(--label-size); font-weight: 500; line-height: 1.4; letter-spacing: .1em; font-synthesis: none; text-transform: uppercase; }
 .brochure-link span { color: var(--orange); font-size: 1.2rem; }
 
@@ -981,6 +1029,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .pricing-grid-1 { max-width: none; }
   .pricing-grid-2, .pricing-grid-3, .pricing-grid-4 { grid-template-columns: 1fr; }
   .price-card { min-height: 0; }
+  .repeat-sessions { grid-template-columns: 1fr; }
+  .repeat-sessions-details { padding: 30px 0 0; border-top: 1px solid rgba(255,255,255,.14); border-left: 0; }
   .work-placeholder:nth-child(n) { grid-column: span 12; }
   .editorial-duo-reverse .studio-visual { order: 2; }
   .field-grid { grid-template-columns: 1fr; }

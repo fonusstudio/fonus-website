@@ -411,6 +411,23 @@ function ServicesPage({ locale }: { locale: Locale }) {
             );
           })}
         </div>
+        <section className="repeat-sessions">
+          <div className="repeat-sessions-copy">
+            <p className="eyebrow">{t.repeatEyebrow}</p>
+            <h2>{t.repeatTitle}</h2>
+            <p>{t.repeatText}</p>
+          </div>
+          <div className="repeat-sessions-details">
+            <p>{t.repeatBenefit}</p>
+            <div>
+              <span>{t.repeatExtrasLabel}</span>
+              <ul>
+                {t.repeatExtras.map((extra) => <li key={extra}>{extra}</li>)}
+              </ul>
+            </div>
+            <Link className="button button-primary" href={pageHref(locale, "contact")}>{t.repeatCta}</Link>
+          </div>
+        </section>
         <a className="brochure-link" href="/downloads/fonus-studio-brochure.pdf" target="_blank" rel="noreferrer">
           {locale === "es" ? "Descargar brochure de servicios" : "Download services brochure"} <span>↓</span>
         </a>
