@@ -370,10 +370,11 @@ function ConsentAwareAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
   const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
   const loadedRef = useRef(false);
+  const consentDefaultRef = useRef(false);
   const initialPathRef = useRef(pathname);
 
   useEffect(() => {
-    if (!ready || !preferences?.analytics || !validMeasurementId) return;
+    if (!ready || !validMeasurementId) return;
     const analyticsWindow = window as AnalyticsWindow;
     // Create the GA queue explicitly before loading gtag.js. This keeps consent
     // updates and the first page view queued even if the third-party script is
@@ -386,15 +387,19 @@ function ConsentAwareAnalytics() {
     }
     const gtag = analyticsWindow.gtag;
 
-    gtag("consent", "default", {
-      analytics_storage: "denied",
-      functionality_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      security_storage: "granted",
-      wait_for_update: 500,
-    });
+    if (!consentDefaultRef.current) {
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+      });
+      consentDefaultRef.current = true;
+    }
+    if (!preferences?.analytics) return;
     gtag("consent", "update", {
       analytics_storage: "granted",
       functionality_storage: preferences.functional ? "granted" : "denied",
