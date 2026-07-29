@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import type { Locale } from "../content";
+import { pageHref, type Locale } from "../content";
 
 const labels = {
   es: {
@@ -12,6 +12,9 @@ const labels = {
     message: "Cuéntanos tu proyecto",
     messageHint: "Mínimo 10 caracteres.",
     messageTooShort: "Escribe al menos 10 caracteres.",
+    consent:
+      "He leído y acepto la Política de Privacidad y consiento el tratamiento de mis datos personales para responder a mi consulta.",
+    consentRequired: "Debes aceptar la Política de Privacidad para enviar tu consulta.",
     send: "Enviar solicitud",
     sending: "Enviando…",
     successTitle: "¡Solicitud enviada!",
@@ -30,6 +33,9 @@ const labels = {
     message: "Tell us about your project",
     messageHint: "Minimum 10 characters.",
     messageTooShort: "Please enter at least 10 characters.",
+    consent:
+      "I have read and accept the Privacy Policy and consent to my personal data being processed for the purpose of responding to my enquiry.",
+    consentRequired: "You must accept the Privacy Policy to send your enquiry.",
     send: "Send enquiry",
     sending: "Sending…",
     successTitle: "Enquiry sent!",
@@ -137,6 +143,24 @@ export function ContactForm({ locale }: { locale: Locale }) {
       <label className="website-field" aria-hidden="true">
         Website
         <input name="website" tabIndex={-1} autoComplete="off" />
+      </label>
+      <label className="consent-field">
+        <input
+          name="consent"
+          type="checkbox"
+          required
+          value="on"
+          onInvalid={(event) => event.currentTarget.setCustomValidity(t.consentRequired)}
+          onChange={(event) => event.currentTarget.setCustomValidity("")}
+        />
+        <span>
+          {t.consent.split(locale === "es" ? "Política de Privacidad" : "Privacy Policy")[0]}
+          <a href={pageHref(locale, "privacy")} target="_blank" rel="noreferrer">
+            {locale === "es" ? "Política de Privacidad" : "Privacy Policy"}
+          </a>
+          {t.consent.split(locale === "es" ? "Política de Privacidad" : "Privacy Policy")[1]}
+          {" *"}
+        </span>
       </label>
       <button className="button button-primary" type="submit" disabled={status === "sending"}>
         {status === "sending" ? t.sending : t.send}

@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BUSINESS } from "../business";
 import { CONTACT_EMAIL, CONTACT_PHONE, copy, pageHref, pricing, serviceDetails, type Locale, type PageName } from "../content";
 import { CalBookingLink } from "./cal-booking-link";
+import { CookiePreferencesButton, FunctionalEmbed, LanguagePreferenceLink } from "./consent-manager";
 import { ContactForm } from "./contact-form";
+import { LegalPage } from "./legal-page";
 
 type Props = { locale: Locale; page: PageName };
 
@@ -31,10 +34,10 @@ function Header({ locale, page }: Props) {
           ))}
         </nav>
         <div className="header-actions">
-          <Link className="language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
+          <LanguagePreferenceLink className="language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
             <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
             <span>{locale.toUpperCase()}</span>
-          </Link>
+          </LanguagePreferenceLink>
           <Link className="button button-primary header-cta" href={pageHref(locale, "contact")}>
             {t.book}
           </Link>
@@ -42,10 +45,10 @@ function Header({ locale, page }: Props) {
             <summary aria-label={t.menu}><span /><span /></summary>
             <nav>
               {links.map(([name, label]) => <Link key={name} href={pageHref(locale, name)}>{label}</Link>)}
-              <Link className="mobile-language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
+              <LanguagePreferenceLink className="mobile-language-link" href={pageHref(opposite, page)} hrefLang={opposite} aria-label={languageLabel}>
                 <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
                 <span>{locale.toUpperCase()}</span>
-              </Link>
+              </LanguagePreferenceLink>
               <Link href={pageHref(locale, "contact")}>{t.book}</Link>
             </nav>
           </details>
@@ -57,7 +60,6 @@ function Header({ locale, page }: Props) {
 
 function Footer({ locale }: { locale: Locale }) {
   const t = copy[locale].nav;
-  const legalTarget = `${pageHref(locale, "contact")}#legal`;
   return (
     <footer className="site-footer">
       <div className="footer-top">
@@ -74,19 +76,20 @@ function Footer({ locale }: { locale: Locale }) {
         <div className="footer-column">
           <p className="footer-label">{locale === "es" ? "Contacto" : "Contact"}</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-          <a href="tel:+34614692775">{CONTACT_PHONE}</a>
-          <span>Valencia, Spain</span>
+          <a href={BUSINESS.phoneHref}>{CONTACT_PHONE}</a>
+          <span>{locale === "es" ? "Valencia, España" : "Valencia, Spain"}</span>
         </div>
         <div className="footer-column">
           <p className="footer-label">Legal</p>
-          <a href={legalTarget}>{locale === "es" ? "Privacidad" : "Privacy"}</a>
-          <a href={legalTarget}>{locale === "es" ? "Cookies" : "Cookies"}</a>
-          <a href={legalTarget}>{locale === "es" ? "Términos" : "Terms"}</a>
+          <Link href={pageHref(locale, "privacy")}>{locale === "es" ? "Política de Privacidad" : "Privacy Policy"}</Link>
+          <Link href={pageHref(locale, "cookies")}>{locale === "es" ? "Política de Cookies" : "Cookie Policy"}</Link>
+          <Link href={pageHref(locale, "legal")}>{locale === "es" ? "Aviso Legal" : "Legal Notice"}</Link>
+          <CookiePreferencesButton locale={locale} />
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Fonus Studio</span>
-        <span>{locale === "es" ? "Todos los derechos reservados." : "All rights reserved."}</span>
+        <span>© {BUSINESS.legalName} All rights reserved.</span>
+        <span>{BUSINESS.tradingName} · Valencia</span>
       </div>
     </footer>
   );
@@ -524,10 +527,17 @@ function ContactPage({ locale }: { locale: Locale }) {
       </section>
       <section className="section-shell map-section section-pad">
         <div><p className="eyebrow">Valencia · 46022</p><h2>{t.mapTitle}</h2><p>{t.location}</p></div>
-        <iframe title={locale === "es" ? "Mapa de Fonus Studio" : "Fonus Studio map"} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=C%2F%20Campoamor%2068%2C%2046022%20Valencia%2C%20Spain&output=embed" />
-      </section>
-      <section className="section-shell legal-note" id="legal">
-        <p>{locale === "es" ? "Los textos legales definitivos se incorporarán antes del lanzamiento público." : "Final legal documents will be added before public launch."}</p>
+        <FunctionalEmbed
+          title={locale === "es" ? "Mapa protegido por tus preferencias" : "Map protected by your preferences"}
+          description={locale === "es"
+            ? "Google Maps solo se cargará si habilitas las cookies funcionales."
+            : "Google Maps will load only if you enable functional cookies."}
+          buttonLabel={locale === "es" ? "Habilitar mapa" : "Enable map"}
+          policyLabel={locale === "es" ? "Privacidad de Google" : "Google privacy"}
+          policyHref="https://policies.google.com/privacy"
+        >
+          <iframe title={locale === "es" ? "Mapa de Fonus Studio" : "Fonus Studio map"} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=C%2F%20Campoamor%2068%2C%2046022%20Valencia%2C%20Spain&output=embed" />
+        </FunctionalEmbed>
       </section>
     </>
   );
@@ -549,6 +559,9 @@ export function SitePage({ locale, page }: Props) {
         {page === "services" && <ServicesPage locale={locale} />}
         {page === "portfolio" && <PortfolioPage locale={locale} />}
         {page === "contact" && <ContactPage locale={locale} />}
+        {(page === "privacy" || page === "cookies" || page === "legal") && (
+          <LegalPage locale={locale} page={page} />
+        )}
       </main>
       <Footer locale={locale} />
     </div>

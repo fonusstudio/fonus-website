@@ -106,10 +106,16 @@ test("renders every public page in Spanish and English", async () => {
     "/services",
     "/portfolio",
     "/contact",
+    "/politica-privacidad",
+    "/politica-cookies",
+    "/aviso-legal",
     "/en",
     "/en/services",
     "/en/portfolio",
     "/en/contact",
+    "/en/privacy-policy",
+    "/en/cookie-policy",
+    "/en/legal-notice",
   ];
 
   for (const path of paths) {
@@ -199,6 +205,11 @@ test("uses Cal.com for discovery meeting bookings", async () => {
   assert.match(spanishHtml, /name="website"/i);
   assert.match(spanishHtml, /tabindex="-1"/i);
   assert.doesNotMatch(spanishHtml, /calendar\.app\.google/i);
+  assert.match(spanishHtml, /name="consent"/i);
+  assert.match(spanishHtml, /type="checkbox"/i);
+  assert.match(spanishHtml, /href="\/politica-privacidad"[^>]*target="_blank"/i);
+  assert.doesNotMatch(spanishHtml, /app\.cal\.com\/embed\/embed\.js/i);
+  assert.doesNotMatch(spanishHtml, /<iframe[^>]+google\.com\/maps\?q=/i);
 
   const englishResponse = await request("/en/contact");
   assert.equal(englishResponse.status, 200);
@@ -209,6 +220,29 @@ test("uses Cal.com for discovery meeting bookings", async () => {
   assert.ok(englishTrigger, "English booking trigger should be a button");
   assert.doesNotMatch(englishTrigger, /\btarget=/i);
   assert.doesNotMatch(englishTrigger, /\bhref=/i);
+});
+
+test("publishes complete bilingual legal and cookie controls", async () => {
+  const spanishPrivacy = await request("/politica-privacidad");
+  assert.equal(spanishPrivacy.status, 200);
+  const privacyHtml = await spanishPrivacy.text();
+  assert.match(privacyHtml, /Local Boosting S\.L\./i);
+  assert.match(privacyHtml, /B70991237/i);
+  assert.match(privacyHtml, /V-217447/i);
+  assert.match(privacyHtml, /12 meses/i);
+  assert.match(privacyHtml, /Agencia Española de Protección de Datos/i);
+
+  const englishCookies = await request("/en/cookie-policy");
+  assert.equal(englishCookies.status, 200);
+  const cookiesHtml = await englishCookies.text();
+  assert.match(cookiesHtml, /Essential/i);
+  assert.match(cookiesHtml, /Functional/i);
+  assert.match(cookiesHtml, /Analytics/i);
+  assert.doesNotMatch(cookiesHtml, /Marketing cookies/i);
+
+  const legalNotice = await request("/en/legal-notice");
+  assert.equal(legalNotice.status, 200);
+  assert.match(await legalNotice.text(), /courts of Valencia/i);
 });
 
 test("silently accepts honeypot submissions without sending", async () => {
@@ -287,6 +321,7 @@ test("sends the studio notification and submitter confirmation together", async 
         message: "This is a safe automated test enquiry for the contact form.",
         locale: "es",
         website: "",
+        consent: "on",
       },
       "192.0.2.40",
     );

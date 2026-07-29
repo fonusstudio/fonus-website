@@ -68,6 +68,7 @@ export async function POST(request: Request) {
     ["Email", email],
     ["Company", company || "—"],
     ["Telephone", phone || "—"],
+    ["Privacy consent", "Yes"],
   ];
 
   const response = await fetch("https://api.resend.com/emails/batch", {

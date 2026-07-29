@@ -1,8 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect } from "react";
 import type { Locale } from "../content";
+import { useConsent } from "./consent-manager";
 
 const CAL_EMBED_SCRIPT_URL = "https://app.cal.com/embed/embed.js";
 const CAL_BOOKINGS = {
@@ -91,21 +91,38 @@ type CalBookingLinkProps = {
 
 export function CalBookingLink({ children, locale }: CalBookingLinkProps) {
   const booking = CAL_BOOKINGS[locale];
+  const consent = useConsent();
 
-  useEffect(() => {
+  function openBooking() {
+    if (!consent.preferences?.functional) consent.enableFunctional();
     configureCalEmbed(booking.namespace);
-  }, [booking.namespace]);
+    queuePopupWhileEmbedLoads(booking.namespace, booking.path);
+  }
 
   return (
-    <button
-      type="button"
-      className="button button-primary"
-      onClick={() => queuePopupWhileEmbedLoads(booking.namespace, booking.path)}
-      data-cal-link={booking.path}
-      data-cal-namespace={booking.namespace}
-      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-    >
-      {children}
-    </button>
+    <div className="booking-consent">
+      {!consent.preferences?.functional ? (
+        <p>
+          {locale === "es"
+            ? "Al continuar, habilitarás el calendario de Cal.com y sus tecnologías funcionales."
+            : "Continuing enables the Cal.com calendar and its functional technologies."}
+        </p>
+      ) : null}
+      <button
+        type="button"
+        className="button button-primary"
+        onClick={openBooking}
+        data-cal-link={booking.path}
+        data-cal-namespace={booking.namespace}
+        data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+      >
+        {consent.preferences?.functional
+          ? children
+          : locale === "es" ? "Habilitar y reservar" : "Enable and book"}
+      </button>
+      <a className="booking-privacy-link" href="https://cal.com/privacy" target="_blank" rel="noreferrer">
+        {locale === "es" ? "Privacidad de Cal.com ↗" : "Cal.com privacy ↗"}
+      </a>
+    </div>
   );
 }

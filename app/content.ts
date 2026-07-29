@@ -1,20 +1,49 @@
+import { BUSINESS } from "./business";
+
 export type Locale = "es" | "en";
-export type PageName = "home" | "services" | "portfolio" | "contact";
+export type PageName =
+  | "home"
+  | "services"
+  | "portfolio"
+  | "contact"
+  | "privacy"
+  | "cookies"
+  | "legal";
 
-export const CONTACT_EMAIL = "info@fonusstudio.com";
-export const CONTACT_PHONE = "+34 614 69 27 75";
+export const CONTACT_EMAIL = BUSINESS.email;
+export const CONTACT_PHONE = BUSINESS.phoneDisplay;
 
-export const paths: Record<PageName, string> = {
-  home: "",
-  services: "services",
-  portfolio: "portfolio",
-  contact: "contact",
+export const paths: Record<Locale, Record<PageName, string>> = {
+  es: {
+    home: "",
+    services: "services",
+    portfolio: "portfolio",
+    contact: "contact",
+    privacy: "politica-privacidad",
+    cookies: "politica-cookies",
+    legal: "aviso-legal",
+  },
+  en: {
+    home: "",
+    services: "services",
+    portfolio: "portfolio",
+    contact: "contact",
+    privacy: "privacy-policy",
+    cookies: "cookie-policy",
+    legal: "legal-notice",
+  },
 };
 
 export function pageHref(locale: Locale, page: PageName) {
   const prefix = locale === "en" ? "/en" : "";
-  const suffix = paths[page] ? `/${paths[page]}` : "";
+  const path = paths[locale][page];
+  const suffix = path ? `/${path}` : "";
   return `${prefix}${suffix}` || "/";
+}
+
+export function pageFromPath(locale: Locale, path: string): PageName | null {
+  const entry = Object.entries(paths[locale]).find(([, value]) => value === path);
+  return (entry?.[0] as PageName | undefined) ?? null;
 }
 
 export const copy = {

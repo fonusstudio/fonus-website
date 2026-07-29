@@ -49,6 +49,7 @@ export type ContactPayload = {
   phone: string;
   message: string;
   locale: "es" | "en";
+  consent: true;
 };
 
 type ParseResult =
@@ -180,6 +181,7 @@ export function validateContactPayload(body: ContactBody): ValidationResult {
     allowLineBreaks: true,
   });
   const locale = body.locale;
+  const consent = body.consent;
 
   if (
     name === null ||
@@ -189,7 +191,8 @@ export function validateContactPayload(body: ContactBody): ValidationResult {
     message === null ||
     !emailPattern.test(email) ||
     (phone.length > 0 && (phone.length < 7 || !phonePattern.test(phone))) ||
-    (locale !== "es" && locale !== "en")
+    (locale !== "es" && locale !== "en") ||
+    (consent !== true && consent !== "on")
   ) {
     return { ok: false, error: "Missing or invalid fields" };
   }
@@ -203,6 +206,7 @@ export function validateContactPayload(body: ContactBody): ValidationResult {
       phone,
       message,
       locale,
+      consent: true,
     },
   };
 }

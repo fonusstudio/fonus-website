@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { BUSINESS } from "./business";
+import { ConsentProvider } from "./components/consent-manager";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -40,23 +42,25 @@ export default function RootLayout({
   const studioSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Fonus Studio",
-    url: "https://fonusstudio.com",
-    email: "info@fonusstudio.com",
+    name: BUSINESS.tradingName,
+    legalName: BUSINESS.legalName,
+    taxID: BUSINESS.taxId,
+    url: BUSINESS.website,
+    email: BUSINESS.email,
     telephone: "+34614692775",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "C/ Campoamor 68",
-      postalCode: "46022",
-      addressLocality: "Valencia",
+      streetAddress: BUSINESS.streetAddress,
+      postalCode: BUSINESS.postalCode,
+      addressLocality: BUSINESS.city,
       addressCountry: "ES",
     },
   };
 
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
-        {children}
+        <ConsentProvider>{children}</ConsentProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(studioSchema) }}
