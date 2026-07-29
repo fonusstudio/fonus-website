@@ -374,8 +374,15 @@ function ConsentAwareAnalytics() {
   useEffect(() => {
     if (!ready || !preferences?.analytics || !validMeasurementId) return;
     const analyticsWindow = window as AnalyticsWindow;
-    analyticsWindow.dataLayer ??= [];
-    analyticsWindow.gtag ??= (...args: unknown[]) => analyticsWindow.dataLayer?.push(args);
+    // Create the GA queue explicitly before loading gtag.js. This keeps consent
+    // updates and the first page view queued even if the third-party script is
+    // still downloading or is delayed by the browser.
+    if (!Array.isArray(analyticsWindow.dataLayer)) analyticsWindow.dataLayer = [];
+    if (typeof analyticsWindow.gtag !== "function") {
+      analyticsWindow.gtag = (...args: unknown[]) => {
+        analyticsWindow.dataLayer?.push(args);
+      };
+    }
     const gtag = analyticsWindow.gtag;
 
     gtag("consent", "default", {
