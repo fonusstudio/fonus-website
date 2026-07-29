@@ -371,6 +371,7 @@ function ConsentAwareAnalytics() {
   const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
   const loadedRef = useRef(false);
   const consentDefaultRef = useRef(false);
+  const configQueuedRef = useRef(false);
   const initialPathRef = useRef(pathname);
 
   useEffect(() => {
@@ -398,6 +399,10 @@ function ConsentAwareAnalytics() {
         wait_for_update: 500,
       });
       consentDefaultRef.current = true;
+    }
+    if (!configQueuedRef.current) {
+      gtag("config", measurementId, { send_page_view: false });
+      configQueuedRef.current = true;
     }
     if (!preferences?.analytics) return;
     gtag("consent", "update", {
