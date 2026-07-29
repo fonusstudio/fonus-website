@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import Script from "next/script";
 import { BUSINESS } from "./business";
 import { ConsentProvider } from "./components/consent-manager";
 import "./globals.css";
@@ -39,6 +40,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
+  const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
   const studioSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -60,6 +63,25 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body>
+        {validMeasurementId ? (
+          <Script id="fonus-consent-default" strategy="beforeInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              window.gtag = window.gtag || function gtag() {
+                window.dataLayer.push(arguments);
+              };
+              window.gtag("consent", "default", {
+                analytics_storage: "denied",
+                functionality_storage: "denied",
+                ad_storage: "denied",
+                ad_user_data: "denied",
+                ad_personalization: "denied",
+                security_storage: "granted",
+                wait_for_update: 500
+              });
+            `}
+          </Script>
+        ) : null}
         <ConsentProvider>{children}</ConsentProvider>
         <script
           type="application/ld+json"

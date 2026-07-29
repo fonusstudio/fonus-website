@@ -370,40 +370,23 @@ function ConsentAwareAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
   const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
   const loadedRef = useRef(false);
-  const consentDefaultRef = useRef(false);
-  const configQueuedRef = useRef(false);
   const initialPathRef = useRef(pathname);
 
   useEffect(() => {
     if (!ready || !validMeasurementId) return;
     const analyticsWindow = window as AnalyticsWindow;
-    // Create the GA queue explicitly before loading gtag.js. This keeps consent
-    // updates and the first page view queued even if the third-party script is
-    // still downloading or is delayed by the browser.
+    // The root layout creates this queue before hydration so Google sees the
+    // denied defaults before any config or event command.
     if (!Array.isArray(analyticsWindow.dataLayer)) analyticsWindow.dataLayer = [];
     if (typeof analyticsWindow.gtag !== "function") {
-      analyticsWindow.gtag = (...args: unknown[]) => {
-        analyticsWindow.dataLayer?.push(args);
+      analyticsWindow.gtag = function gtag() {
+        // Google Tag expects the function's Arguments object, not a rest array.
+        // eslint-disable-next-line prefer-rest-params
+        analyticsWindow.dataLayer?.push(arguments);
       };
     }
     const gtag = analyticsWindow.gtag;
 
-    if (!consentDefaultRef.current) {
-      gtag("consent", "default", {
-        analytics_storage: "denied",
-        functionality_storage: "denied",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        security_storage: "granted",
-        wait_for_update: 500,
-      });
-      consentDefaultRef.current = true;
-    }
-    if (!configQueuedRef.current) {
-      gtag("config", measurementId, { send_page_view: false });
-      configQueuedRef.current = true;
-    }
     if (!preferences?.analytics) return;
     gtag("consent", "update", {
       analytics_storage: "granted",
