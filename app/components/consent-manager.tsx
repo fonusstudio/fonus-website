@@ -370,6 +370,7 @@ function ConsentAwareAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
   const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
   const loadedRef = useRef(false);
+  const initialPathRef = useRef(pathname);
 
   useEffect(() => {
     if (!ready || !preferences?.analytics || !validMeasurementId) return;
@@ -413,14 +414,13 @@ function ConsentAwareAnalytics() {
         anonymize_ip: true,
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
-        send_page_view: false,
       });
       loadedRef.current = true;
     }
   }, [measurementId, preferences, ready, validMeasurementId]);
 
   useEffect(() => {
-    if (!preferences?.analytics || !loadedRef.current) return;
+    if (!preferences?.analytics || !loadedRef.current || pathname === initialPathRef.current) return;
     (window as AnalyticsWindow).gtag?.("event", "page_view", {
       page_path: pathname,
       page_location: window.location.href,
