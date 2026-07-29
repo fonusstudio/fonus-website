@@ -354,13 +354,13 @@ function ServicesPage({ locale }: { locale: Locale }) {
     {
       detail: details[0],
       groups: [
-        { title: t.audio, items: [{ ...recordingPackages[0], recordingOnly: true }, ...pricing.audio[locale]] },
+        { title: t.audio, priceNote: locale === "es" ? "Precios por 1 hora de grabación" : "Prices for 1 hour of recording", items: [{ ...recordingPackages[0], recordingOnly: true }, ...pricing.audio[locale]] },
       ],
     },
     {
       detail: details[1],
       groups: [
-        { title: t.video, items: [{ ...recordingPackages[1], recordingOnly: true }, ...pricing.video[locale]] },
+        { title: t.video, priceNote: locale === "es" ? "Precios por 1 hora de grabación" : "Prices for 1 hour of recording", items: [{ ...recordingPackages[1], recordingOnly: true }, ...pricing.video[locale]] },
       ],
     },
     {
@@ -368,6 +368,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
       groups: [
         {
           title: locale === "es" ? "Packs y complementos" : "Packs and add-ons",
+          priceNote: undefined,
           items: extraPackages.map((item) => ({ ...item, hideCta: true })),
         },
       ],
@@ -406,6 +407,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
                   {groups.map((group) => (
                     <div className="service-package-group" key={group.title}>
                       <h3>{group.title}</h3>
+                      {group.priceNote && <p className="service-price-note">{group.priceNote}</p>}
                       <PricingGrid locale={locale} items={group.items} />
                     </div>
                   ))}

@@ -691,7 +691,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .service-offer-header small { padding-top: 12px; color: var(--muted); font-size: .88rem; line-height: 1.7; }
 .service-package-groups { display: grid; gap: 46px; }
 .service-package-group > h3 {
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   color: var(--orange);
   font-family: "Lemon Milk";
   font-size: var(--label-size);
@@ -699,6 +699,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   line-height: 1.4;
   letter-spacing: .11em;
   text-transform: uppercase;
+}
+.service-price-note {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .02em;
 }
 .pricing-grid { display: grid; gap: 14px; }
 .pricing-grid-1 { max-width: 540px; grid-template-columns: 1fr; }

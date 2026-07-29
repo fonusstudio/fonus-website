@@ -285,12 +285,12 @@ export const serviceDetails = {
 export const pricing = {
   recording: {
     es: [
-      { name: "Audio", price: "120 €", priceNote: "precio por 1 hora de grabación", features: ["1 hora de grabación", "Hasta 4 micrófonos", "Estudio tratado acústicamente", "Asistencia en dirección y grabación"] },
-      { name: "Vídeo", price: "120 €", priceNote: "precio por 1 hora de grabación", features: ["1 hora de grabación", "Hasta 4 micrófonos", "3 cámaras 4K", "Iluminación de estudio"] },
+      { name: "Audio", price: "120 €", features: ["1 hora de grabación", "Hasta 4 micrófonos", "Estudio tratado acústicamente", "Asistencia en dirección y grabación"] },
+      { name: "Vídeo", price: "120 €", features: ["1 hora de grabación", "Hasta 4 micrófonos", "3 cámaras 4K", "Iluminación de estudio"] },
     ],
     en: [
-      { name: "Audio", price: "€120", priceNote: "price for 1 hour of recording", features: ["1-hour recording session", "Up to 4 microphones", "Acoustically treated studio", "Recording direction and assistance"] },
-      { name: "Video", price: "€180", priceNote: "price for 1 hour of recording", features: ["1-hour recording session", "Up to 4 microphones", "3 4K cameras", "Studio lighting"] },
+      { name: "Audio", price: "€120", features: ["1-hour recording session", "Up to 4 microphones", "Acoustically treated studio", "Recording direction and assistance"] },
+      { name: "Video", price: "€180", features: ["1-hour recording session", "Up to 4 microphones", "3 4K cameras", "Studio lighting"] },
     ],
   },
   audio: {
