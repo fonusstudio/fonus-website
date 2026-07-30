@@ -57,7 +57,7 @@ export const copy = {
       menu: "Abrir menú",
     },
     home: {
-      badge: "Estudio de producción audiovisual · Valencia",
+      badge: "Estudio de producción audiovisual",
       title: "Producción profesional para historias que merecen ser escuchadas y vistas.",
       intro:
         "Ayudamos a creadores, empresas y profesionales a producir contenido con calidad profesional en un entorno pensado para que tú solo tengas que comunicar.",
@@ -115,10 +115,22 @@ export const copy = {
       featured: "Trabajos destacados",
       behind: "Detrás de las cámaras",
       behindText:
-        "La futura fotografía mostrará sesiones reales, conversaciones, iluminación, monitorización y el equipo trabajando.",
+        "Detrás de cada producción hay un equipo dispuesto a ayudarte a desarrollar tu idea, guiando tanto el lado técnico como el creativo. Te asesoramos en el guion, el ritmo, la ejecución y la distribución para sacar el máximo partido a tu proyecto.",
+      behindPoints: [
+        "Asesoramiento para dar forma al guion y la estructura",
+        "Dirección y asistencia durante la grabación",
+        "Monitorización en tiempo real para cuidar cada detalle",
+        "Edición lista para publicar en tus plataformas",
+      ],
       studio: "El estudio",
       studioText:
-        "Una selección visual del set, tratamiento acústico, cámaras, iluminación y equipamiento de audio.",
+        "Nuestro espacio está cuidadosamente preparado para ofrecer la máxima calidad, con equipamiento profesional y un ambiente cómodo para que tú te centres en lo más importante.",
+      studioPoints: [
+        "Hasta 4 micrófonos de alta fidelidad",
+        "3 cámaras 4K e iluminación de estudio",
+        "Estudio tratado acústicamente para un sonido óptimo",
+        "Plató preparado para podcast, entrevistas y talleres",
+      ],
       ctaTitle: "¿Listo para crear tu próximo proyecto?",
     },
     contact: {
@@ -167,7 +179,7 @@ export const copy = {
       menu: "Open menu",
     },
     home: {
-      badge: "Creative production studio · Valencia",
+      badge: "Creative production studio",
       title: "Professional production for stories worth hearing and seeing.",
       intro:
         "We help creators, businesses and professionals produce high-quality content in a studio designed so you can focus entirely on your message.",
@@ -225,10 +237,22 @@ export const copy = {
       featured: "Featured work",
       behind: "Behind the scenes",
       behindText:
-        "Future photography will capture real sessions, conversations, lighting, monitoring and the team at work.",
+        "Behind every production is a team ready to help you develop your idea, guiding both the technical and creative sides. We advise you on the script, pacing, execution and distribution to get the most from your project.",
+      behindPoints: [
+        "Guidance to shape your script and structure",
+        "Direction and support throughout the recording",
+        "Real-time monitoring to protect every detail",
+        "Editing ready to publish across your platforms",
+      ],
       studio: "The studio",
       studioText:
-        "A visual introduction to the set, acoustic treatment, cameras, lighting and audio equipment.",
+        "Our space is carefully prepared to deliver the highest quality, with professional equipment and a comfortable environment so you can focus on what matters most.",
+      studioPoints: [
+        "Up to 4 high-fidelity microphones",
+        "3 4K cameras and studio lighting",
+        "Acoustically treated studio for optimal sound",
+        "A set prepared for podcasts, interviews and workshops",
+      ],
       ctaTitle: "Ready to create your next project?",
     },
     contact: {

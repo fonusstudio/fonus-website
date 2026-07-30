@@ -77,6 +77,7 @@ function Footer({ locale }: { locale: Locale }) {
           <p className="footer-label">{locale === "es" ? "Contacto" : "Contact"}</p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <a href={BUSINESS.phoneHref}>{CONTACT_PHONE}</a>
+          <span>{BUSINESS.streetAddress}, {BUSINESS.postalCode} {BUSINESS.city}</span>
           <span>{locale === "es" ? "Valencia, España" : "Valencia, Spain"}</span>
         </div>
         <div className="footer-column">
@@ -151,9 +152,6 @@ function HomePage({ locale }: { locale: Locale }) {
     "/images/creator-candid.png",
     "/images/team-review.png",
   ];
-  const ribbonItems = locale === "es"
-    ? ["Podcast", "Vídeo", "Contenido", "Valencia"]
-    : ["Podcast", "Video", "Content", "Valencia"];
   return (
     <>
       <section className="hero">
@@ -174,13 +172,7 @@ function HomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <div className="motion-ribbon" aria-hidden="true">
-        <div className="motion-ribbon-track">
-          <div className="motion-ribbon-group">
-            {ribbonItems.map((item) => <span key={item}>{item}<i>✦</i></span>)}
-          </div>
-        </div>
-      </div>
+      <div className="motion-ribbon" aria-hidden="true" />
 
       <section className="manifesto section-shell section-pad">
         <div className="manifesto-copy">
@@ -214,14 +206,14 @@ function HomePage({ locale }: { locale: Locale }) {
         <SectionHeading eyebrow={t.home.servicesEyebrow} title={t.home.servicesTitle} />
         <div className="service-grid">
           {t.servicesCards.map(([title, text], index) => (
-            <Link className="service-card" href={pageHref(locale, "services")} key={title}>
+            <Link className="service-card" href={`${pageHref(locale, "services")}#${["audio-production", "video-production", "content-creation", "branding-design"][index]}`} key={title}>
               <div className="service-card-image">
                 <Image src={serviceImages[index]} alt="" fill sizes="(max-width: 800px) 100vw, 50vw" unoptimized />
               </div>
               <div className="service-card-body">
                 <h3>{title}</h3>
                 <p>{text}</p>
-                <span className="card-link">{locale === "es" ? "Ver servicio" : "View service"} <b>↗</b></span>
+                {index < 2 && <span className="card-link">{locale === "es" ? "Ver servicio" : "View service"} <b>↗</b></span>}
               </div>
             </Link>
           ))}
@@ -239,7 +231,7 @@ function HomePage({ locale }: { locale: Locale }) {
           <p className="eyebrow">{locale === "es" ? "El estudio" : "The studio"}</p>
           <h2>{t.home.studioTitle}</h2>
           <p>{t.home.studioText}</p>
-          <Link className="text-link" href={pageHref(locale, "portfolio")}>{locale === "es" ? "Conocer el espacio" : "Explore the space"} <span>↗</span></Link>
+          <Link className="text-link" href={`${pageHref(locale, "portfolio")}#studio`}>{locale === "es" ? "Conocer el espacio" : "Explore the space"} <span>↗</span></Link>
         </div>
       </section>
 
@@ -350,6 +342,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
   const details = serviceDetails[locale];
   const recordingPackages = pricing.recording[locale];
   const extraPackages = pricing.extras[locale];
+  const serviceAnchors = ["audio-production", "video-production", "content-creation", "branding-design"] as const;
   const serviceCatalog = [
     {
       detail: details[0],
@@ -397,7 +390,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
           {serviceCatalog.map(({ detail, groups }) => {
             const [number, title, text, features] = detail;
             return (
-              <article className="service-offer" key={number}>
+              <article id={serviceAnchors[Number(number) - 1]} className="service-offer" key={number}>
                 <div className="service-offer-header">
                   <span className="service-offer-number">{number}</span>
                   <div><h2>{title}</h2><p>{text}</p></div>
@@ -483,12 +476,26 @@ function PortfolioPage({ locale }: { locale: Locale }) {
         </div>
       </section>
       <section className="section-shell section-pad editorial-duo">
-        <div><p className="eyebrow">{t.behind}</p><h2>{t.behind}</h2><p>{t.behindText}</p></div>
+        <div>
+          <p className="eyebrow">{t.behind}</p>
+          <h2>{t.behind}</h2>
+          <p>{t.behindText}</p>
+          <ul className="portfolio-bullet-list">
+            {t.behindPoints.map((point) => <li key={point}><span className="price-feature-icon" aria-hidden="true" /><span>{point}</span></li>)}
+          </ul>
+        </div>
         <StudioVisual label={t.behind} index="BTS" src="/images/video-production.webp" alt={t.behind} />
       </section>
-      <section className="section-shell section-pad editorial-duo editorial-duo-reverse">
+      <section id="studio" className="section-shell section-pad editorial-duo editorial-duo-reverse">
         <StudioVisual label={t.studio} index="ST" src="/images/studio-equipment.webp" alt={t.studio} />
-        <div><p className="eyebrow">Fonus Studio</p><h2>{t.studio}</h2><p>{t.studioText}</p></div>
+        <div>
+          <p className="eyebrow">Fonus Studio</p>
+          <h2>{t.studio}</h2>
+          <p>{t.studioText}</p>
+          <ul className="portfolio-bullet-list">
+            {t.studioPoints.map((point) => <li key={point}><span className="price-feature-icon" aria-hidden="true" /><span>{point}</span></li>)}
+          </ul>
+        </div>
       </section>
       <FinalCta locale={locale} title={t.ctaTitle} />
     </>
