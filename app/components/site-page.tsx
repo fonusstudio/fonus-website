@@ -38,7 +38,7 @@ function Header({ locale, page }: Props) {
             <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
             <span>{locale.toUpperCase()}</span>
           </LanguagePreferenceLink>
-          <Link className="button button-primary header-cta" href={pageHref(locale, "contact")}>
+          <Link className="button button-primary header-cta" href={`${pageHref(locale, "contact")}#booking`}>
             {t.book}
           </Link>
           <details className="mobile-menu">
@@ -49,7 +49,7 @@ function Header({ locale, page }: Props) {
                 <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
                 <span>{locale.toUpperCase()}</span>
               </LanguagePreferenceLink>
-              <Link href={pageHref(locale, "contact")}>{t.book}</Link>
+              <Link href={`${pageHref(locale, "contact")}#booking`}>{t.book}</Link>
             </nav>
           </details>
         </div>
@@ -110,7 +110,7 @@ function ButtonRow({ locale, secondary = true }: { locale: Locale; secondary?: b
   const t = copy[locale].home;
   return (
     <div className="button-row">
-      <Link className="button button-primary" href={pageHref(locale, "contact")}>{t.primary}</Link>
+      <Link className="button button-primary" href={`${pageHref(locale, "contact")}#booking`}>{t.primary}</Link>
       {secondary && <Link className="button button-secondary" href={pageHref(locale, "services")}>{t.secondary}</Link>}
     </div>
   );
@@ -174,34 +174,6 @@ function HomePage({ locale }: { locale: Locale }) {
 
       <div className="motion-ribbon" aria-hidden="true" />
 
-      <section className="manifesto section-shell section-pad">
-        <div className="manifesto-copy">
-          <p className="eyebrow">{t.home.manifestoEyebrow}</p>
-          <h2>{t.home.manifestoTitle}</h2>
-          <p>{t.home.manifesto}</p>
-        </div>
-        <div className="manifesto-collage" aria-label={locale === "es" ? "Momentos en el estudio" : "Moments in the studio"}>
-          <figure className="organic-photo organic-photo-main">
-            <Image
-              src="/images/creator-candid.png"
-              alt={locale === "es" ? "Creadora sonriendo durante una grabación" : "Creator smiling during a recording"}
-              fill
-              sizes="(max-width: 800px) 75vw, 38vw"
-              unoptimized
-            />
-          </figure>
-          <figure className="organic-photo organic-photo-detail">
-            <Image
-              src="/images/audio-craft.png"
-              alt={locale === "es" ? "Manos trabajando con una mesa de mezclas" : "Hands working with an audio mixer"}
-              fill
-              sizes="(max-width: 800px) 45vw, 18vw"
-              unoptimized
-            />
-          </figure>
-        </div>
-      </section>
-
       <section className="section-shell section-pad services-overview">
         <SectionHeading eyebrow={t.home.servicesEyebrow} title={t.home.servicesTitle} />
         <div className="service-grid">
@@ -231,28 +203,8 @@ function HomePage({ locale }: { locale: Locale }) {
           <p className="eyebrow">{locale === "es" ? "El estudio" : "The studio"}</p>
           <h2>{t.home.studioTitle}</h2>
           <p>{t.home.studioText}</p>
-          <Link className="text-link" href={`${pageHref(locale, "portfolio")}#studio`}>{locale === "es" ? "Conocer el espacio" : "Explore the space"} <span>↗</span></Link>
+          <Link className="text-link" href={`${pageHref(locale, "portfolio")}#behind-scenes`}>{locale === "es" ? "Conocer el espacio" : "Explore the space"} <span>↗</span></Link>
         </div>
-      </section>
-
-      <section className="section-shell section-pad portfolio-preview">
-        <SectionHeading eyebrow="Portfolio" title={t.home.portfolioTitle} text={locale === "es" ? "La galería está preparada para recibir los primeros proyectos reales." : "The gallery is ready for the first real projects."} />
-        <div className="portfolio-grid">
-          {["Podcast", "Videopodcast", locale === "es" ? "Contenido social" : "Social content"].map((label, index) => (
-            <div className={`portfolio-card portfolio-card-${index + 1}`} key={label}>
-              <Image
-                className="portfolio-photo"
-                src={index === 0 ? "/images/podcast-session.webp" : index === 1 ? "/images/creator-candid.png" : "/images/team-review.png"}
-                alt=""
-                fill
-                sizes="(max-width: 800px) 100vw, 50vw"
-                unoptimized
-              />
-              <span>{label}</span><small>{locale === "es" ? "Proyecto próximamente" : "Project coming soon"}</small>
-            </div>
-          ))}
-        </div>
-        <Link className="button button-secondary" href={pageHref(locale, "portfolio")}>{locale === "es" ? "Ver portfolio" : "View portfolio"}</Link>
       </section>
 
       <section className="section-shell section-pad process-section">
@@ -273,14 +225,6 @@ function HomePage({ locale }: { locale: Locale }) {
             <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>
           ))}
         </ol>
-      </section>
-
-      <section className="section-shell section-pad trust-section">
-        <div className="trust-card">
-          <p className="eyebrow">{locale === "es" ? "Historias de clientes" : "Client stories"}</p>
-          <h2>{t.home.testimonialsTitle}</h2>
-          <p>{t.home.testimonialsText}</p>
-        </div>
       </section>
 
       <section className="section-shell section-pad faq-section">
@@ -475,7 +419,7 @@ function PortfolioPage({ locale }: { locale: Locale }) {
           ))}
         </div>
       </section>
-      <section className="section-shell section-pad editorial-duo">
+      <section id="behind-scenes" className="section-shell section-pad editorial-duo">
         <div>
           <p className="eyebrow">{t.behind}</p>
           <h2>{t.behind}</h2>
@@ -522,7 +466,7 @@ function ContactPage({ locale }: { locale: Locale }) {
           <p>{t.intro}</p>
         </div>
       </section>
-      <section className="section-shell contact-layout section-pad">
+      <section id="booking" className="section-shell contact-layout section-pad">
         <div className="contact-sidebar">
           <div><p className="eyebrow">{t.details}</p><h2>{locale === "es" ? "Estamos aquí para ayudarte." : "We’re here to help."}</h2></div>
           <div className="contact-details-list">

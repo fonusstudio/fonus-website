@@ -51,7 +51,7 @@ export const copy = {
     nav: {
       home: "Inicio",
       services: "Servicios",
-      portfolio: "Portfolio",
+      portfolio: "Portfolio y Estudio",
       contact: "Contacto",
       book: "Reservar sesión",
       menu: "Abrir menú",
@@ -173,7 +173,7 @@ export const copy = {
     nav: {
       home: "Home",
       services: "Services",
-      portfolio: "Portfolio",
+      portfolio: "Portfolio & Studio",
       contact: "Contact",
       book: "Book a session",
       menu: "Open menu",
