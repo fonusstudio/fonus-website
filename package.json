@@ -13,6 +13,7 @@
     "dev:cloudflare": "vinext dev",
     "build:cloudflare": "vinext build",
     "test": "pnpm run build && node --test tests/rendered-html.test.mjs",
+    "test:seo": "next build && node --test tests/seo.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
   },

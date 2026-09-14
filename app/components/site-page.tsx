@@ -78,7 +78,7 @@ function Footer({ locale }: { locale: Locale }) {
       <div className="footer-top">
         <div className="footer-brand">
           <Image src="/brand/fonus-logo-white.svg" alt="Fonus Studio" width={184} height={88} />
-          <p>{locale === "es" ? "Estudio creativo de producción audiovisual en Valencia." : "Creative production studio in Valencia."}</p>
+          <p>{locale === "es" ? "Estudio de podcast, videopodcast y producción audiovisual en Valencia." : "Podcast studio, video podcast recording and audiovisual production in Valencia."}</p>
         </div>
         <div className="footer-column">
           <p className="footer-label">{locale === "es" ? "Explorar" : "Explore"}</p>

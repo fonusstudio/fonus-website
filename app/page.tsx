@@ -3,16 +3,9 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SitePage } from "./components/site-page";
 import { LANGUAGE_COOKIE } from "./consent";
+import { pageMetadata } from "./seo";
 
-export const metadata: Metadata = {
-  title: "Estudio de podcast y producción audiovisual en Valencia",
-  description:
-    "Producción profesional de podcasts, videopodcasts y contenido para marcas y creadores en Valencia.",
-  alternates: {
-    canonical: "/",
-    languages: { es: "/", en: "/en" },
-  },
-};
+export const metadata: Metadata = pageMetadata("es", "home");
 
 export default async function Home() {
   const language = (await cookies()).get(LANGUAGE_COOKIE)?.value;

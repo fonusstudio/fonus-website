@@ -57,21 +57,21 @@ export const copy = {
       menu: "Abrir menú",
     },
     home: {
-      badge: "Estudio de producción audiovisual",
-      title: "Producción profesional para historias que merecen ser escuchadas y vistas.",
+      badge: "Fonus Studio · Grabación y producción",
+      title: "Tu estudio de podcast en Valencia.",
       intro:
-        "Ayudamos a creadores, empresas y profesionales a producir contenido con calidad profesional en un entorno pensado para que tú solo tengas que comunicar.",
+        "Graba tu podcast o videopodcast en un estudio preparado para que tú solo tengas que comunicar. Acompañamos a creadores, empresas y profesionales con grabación, edición y producción audiovisual.",
       primary: "Reservar sesión",
-      secondary: "Descubrir servicios",
+      secondary: "Ver servicios y precios",
       manifestoEyebrow: "Fonus Studio",
       manifestoTitle: "Un estudio donde las ideas toman forma.",
       manifesto:
         "Creemos que una buena conversación merece más que una webcam y un micrófono improvisado. Por eso hemos creado un espacio que combina atención al detalle, equipamiento profesional y un ambiente cómodo y natural.",
       servicesEyebrow: "Qué hacemos",
       servicesTitle: "Todo lo que necesitas para crear contenido profesional.",
-      studioTitle: "Un espacio diseñado para crear.",
+      studioTitle: "Graba tu podcast en C/ Campoamor 68, Valencia.",
       studioText:
-        "Equipamiento profesional, iluminación, tratamiento acústico y dirección técnica cuidada. Mientras nosotros nos ocupamos de la parte técnica, tú puedes concentrarte en la conversación.",
+        "Nuestro estudio en Valencia cuenta con tratamiento acústico, hasta 4 micrófonos, 3 cámaras 4K e iluminación profesional. Te acompañamos durante la grabación para que puedas concentrarte en la conversación.",
       portfolioTitle: "Cada proyecto tiene su propia voz.",
       processTitle: "Un proceso sencillo, de principio a fin.",
       testimonialsTitle: "La confianza se construye proyecto a proyecto.",
@@ -83,9 +83,9 @@ export const copy = {
     },
     services: {
       badge: "Servicios",
-      title: "Producción audiovisual profesional, adaptada a tu proyecto.",
+      title: "Grabación y edición de podcast en Valencia.",
       intro:
-        "Desde sesiones de grabación hasta producciones completas con edición, diseño y contenido optimizado para múltiples plataformas.",
+        "Elige una sesión de grabación de audio o videopodcast en Fonus Studio, o una producción completa con edición, diseño y contenido listo para tus plataformas.",
       detailTitle: "Nos adaptamos a la forma en la que quieres crear.",
       pricingTitle: "Paquetes y precios",
       pricingIntro: "Elige el nivel de producción que mejor se adapta a tus necesidades.",
@@ -108,10 +108,10 @@ export const copy = {
       ctaText: "Encontraremos la forma de convertir tu idea en contenido profesional.",
     },
     portfolio: {
-      badge: "Portfolio",
-      title: "Cada proyecto cuenta una historia diferente.",
+      badge: "Portfolio y estudio",
+      title: "Conoce nuestro estudio de podcast en Valencia.",
       intro:
-        "Estamos preparando una selección de producciones reales. Mientras tanto, esta versión muestra la dirección editorial y el comportamiento de la futura galería.",
+        "Descubre el espacio y el equipo de Fonus Studio en C/ Campoamor 68. Estamos preparando una selección de producciones para compartir nuestros proyectos de podcast, vídeo y contenido.",
       featured: "Trabajos destacados",
       behind: "Detrás de las cámaras",
       behindText:
@@ -135,7 +135,7 @@ export const copy = {
     },
     contact: {
       badge: "Contacto",
-      title: "Hablemos de tu próximo proyecto.",
+      title: "Reserva tu sesión de podcast en Valencia.",
       intro:
         "Cuéntanos qué quieres crear y te ayudaremos a encontrar la mejor forma de hacerlo realidad.",
       details: "Información de contacto",
@@ -163,6 +163,8 @@ export const copy = {
       ["Entregamos", "Recibes todo listo para publicar."],
     ],
     faqs: [
+      ["¿Dónde está el estudio de podcast?", "Fonus Studio está en C/ Campoamor 68, 46022 Valencia. Puedes consultar la ubicación en nuestra página de contacto y reservar una reunión gratuita para hablar de tu proyecto."],
+      ["¿Qué equipo incluye una sesión de grabación?", "El estudio dispone de hasta 4 micrófonos, tratamiento acústico y asistencia durante la grabación. Para videopodcast también contamos con 3 cámaras 4K e iluminación de estudio. Consulta los servicios para elegir tu paquete."],
       ["¿Necesito experiencia delante de una cámara?", "No. Te acompañamos durante toda la sesión para que la grabación resulte natural y cómoda."],
       ["¿Se puede personalizar el plató?", "Sí, disponemos de una variedad de decoraciones y te invitamos a traer lo que quieras para darle tu toque a la imagen."],
       ["¿Puedo reservar solo la grabación?", "Sí. Puedes recibir los archivos originales y encargarte de la edición por tu cuenta."],
@@ -179,21 +181,21 @@ export const copy = {
       menu: "Open menu",
     },
     home: {
-      badge: "Creative production studio",
-      title: "Professional production for stories worth hearing and seeing.",
+      badge: "Fonus Studio · Recording and production",
+      title: "Your podcast studio in Valencia.",
       intro:
-        "We help creators, businesses and professionals produce high-quality content in a studio designed so you can focus entirely on your message.",
+        "Record your podcast or video podcast in a studio designed so you can focus on your message. We support creators, businesses and professionals with recording, editing and audiovisual production.",
       primary: "Book a session",
-      secondary: "Explore services",
+      secondary: "View services and prices",
       manifestoEyebrow: "Fonus Studio",
       manifestoTitle: "A studio where ideas come to life.",
       manifesto:
         "Every great conversation deserves more than a webcam and a built-in microphone. We combine professional equipment and careful technical direction with a relaxed, welcoming environment.",
       servicesEyebrow: "What we do",
       servicesTitle: "Everything you need to create professional content.",
-      studioTitle: "Designed for creativity.",
+      studioTitle: "Record your podcast at C/ Campoamor 68, Valencia.",
       studioText:
-        "Professional equipment, carefully planned lighting, acoustic treatment and expert technical direction. We handle the details while you focus on the conversation.",
+        "Our Valencia studio has acoustic treatment, up to 4 microphones, 3 4K cameras and professional lighting. We support you throughout the recording so you can focus on the conversation.",
       portfolioTitle: "Every project has its own voice.",
       processTitle: "A simple process, from idea to delivery.",
       testimonialsTitle: "Built on trust, one project at a time.",
@@ -205,9 +207,9 @@ export const copy = {
     },
     services: {
       badge: "Services",
-      title: "Professional content production, tailored to your project.",
+      title: "Podcast recording and editing in Valencia.",
       intro:
-        "From studio recording sessions to complete productions with editing, branding and platform-ready content.",
+        "Choose an audio or video podcast recording session at Fonus Studio, or a complete production with editing, branding and content ready for your platforms.",
       detailTitle: "We adapt to the way you create.",
       pricingTitle: "Packages and pricing",
       pricingIntro: "Choose the production level that best fits your project.",
@@ -230,10 +232,10 @@ export const copy = {
       ctaText: "We’ll help turn your idea into professional content.",
     },
     portfolio: {
-      badge: "Portfolio",
-      title: "Every project has its own story.",
+      badge: "Portfolio and studio",
+      title: "Explore our podcast studio in Valencia.",
       intro:
-        "We are preparing a selection of real productions. For now, this version shows the editorial direction and behaviour of the future gallery.",
+        "Discover the space and equipment at Fonus Studio, C/ Campoamor 68. We are preparing a selection of productions to share our podcast, video and content projects.",
       featured: "Featured work",
       behind: "Behind the scenes",
       behindText:
@@ -257,7 +259,7 @@ export const copy = {
     },
     contact: {
       badge: "Contact",
-      title: "Let’s talk about your next project.",
+      title: "Book your podcast session in Valencia.",
       intro:
         "Tell us what you want to create and we’ll help you find the best way to bring it to life.",
       details: "Contact information",
@@ -285,6 +287,8 @@ export const copy = {
       ["Deliver", "You receive everything ready to publish."],
     ],
     faqs: [
+      ["Where is the podcast studio?", "Fonus Studio is at C/ Campoamor 68, 46022 Valencia. Find the location on our contact page and book a free discovery meeting to discuss your project."],
+      ["What equipment is included in a recording session?", "The studio has up to 4 microphones, acoustic treatment and recording support. For video podcasts, we also have 3 4K cameras and studio lighting. See our services to choose your package."],
       ["Do I need experience on camera?", "No. We guide you throughout the session so the recording feels relaxed and natural."],
       ["Can I customise the set?", "Yes. We have a range of set designs, and you are welcome to bring anything you would like to give the image your own touch."],
       ["Can I book recording without editing?", "Yes. You can receive the original files and handle the edit yourself."],
