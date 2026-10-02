@@ -159,6 +159,7 @@ function FinalCta({ locale, title, text }: { locale: Locale; title: string; text
 
 function HomePage({ locale }: { locale: Locale }) {
   const t = copy[locale];
+  const faqMidpoint = Math.ceil(t.faqs.length / 2);
   const serviceImages = [
     "/images/podcast-session.webp",
     "/images/video-production.webp",
@@ -222,7 +223,11 @@ function HomePage({ locale }: { locale: Locale }) {
       <section className="section-shell section-pad faq-section">
         <SectionHeading eyebrow="FAQ" title={t.home.faqTitle} />
         <div className="faq-list">
-          {t.faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}
+          {[t.faqs.slice(0, faqMidpoint), t.faqs.slice(faqMidpoint)].map((questions, index) => (
+            <div className="faq-column" key={index}>
+              {questions.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}
+            </div>
+          ))}
         </div>
       </section>
       <FinalCta locale={locale} title={t.home.ctaTitle} text={t.home.ctaText} />

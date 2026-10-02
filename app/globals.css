@@ -572,9 +572,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .trust-card h2 { font-family: "Lemon Milk"; font-size: clamp(2.4rem, 4vw, 4.4rem); font-weight: 400; line-height: 1; }
 .trust-card > p:last-child { max-width: 500px; margin: clamp(28px, 3vw, 42px) 0 0; color: var(--muted); }
 
-.faq-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 8vw; }
+.faq-section { display: block; }
+.faq-section > .section-heading { margin-bottom: clamp(36px, 4vw, 56px); }
+.faq-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 6vw, 80px); }
+.faq-column { min-width: 0; }
 .faq-list details { margin: 0; padding-inline: 4px; border-bottom: 1px solid var(--line); transition: transform .25s ease, border-color .25s ease; }
-.faq-list details:first-child { border-top: 1px solid var(--line); }
+.faq-column details:first-child { border-top: 1px solid var(--line); }
 .faq-list details:hover { transform: translateX(6px); border-color: rgba(255,97,35,.5); }
 .faq-list summary { padding: 27px 0; display: flex; justify-content: space-between; gap: 24px; cursor: pointer; font-family: "Lemon Milk"; font-size: 14px; list-style: none; }
 .faq-list summary::-webkit-details-marker { display: none; }
@@ -1120,8 +1123,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .mobile-menu nav a:last-child { border-bottom: 0; color: var(--orange); }
   .hero { min-height: 100svh; }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
-  .faq-section { grid-template-columns: 1fr; }
-  .faq-section .section-heading { margin-bottom: 0; }
   .contact-layout { grid-template-columns: 1fr; }
   .pricing-grid-4 { grid-template-columns: repeat(2, 1fr); }
 }
@@ -1173,6 +1174,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .organic-studio { padding-inline: 24px; border-radius: 52px 14px 52px 14px; }
   .studio-section .studio-visual { min-height: 360px; }
   .editorial-duo .studio-visual { min-height: 480px; }
+  .faq-list { grid-template-columns: 1fr; gap: 0; }
+  .faq-column + .faq-column details:first-child { border-top: 0; }
   .portfolio-grid { grid-template-columns: 1fr; grid-template-rows: none; }
   .portfolio-card-1 { grid-row: auto; }
   .portfolio-card { min-height: 340px; }
