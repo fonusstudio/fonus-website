@@ -69,11 +69,8 @@ export const copy = {
         "Creemos que una buena conversación merece más que una webcam y un micrófono improvisado. Por eso hemos creado un espacio que combina atención al detalle, equipamiento profesional y un ambiente cómodo y natural.",
       servicesEyebrow: "Qué hacemos",
       servicesTitle: "Todo lo que necesitas para crear contenido profesional.",
-      studioTitle: "Graba tu podcast en C/ Campoamor 68, Valencia.",
-      studioText:
-        "Nuestro estudio en Valencia cuenta con tratamiento acústico, hasta 4 micrófonos, 3 cámaras 4K e iluminación profesional. Te acompañamos durante la grabación para que puedas concentrarte en la conversación.",
+      studioTitle: "Graba en nuestro estudio.",
       portfolioTitle: "Cada proyecto tiene su propia voz.",
-      processTitle: "Un proceso sencillo, de principio a fin.",
       testimonialsTitle: "La confianza se construye proyecto a proyecto.",
       testimonialsText:
         "Este espacio se completará con testimonios y casos reales del estudio. La estructura ya está preparada para incorporarlos.",
@@ -156,12 +153,6 @@ export const copy = {
       ["Creación de contenido", "Reels, entrevistas, cursos, promociones y formatos adaptados a cada plataforma."],
       ["Branding y diseño", "Portadas, miniaturas, motion graphics y recursos visuales para tu contenido."],
     ],
-    process: [
-      ["Hablamos", "Ven a contarnos tu proyecto y a compartir tus objetivos."],
-      ["Grabamos", "El día de la grabación, solo tienes que venir con tu guion preparado."],
-      ["Editamos", "Damos forma al contenido cuidando cada detalle."],
-      ["Entregamos", "Recibes todo listo para publicar."],
-    ],
     faqs: [
       ["¿Dónde está el estudio de podcast?", "Fonus Studio está en C/ Campoamor 68, 46022 Valencia. Puedes consultar la ubicación en nuestra página de contacto y reservar una reunión gratuita para hablar de tu proyecto."],
       ["¿Qué equipo incluye una sesión de grabación?", "El estudio dispone de hasta 4 micrófonos, tratamiento acústico y asistencia durante la grabación. Para videopodcast también contamos con 3 cámaras 4K e iluminación de estudio. Consulta los servicios para elegir tu paquete."],
@@ -193,11 +184,8 @@ export const copy = {
         "Every great conversation deserves more than a webcam and a built-in microphone. We combine professional equipment and careful technical direction with a relaxed, welcoming environment.",
       servicesEyebrow: "What we do",
       servicesTitle: "Everything you need to create professional content.",
-      studioTitle: "Record your podcast at C/ Campoamor 68, Valencia.",
-      studioText:
-        "Our Valencia studio has acoustic treatment, up to 4 microphones, 3 4K cameras and professional lighting. We support you throughout the recording so you can focus on the conversation.",
+      studioTitle: "Record at our studio.",
       portfolioTitle: "Every project has its own voice.",
-      processTitle: "A simple process, from idea to delivery.",
       testimonialsTitle: "Built on trust, one project at a time.",
       testimonialsText:
         "This section will feature verified client stories and studio case studies. The layout is ready for them.",
@@ -279,12 +267,6 @@ export const copy = {
       ["Video production", "Multi-camera productions for YouTube, Spotify and digital channels."],
       ["Content creation", "Reels, interviews, courses, promotions and platform-ready formats."],
       ["Branding and design", "Artwork, thumbnails, motion graphics and visual assets for your content."],
-    ],
-    process: [
-      ["Discover", "Come and tell us about your project and share your goals."],
-      ["Record", "On the recording day, all you need to do is bring your prepared script."],
-      ["Edit", "We shape the content and refine every detail."],
-      ["Deliver", "You receive everything ready to publish."],
     ],
     faqs: [
       ["Where is the podcast studio?", "Fonus Studio is at C/ Campoamor 68, 46022 Valencia. Find the location on our contact page and book a free discovery meeting to discuss your project."],

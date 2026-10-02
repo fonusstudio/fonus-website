@@ -215,29 +215,8 @@ function HomePage({ locale }: { locale: Locale }) {
         <div className="studio-copy">
           <p className="eyebrow">{locale === "es" ? "El estudio" : "The studio"}</p>
           <h2>{t.home.studioTitle}</h2>
-          <p>{t.home.studioText}</p>
-          <Link className="text-link" href={`${pageHref(locale, "portfolio")}#behind-scenes`}>{locale === "es" ? "Conocer el espacio" : "Explore the space"} <span>↗</span></Link>
+          <Link className="button button-primary" href={`${pageHref(locale, "portfolio")}#behind-scenes`}>{locale === "es" ? "Conocer el espacio" : "Explore the space"}</Link>
         </div>
-      </section>
-
-      <section className="section-shell section-pad process-section">
-        <div className="process-intro">
-          <SectionHeading eyebrow={locale === "es" ? "Cómo trabajamos" : "How it works"} title={t.home.processTitle} />
-          <figure className="process-photo">
-            <Image
-              src="/images/team-review.png"
-              alt={locale === "es" ? "Equipo creativo revisando una grabación" : "Creative team reviewing a recording"}
-              fill
-              sizes="(max-width: 1050px) 100vw, 42vw"
-              unoptimized
-            />
-          </figure>
-        </div>
-        <ol className="process-list">
-          {t.process.map(([title, text], index) => (
-            <li key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></li>
-          ))}
-        </ol>
       </section>
 
       <section className="section-shell section-pad faq-section">
