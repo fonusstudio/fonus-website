@@ -380,7 +380,21 @@ function ServicesPage({ locale }: { locale: Locale }) {
 
 function PortfolioPage({ locale }: { locale: Locale }) {
   const t = copy[locale].portfolio;
-  const categories = locale === "es" ? ["Podcast", "Videopodcast", "Campaña", "Contenido social", "Entrevista", "Producción corporativa"] : ["Podcast", "Video podcast", "Campaign", "Social content", "Interview", "Corporate production"];
+  const categories = locale === "es" ? ["Podcast", "Musica en directo", "Podcast", "Musica en directo", "Podcast"] : ["Podcast", "Live music", "Podcast", "Live music", "Podcast"];
+  const portfolioVideos = [
+    { id: "7OSFndnPuf8", title: "Like Guiris Ep.1" },
+    { id: "ij6halV6Axs", title: "Fonus Sesiones: Indecentes" },
+    { id: "oEhB8cnQwwU", title: "El Mito de la Caverna" },
+    { id: "tMD1C4qeCJg", title: "Meal Time" },
+    { id: "P6qAJtSHX-c", title: "Vitamina Carol - Ep. 1" },
+  ];
+  const portfolioCardStyles = [
+    { flex: "0 1 calc(56% - 9px)", borderRadius: "48px 12px 34px 12px" },
+    { flex: "0 1 calc(44% - 9px)", borderRadius: "14px 58px 14px 38px" },
+    { flex: "0 1 calc(43% - 9px)", borderRadius: "16px 42px 58px 14px" },
+    { flex: "0 1 calc(57% - 9px)", borderRadius: "54px 14px 34px 14px" },
+    { flex: "0 1 64%", borderRadius: "62px 18px 62px 18px" },
+  ];
   return (
     <>
       <section className="portfolio-hero">
@@ -399,21 +413,57 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       </section>
       <section className="section-shell section-pad">
         <p className="eyebrow portfolio-grid-eyebrow">{t.featured}</p>
-        <div className="portfolio-full-grid">
-          {categories.map((category, index) => (
-            <article className={`work-placeholder work-placeholder-${(index % 4) + 1}`} key={category}>
-              <Image
-                className="work-photo"
-                src={index % 3 === 0 ? "/images/podcast-session.webp" : index % 3 === 1 ? "/images/video-production.webp" : "/images/studio-equipment.webp"}
-                alt=""
-                fill
-                sizes="(max-width: 800px) 100vw, 55vw"
-                unoptimized
-              />
-              <div className="work-number">0{index + 1}</div>
-              <div><h3>{category}</h3><p>{locale === "es" ? "Contenido real próximamente" : "Real work coming soon"}</p></div>
-            </article>
-          ))}
+        <div
+          className="portfolio-full-grid"
+          style={{ display: "flex", flexWrap: "wrap", gap: "18px", justifyContent: "center", alignItems: "stretch" }}
+        >
+          {categories.map((category, index) => {
+            const video = portfolioVideos[index];
+            return (
+              <article
+                className={`work-placeholder work-placeholder-${(index % 4) + 1} ${video ? "work-video-card" : ""}`}
+                key={video?.id ?? category}
+                style={video ? { ...portfolioCardStyles[index], minHeight: 0, minWidth: "min(100%, 340px)", padding: 0, display: "flex", flexDirection: "column", alignSelf: "stretch", background: "#080808" } : undefined}
+              >
+                {video ? (
+                  <>
+                    <div
+                      className="work-video-frame"
+                      style={{ position: "relative", zIndex: 2, width: "100%", aspectRatio: "16 / 9", overflow: "hidden", background: "#000" }}
+                    >
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0`}
+                        title={video.title}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+                      />
+                    </div>
+                    <div className="work-video-meta" style={{ padding: "22px 24px 26px", flex: 1, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                      <span className="work-number">0{index + 1}</span>
+                      <h3>{video.title}</h3>
+                      <p style={{ marginTop: "auto" }}>{category}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      className="work-photo"
+                      src={index % 3 === 0 ? "/images/podcast-session.webp" : index % 3 === 1 ? "/images/video-production.webp" : "/images/studio-equipment.webp"}
+                      alt=""
+                      fill
+                      sizes="(max-width: 800px) 100vw, 55vw"
+                      unoptimized
+                    />
+                    <div className="work-number">0{index + 1}</div>
+                    <div><h3>{category}</h3><p>{locale === "es" ? "Contenido real próximamente" : "Real work coming soon"}</p></div>
+                  </>
+                )}
+              </article>
+            );
+          })}
         </div>
       </section>
       <section id="behind-scenes" className="section-shell section-pad editorial-duo">

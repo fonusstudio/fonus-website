@@ -107,8 +107,7 @@ export const copy = {
     portfolio: {
       badge: "Portfolio y estudio",
       title: "Conoce nuestro estudio de podcast en Valencia.",
-      intro:
-        "Descubre el espacio y el equipo de Fonus Studio en C/ Campoamor 68. Estamos preparando una selección de producciones para compartir nuestros proyectos de podcast, vídeo y contenido.",
+      intro: "Descubre el espacio y el equipo de Fonus Studio.",
       featured: "Trabajos destacados",
       behind: "Detrás de las cámaras",
       behindText:
@@ -222,8 +221,7 @@ export const copy = {
     portfolio: {
       badge: "Portfolio and studio",
       title: "Explore our podcast studio in Valencia.",
-      intro:
-        "Discover the space and equipment at Fonus Studio, C/ Campoamor 68. We are preparing a selection of productions to share our podcast, video and content projects.",
+      intro: "Discover the space and equipment at Fonus Studio.",
       featured: "Featured work",
       behind: "Behind the scenes",
       behindText:
