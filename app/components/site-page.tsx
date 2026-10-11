@@ -163,8 +163,8 @@ function HomePage({ locale }: { locale: Locale }) {
   const serviceImages = [
     "/images/podcast-session.webp",
     "/images/video-production.webp",
-    "/images/creator-candid.png",
-    "/images/team-review.png",
+    "/images/creator-candid.webp",
+    "/images/team-review.webp",
   ];
   return (
     <>
@@ -361,7 +361,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
           </div>
           <div className="repeat-sessions-media">
             <Image
-              src="/images/team-review.png"
+              src="/images/team-review.webp"
               alt={locale === "es" ? "Equipo creativo revisando una producción" : "Creative team reviewing a production"}
               fill
               sizes="(max-width: 800px) 100vw, 45vw"
