@@ -210,8 +210,8 @@ function HomePage({ locale }: { locale: Locale }) {
         <StudioVisual
           label={locale === "es" ? "Equipamiento del estudio" : "Studio equipment"}
           index="02"
-          src="/images/studio-equipment.webp"
-          alt={locale === "es" ? "Micrófono, cámara y mesa de mezclas profesional" : "Professional microphone, camera and audio mixer"}
+          src="/images/microphone-colour.webp"
+          alt={locale === "es" ? "Micrófono de estudio sobre un fondo de colores" : "Studio microphone against a colorful background"}
         />
         <div className="studio-copy">
           <p className="eyebrow">{locale === "es" ? "El estudio" : "The studio"}</p>
@@ -314,8 +314,8 @@ function ServicesPage({ locale }: { locale: Locale }) {
       <section className="services-hero">
         <Image
           className="services-hero-photo"
-          src="/images/video-production.webp"
-          alt={locale === "es" ? "Producción de entrevista multicámara" : "Multi-camera interview production"}
+          src="/images/services-hero.webp"
+          alt={locale === "es" ? "Dos invitados grabando un podcast en Fonus Studio" : "Two guests recording a podcast at Fonus Studio"}
           fill
           priority
           unoptimized
@@ -386,8 +386,8 @@ function PortfolioPage({ locale }: { locale: Locale }) {
       <section className="portfolio-hero">
         <Image
           className="portfolio-hero-photo"
-          src="/images/podcast-session.webp"
-          alt={locale === "es" ? "Dos personas grabando un podcast" : "Two people recording a podcast"}
+          src="/images/scree-equipment.webp"
+          alt={locale === "es" ? "Equipo de iluminación, vídeo y sonido del estudio" : "Studio lighting, video, and audio equipment"}
           fill
           priority
           unoptimized
@@ -450,8 +450,8 @@ function ContactPage({ locale }: { locale: Locale }) {
       <section className="contact-hero">
         <Image
           className="contact-hero-photo"
-          src="/images/podcast-session.webp"
-          alt={locale === "es" ? "Conversación grabada en Fonus Studio" : "Conversation recorded at Fonus Studio"}
+          src="/images/contact-hero-session.webp"
+          alt={locale === "es" ? "Cámaras grabando una sesión musical en Fonus Studio" : "Cameras filming a music session at Fonus Studio"}
           fill
           priority
           unoptimized
