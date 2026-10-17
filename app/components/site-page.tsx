@@ -235,9 +235,9 @@ function HomePage({ locale }: { locale: Locale }) {
   );
 }
 
-function PricingGrid({ locale, items }: { locale: Locale; items: readonly { name: string; description?: string; price: string; priceNote?: string; priceTag?: string; priceOptions?: readonly { label: string; price: string; note?: string }[]; features: readonly string[]; popular?: boolean; recordingOnly?: boolean; hideCta?: boolean }[] }) {
+function PricingGrid({ locale, items, extraServices = false }: { locale: Locale; extraServices?: boolean; items: readonly { name: string; description?: string; price: string; priceNote?: string; priceTag?: string; priceOptions?: readonly { label: string; price: string; note?: string }[]; features: readonly string[]; popular?: boolean; recordingOnly?: boolean; hideCta?: boolean }[] }) {
   return (
-    <div className={`pricing-grid pricing-grid-${items.length}`}>
+    <div className={`pricing-grid pricing-grid-${items.length}${extraServices ? " pricing-grid-extras" : ""}`}>
       {items.map((item) => (
         <article className={`price-card ${item.popular ? "price-card-popular" : ""} ${item.recordingOnly ? "price-card-recording-only" : ""}`} key={item.name}>
           {item.popular && <span className="popular-badge">{copy[locale].services.popular}</span>}
@@ -342,7 +342,7 @@ function ServicesPage({ locale }: { locale: Locale }) {
                     <div className="service-package-group" key={group.title}>
                       <h3>{group.title}</h3>
                       {group.priceNote && <p className="service-price-note">{group.priceNote}</p>}
-                      <PricingGrid locale={locale} items={group.items} />
+                      <PricingGrid locale={locale} items={group.items} extraServices={number === "03"} />
                     </div>
                   ))}
                 </div>

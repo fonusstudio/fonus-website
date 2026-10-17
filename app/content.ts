@@ -281,12 +281,12 @@ export const serviceDetails = {
   es: [
     ["01", "Audio", "Sonido profesional para conversaciones que merecen ser escuchadas.", "Hasta 4 micrófonos · Monitorización de la sesion · Edición · Estudio Tratado Acousticamente"],
     ["02", "Video", "La fuerza del vídeo, sin complicaciones.", "Hasta 3 cámaras 4k · Iluminación Profesional · Edición ·  Monitorización de la sesion"],
-    ["03", "Servicios extra", "Todo lo que necesitas para completar y reforzar tu contenido.", "Transcripción · Portadas · Miniaturas · Branding · Intros · Diseño sonoro"],
+    ["03", "Servicios extra", "Todo lo que necesitas para completar y reforzar tu contenido.", "Portadas · Miniaturas · Branding · Intros · Diseño sonoro"],
   ],
   en: [
     ["01", "Audio", "Professional audio for conversations worth sharing.", "Up to 4 microphones · Monitoring during the session· Editing · Mixing and mastering"],
     ["02", "Video", "The power of video, without the complexity.", "Up to 3 cameras · Studio Lighting · Editing · Monitoring during the session"],
-    ["03", "Extra services", "Everything you need to complete and strengthen your content.", "Transcription · Artwork · Thumbnails · Branding · Intros · Sound design"],
+    ["03", "Extra services", "Everything you need to complete and strengthen your content.", "Artwork · Thumbnails · Branding · Intros · Sound design"],
   ],
 } as const;
 
@@ -304,37 +304,33 @@ export const pricing = {
   audio: {
     es: [
       { name: "Básico", price: "249 €", features: ["Montaje del episodio", "Mezcla y masterización básica"] },
-      { name: "Profesional", price: "299 €", features: ["Todo lo incluido en Básico", "Limpieza, mezcla y montaje avanzado", "1 revisión"], popular: true },
-      { name: "Premium", price: "449 €", features: ["Todo lo incluido en Profesional", "Música y efectos de sonido", "5 reels de audiograma", "2 revisiones"] },
+      { name: "Premium", price: "399 €", features: ["Todo lo incluido en Básico", "Limpieza, mezcla y montaje avanzado", "Música y efectos de sonido", "Transcripción completa", "5 reels de audiograma", "2 revisiones"] },
     ],
     en: [
       { name: "Basic", price: "€249", features: ["Episode assembly", "Basic mixing and mastering"] },
-      { name: "Professional", price: "€299", features: ["Everything included in Basic", "Advanced clean-up, mixing and editing", "1 revision"], popular: true },
-      { name: "Premium", price: "€449", features: ["Everything included in Professional", "Music and sound effects", "5 audiogram reels", "2 revisions"] },
+      { name: "Premium", price: "€399", features: ["Everything included in Basic", "Advanced clean-up, mixing and editing", "Music and sound effects", "Full transcription", "5 audiogram reels", "2 revisions"] },
     ],
   },
   video: {
     es: [
       { name: "Básico", price: "299 €", features: ["Montaje del episodio", "Edición, mezcla y masterización básica"] },
-      { name: "Profesional", price: "399 €", features: ["Todo lo incluido en Básico", "Limpieza, edición, mezcla y montaje avanzado", "1 revisión"], popular: true },
-      { name: "Premium", price: "599 €", features: ["Todo lo incluido en Profesional", "Música y efectos de sonido", "Gráficos básicos: títulos e información", "5 vídeo reels"] },
+      { name: "Profesional", price: "399 €", features: ["Todo lo incluido en Básico", "Limpieza, edición, mezcla y montaje avanzado", "Subtítulos para vídeo", "3 reels de vídeo", "1 revisión"], popular: true },
+      { name: "Premium", price: "599 €", features: ["Todo lo incluido en Profesional", "Música y efectos de sonido", "Gráficos básicos: títulos e información", "Subtítulos para vídeo", "5 reels de vídeo"] },
     ],
     en: [
       { name: "Basic", price: "€299", features: ["Episode assembly", "Basic editing, mixing and mastering"] },
-      { name: "Professional", price: "€399", features: ["Everything included in Basic", "Advanced clean-up, editing, mixing and assembly", "1 revision"], popular: true },
-      { name: "Premium", price: "€599", features: ["Everything included in Professional", "Music and sound effects", "Basic graphics: titles and information", "5 video reels"] },
+      { name: "Professional", price: "€399", features: ["Everything included in Basic", "Advanced clean-up, editing, mixing and assembly", "Video subtitles", "3 video reels", "1 revision"], popular: true },
+      { name: "Premium", price: "€599", features: ["Everything included in Professional", "Music and sound effects", "Basic graphics: titles and information", "Video subtitles", "5 video reels"] },
     ],
   },
   extras: {
     es: [
       { name: "Portadas y miniaturas", description: "Una imagen visual coherente y lista para publicar en cada episodio.", price: "49 €", priceNote: "por proyecto", features: ["Portada de vídeo", "Miniatura para plataformas"] },
       { name: "Pack de branding", description: "Creación de intros, animaciones y gráficos personalizados para tu marca, listos para utilizarse a lo largo de tu proyecto.", price: "299 €", priceOptions: [{ label: "Audio", price: "299 €" }, { label: "Vídeo", price: "449 €" }], features: ["Intro personalizada", "Gráficos personalizados", "Plantillas visuales"] },
-      { name: "Transcripción y subtitulado", description: "Texto y subtítulos claros para mejorar la accesibilidad y ampliar el alcance.", price: "49 / 99 €", priceOptions: [{ label: "Audio", price: "49 €", note: "por episodio" }, { label: "Vídeo", price: "99 €", note: "por episodio" }], features: ["Transcripción completa", "Subtítulos para vídeo"] },
     ],
     en: [
       { name: "Covers and thumbnails", description: "A consistent visual identity, ready to publish with every episode.", price: "€49", priceNote: "per project", features: ["Video cover", "Platform-ready thumbnail"] },
       { name: "Branding pack", description: "Custom intros, animations and graphics for your brand, ready to use throughout your project.", price: "€299", priceOptions: [{ label: "Audio", price: "€299" }, { label: "Video", price: "€449" }], features: ["Custom intro", "Custom graphics", "Visual templates"] },
-      { name: "Transcription and subtitling", description: "Clear text and subtitles that improve accessibility and expand your reach.", price: "€49 / €99", priceOptions: [{ label: "Audio", price: "€49", note: "per episode" }, { label: "Video", price: "€99", note: "per episode" }], features: ["Full transcription", "Video subtitles"] },
     ],
   },
 } as const;

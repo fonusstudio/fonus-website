@@ -159,11 +159,13 @@ test("groups packages beneath their matching service", async () => {
 
   const html = await response.text();
   assert.doesNotMatch(html, /service-detail-list|pricing-section/i);
-  assert.match(html, /<article class="service-offer">[\s\S]*?<h2>Audio<\/h2>[\s\S]*?Producci.n de audio[\s\S]*?Solo grabaci.n/i);
-  assert.match(html, /<article class="service-offer">[\s\S]*?<h2>Video<\/h2>[\s\S]*?Producci.n de v.deo[\s\S]*?Solo grabaci.n/i);
-  assert.ok((html.match(/pricing-grid pricing-grid-4/g) ?? []).length >= 2);
+  assert.match(html, /<article id="audio-production" class="service-offer">[\s\S]*?<h2>Audio<\/h2>[\s\S]*?Producci.n de audio[\s\S]*?Solo grabaci.n/i);
+  assert.match(html, /<article id="video-production" class="service-offer">[\s\S]*?<h2>Video<\/h2>[\s\S]*?Producci.n de v.deo[\s\S]*?Solo grabaci.n/i);
+  assert.equal((html.match(/<div class="pricing-grid pricing-grid-4"/g) ?? []).length, 1);
+  assert.equal((html.match(/<div class="pricing-grid pricing-grid-3"/g) ?? []).length, 1);
   assert.ok((html.match(/price-card-recording-only/g) ?? []).length >= 2);
-  assert.match(html, /<article class="service-offer">[\s\S]*?Servicios extra[\s\S]*?Packs y complementos[\s\S]*?Portadas y miniaturas[\s\S]*?Pack de branding[\s\S]*?Transcripci.n y subtitulado/i);
+  assert.match(html, /<article id="content-creation" class="service-offer">[\s\S]*?Servicios extra[\s\S]*?Packs y complementos[\s\S]*?pricing-grid-2 pricing-grid-extras[\s\S]*?Portadas y miniaturas[\s\S]*?Pack de branding/i);
+  assert.doesNotMatch(html, /Transcripci.n y subtitulado/i);
 });
 
 test("offers negotiated long-term plans in both languages", async () => {
