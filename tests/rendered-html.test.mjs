@@ -125,6 +125,34 @@ test("renders every public page in Spanish and English", async () => {
   }
 });
 
+test("links every session button to the localized booking and enquiry section", async () => {
+  const publicPages = {
+    es: ["/", "/services", "/portfolio", "/contact", "/politica-privacidad", "/politica-cookies", "/aviso-legal"],
+    en: ["/en", "/en/services", "/en/portfolio", "/en/contact", "/en/privacy-policy", "/en/cookie-policy", "/en/legal-notice"],
+  };
+
+  for (const [locale, paths] of Object.entries(publicPages)) {
+    const destination = `${locale === "en" ? "/en" : ""}/contact#booking`;
+    for (const path of paths) {
+      const response = await request(path);
+      assert.equal(response.status, 200);
+      const html = await response.text();
+      const sessionLinks = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>\s*(?:Reservar sesión|Book a session)\s*<\/a>/g)];
+      assert.ok(sessionLinks.length >= 2, `${path} should include desktop and mobile session links`);
+      for (const [, href] of sessionLinks) assert.equal(href, destination, `${path} session link should land at the booking section`);
+
+      if (path.endsWith("/contact")) {
+        const bookingStart = html.indexOf('<div id="booking" class="contact-layout" tabindex="-1">');
+        const calendar = html.indexOf('data-cal-link=', bookingStart);
+        const form = html.indexOf('class="form-panel"', bookingStart);
+        const details = html.indexOf('class="contact-sidebar"', bookingStart);
+        assert.ok(bookingStart !== -1, "The booking anchor should be focusable");
+        assert.ok(calendar > bookingStart && form > calendar && details > form, "Booking and enquiry panels should precede contact details");
+      }
+    }
+  }
+});
+
 test("renders the services page with a full hero image", async () => {
   const response = await request("/services");
   assert.equal(response.status, 200);

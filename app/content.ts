@@ -41,6 +41,10 @@ export function pageHref(locale: Locale, page: PageName) {
   return `${prefix}${suffix}` || "/";
 }
 
+export function bookingHref(locale: Locale) {
+  return `${pageHref(locale, "contact")}#booking`;
+}
+
 export function pageFromPath(locale: Locale, path: string): PageName | null {
   const entry = Object.entries(paths[locale]).find(([, value]) => value === path);
   return (entry?.[0] as PageName | undefined) ?? null;
@@ -293,32 +297,32 @@ export const serviceDetails = {
 export const pricing = {
   recording: {
     es: [
-      { name: "Audio", price: "120 €", features: ["1 hora de grabación", "Hasta 4 micrófonos", "Estudio tratado acústicamente", "Asistencia en dirección y grabación"] },
+      { name: "Audio", price: "80 €", features: ["1 hora de grabación", "Hasta 4 micrófonos", "Estudio tratado acústicamente", "Asistencia en dirección y grabación"] },
       { name: "Vídeo", price: "120 €", features: ["1 hora de grabación", "Hasta 4 micrófonos", "3 cámaras 4K", "Iluminación de estudio"] },
     ],
     en: [
-      { name: "Audio", price: "€120", features: ["1-hour recording session", "Up to 4 microphones", "Acoustically treated studio", "Recording direction and assistance"] },
+      { name: "Audio", price: "€80", features: ["1-hour recording session", "Up to 4 microphones", "Acoustically treated studio", "Recording direction and assistance"] },
       { name: "Video", price: "€180", features: ["1-hour recording session", "Up to 4 microphones", "3 4K cameras", "Studio lighting"] },
     ],
   },
   audio: {
     es: [
-      { name: "Básico", price: "249 €", features: ["Montaje del episodio", "Mezcla y masterización básica"] },
-      { name: "Premium", price: "399 €", features: ["Todo lo incluido en Básico", "Limpieza, mezcla y montaje avanzado", "Música y efectos de sonido", "Transcripción completa", "5 reels de audiograma", "2 revisiones"] },
+      { name: "Básico", price: "199 €", features: ["Montaje del episodio", "Mezcla y masterización básica"] },
+      { name: "Premium", price: "299 €", features: ["Todo lo incluido en Básico", "Limpieza, mezcla y montaje avanzado", "Música y efectos de sonido", "Transcripción completa", "5 reels de audiograma", "2 revisiones"] },
     ],
     en: [
-      { name: "Basic", price: "€249", features: ["Episode assembly", "Basic mixing and mastering"] },
-      { name: "Premium", price: "€399", features: ["Everything included in Basic", "Advanced clean-up, mixing and editing", "Music and sound effects", "Full transcription", "5 audiogram reels", "2 revisions"] },
+      { name: "Basic", price: "€199", features: ["Episode assembly", "Basic mixing and mastering"] },
+      { name: "Premium", price: "€299", features: ["Everything included in Basic", "Advanced clean-up, mixing and editing", "Music and sound effects", "Full transcription", "5 audiogram reels", "2 revisions"] },
     ],
   },
   video: {
     es: [
-      { name: "Básico", price: "299 €", features: ["Montaje del episodio", "Edición, mezcla y masterización básica"] },
+      { name: "Básico", price: "299 €", features: ["Grabación incluida", "Montaje del episodio", "Edición, mezcla y masterización básica"] },
       { name: "Profesional", price: "399 €", features: ["Todo lo incluido en Básico", "Limpieza, edición, mezcla y montaje avanzado", "Subtítulos para vídeo", "3 reels de vídeo", "1 revisión"], popular: true },
       { name: "Premium", price: "599 €", features: ["Todo lo incluido en Profesional", "Música y efectos de sonido", "Gráficos básicos: títulos e información", "Subtítulos para vídeo", "5 reels de vídeo"] },
     ],
     en: [
-      { name: "Basic", price: "€299", features: ["Episode assembly", "Basic editing, mixing and mastering"] },
+      { name: "Basic", price: "€299", features: ["Recording included", "Episode assembly", "Basic editing, mixing and mastering"] },
       { name: "Professional", price: "€399", features: ["Everything included in Basic", "Advanced clean-up, editing, mixing and assembly", "Video subtitles", "3 video reels", "1 revision"], popular: true },
       { name: "Premium", price: "€599", features: ["Everything included in Professional", "Music and sound effects", "Basic graphics: titles and information", "Video subtitles", "5 video reels"] },
     ],

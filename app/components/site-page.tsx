@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BUSINESS } from "../business";
 import { CONTACT_EMAIL, CONTACT_PHONE, copy, pageHref, pricing, serviceDetails, type Locale, type PageName } from "../content";
+import { BookingLink } from "./booking-link";
 import { CalBookingLink } from "./cal-booking-link";
 import { CookiePreferencesButton, FunctionalEmbed, LanguagePreferenceLink } from "./consent-manager";
 import { ContactForm } from "./contact-form";
@@ -51,9 +52,9 @@ function Header({ locale, page }: Props) {
             <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
             <span>{locale.toUpperCase()}</span>
           </LanguagePreferenceLink>
-          <Link className="button button-primary header-cta" href={`${pageHref(locale, "contact")}#booking`}>
+          <BookingLink locale={locale} className="button button-primary header-cta">
             {t.book}
-          </Link>
+          </BookingLink>
           <details className="mobile-menu">
             <summary aria-label={t.menu}><span /><span /></summary>
             <nav>
@@ -62,7 +63,7 @@ function Header({ locale, page }: Props) {
                 <span className={`language-flag language-flag-${locale}`} aria-hidden="true" />
                 <span>{locale.toUpperCase()}</span>
               </LanguagePreferenceLink>
-              <Link href={`${pageHref(locale, "contact")}#booking`}>{t.book}</Link>
+              <BookingLink locale={locale}>{t.book}</BookingLink>
             </nav>
           </details>
         </div>
@@ -123,7 +124,7 @@ function ButtonRow({ locale, secondary = true }: { locale: Locale; secondary?: b
   const t = copy[locale].home;
   return (
     <div className="button-row">
-      <Link className="button button-primary" href={`${pageHref(locale, "contact")}#booking`}>{t.primary}</Link>
+      <BookingLink locale={locale} className="button button-primary">{t.primary}</BookingLink>
       {secondary && <Link className="button button-secondary" href={pageHref(locale, "services")}>{t.secondary}</Link>}
     </div>
   );
@@ -271,7 +272,7 @@ function PricingGrid({ locale, items, extraServices = false }: { locale: Locale;
               {item.priceNote && <span className="price-note">{item.priceNote}</span>}
             </div>
           )}
-          {!item.hideCta && <Link className="button button-secondary" href={pageHref(locale, "contact")}>{copy[locale].nav.book}</Link>}
+          {!item.hideCta && <BookingLink locale={locale} className="button button-secondary">{copy[locale].nav.book}</BookingLink>}
         </article>
       ))}
     </div>
@@ -369,9 +370,6 @@ function ServicesPage({ locale }: { locale: Locale }) {
             />
           </div>
         </section>
-        <a className="brochure-link" href="/downloads/fonus-studio-brochure.pdf" target="_blank" rel="noreferrer">
-          {locale === "es" ? "Descargar brochure de servicios" : "Download services brochure"} <span>↓</span>
-        </a>
       </section>
       <FinalCta locale={locale} title={t.ctaTitle} text={t.ctaText} />
     </>
@@ -513,17 +511,19 @@ function ContactPage({ locale }: { locale: Locale }) {
           <p>{t.intro}</p>
         </div>
       </section>
-      <section id="booking" className="section-shell contact-layout section-pad">
-        <div className="contact-sidebar">
-          <div><p className="eyebrow">{t.details}</p><h2>{locale === "es" ? "Estamos aquí para ayudarte." : "We’re here to help."}</h2></div>
-          <div className="contact-details-list">
-            <div className="contact-item"><span>{t.emailLabel}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
-            <div className="contact-item"><span>{t.phoneLabel}</span><a href="tel:+34614692775">{CONTACT_PHONE}</a></div>
-            <div className="contact-item"><span>{t.locationLabel}</span><p>{t.location}</p></div>
+      <section className="section-shell section-pad" aria-labelledby="booking-title">
+        <div id="booking" className="contact-layout" tabIndex={-1}>
+          <div className="meeting-card"><span className="live-dot" /><h2 id="booking-title">{t.meetingTitle}</h2><p>{t.meetingText}</p><CalBookingLink locale={locale}>{t.bookMeeting}</CalBookingLink></div>
+          <div className="form-panel"><p className="eyebrow">{locale === "es" ? "Formulario" : "Enquiry form"}</p><h2>{t.formTitle}</h2><ContactForm locale={locale} /></div>
+          <div className="contact-sidebar">
+            <div><p className="eyebrow">{t.details}</p><h2>{locale === "es" ? "Estamos aquí para ayudarte." : "We’re here to help."}</h2></div>
+            <div className="contact-details-list">
+              <div className="contact-item"><span>{t.emailLabel}</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
+              <div className="contact-item"><span>{t.phoneLabel}</span><a href="tel:+34614692775">{CONTACT_PHONE}</a></div>
+              <div className="contact-item"><span>{t.locationLabel}</span><p>{t.location}</p></div>
+            </div>
           </div>
-          <div className="meeting-card"><span className="live-dot" /><h3>{t.meetingTitle}</h3><p>{t.meetingText}</p><CalBookingLink locale={locale}>{t.bookMeeting}</CalBookingLink></div>
         </div>
-        <div className="form-panel"><p className="eyebrow">{locale === "es" ? "Formulario" : "Enquiry form"}</p><h2>{t.formTitle}</h2><ContactForm locale={locale} /></div>
       </section>
       <section className="section-shell map-section section-pad">
         <div><p className="eyebrow">Valencia · 46022</p><h2>{t.mapTitle}</h2><p>{t.location}</p></div>

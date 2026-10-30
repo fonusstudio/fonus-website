@@ -1,1 +1,31 @@
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+[browser] Uncaught Error: Internal Next.js error: Router action dispatched before initialization.
+⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] ./app/globals.css:1278:3
+Syntax error: C:\Users\tobia\Documents\fonus\website\site\app\globals.css Unknown word
+
+  1276 |   .cookie-modal { max-height: calc(100svh - 20px); border-radius: 26px 8px 26px 8px; }
+  1277 |   .cookie-option { gap: 18px; }
+> 1278 |   .cook
+       |   ^ 
+[browser] ./app/globals.css
+Syntax error: C:\Users\tobia\Documents\fonus\website\site\app\globals.css Unknown word (1278:3)
+
+  1276 |   .cookie-modal { max-height: calc(100svh - 20px); border-radius: 26px 8px 26px 8px; }
+  1277 |   .cookie-option { gap: 18px; }
+> 1278 |   .cook
+       |   ^
+-- inner error --
+Syntax error: C:\Users\tobia\Documents\fonus\website\site\app\globals.css Unknown word (1278:3)
+
+  1276 |   .cookie-modal { max-height: calc(100svh - 20px); border-radius: 26px 8px 26px 8px; }
+  1277 |   .cookie-option { gap: 18px; }
+> 1278 |   .cook
+       |   ^
+Generated code for C:\Users\tobia\Documents\fonus\website\site\node_modules\.pnpm\next@16.2.6_@babel+core@7.2_254017c60be10ba7f4b780f8f1e06ef4\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[15].oneOf[10].use[2]!C:\Users\tobia\Documents\fonus\website\site\node_modules\.pnpm\next@16.2.6_@babel+core@7.2_254017c60be10ba7f4b780f8f1e06ef4\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[15].oneOf[10].use[3]!C:\Users\tobia\Documents\fonus\website\site\app\globals.css
+1 | throw new Error("Module build failed (from ./node_modules/.pnpm/next@16.2.6_@babel+core@7.2_254017c60be10ba7f4b780f8f1e06ef4/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js):\nSyntaxError\n\n(1278:3) C:\\Users\\tobia\\Documents\\fonus\\website\\site\\app\\globals.css Unknown word\n\n  1276 |   .cookie-modal { max-height: calc(100svh - 20px); border-radius: 26px 8px 26px 8px; }\n  1277 |   .cookie-option { gap: 18px; }\n> 1278 |   .cook\n       |   ^\n");
+
+Import trace for requested module:
+./app/globals.css 
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
