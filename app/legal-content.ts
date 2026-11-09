@@ -30,6 +30,7 @@ const providerRowsEs = [
   ["Resend", "Envío del formulario de contacto y de su confirmación.", "https://resend.com/legal/privacy-policy"],
   ["Cal.com", "Gestión de reservas cuando el usuario habilita y utiliza el calendario.", "https://cal.com/privacy"],
   ["Google Analytics 4", "Medición agregada del uso del sitio, solo con consentimiento analítico.", "https://policies.google.com/privacy"],
+  ["Google Ads", "Medición de campañas, solo con consentimiento para la medición publicitaria.", "https://policies.google.com/privacy"],
   ["Google Maps", "Visualización del mapa, solo cuando el usuario habilita contenido funcional.", "https://policies.google.com/privacy"],
   ["Vimeo", "Reproducción de vídeos de portfolio, solo cuando el usuario habilita contenido funcional.", "https://vimeo.com/legal/privacy"],
 ] as const;
@@ -40,6 +41,7 @@ const providerRowsEn = [
   ["Resend", "Delivery of contact enquiries and confirmation messages.", "https://resend.com/legal/privacy-policy"],
   ["Cal.com", "Booking management when the visitor enables and uses the calendar.", "https://cal.com/privacy"],
   ["Google Analytics 4", "Aggregate website measurement, only with analytics consent.", "https://policies.google.com/privacy"],
+  ["Google Ads", "Campaign measurement, only with consent for advertising measurement.", "https://policies.google.com/privacy"],
   ["Google Maps", "Map display, only when the visitor enables functional content.", "https://policies.google.com/privacy"],
   ["Vimeo", "Portfolio video playback, only when the visitor enables functional content.", "https://vimeo.com/legal/privacy"],
 ] as const;
@@ -70,6 +72,7 @@ const privacy: Record<Locale, LegalDocument> = {
           "Datos técnicos: dirección IP, tipo de navegador, dispositivo, fecha, hora y registros estrictamente necesarios para seguridad, prevención de abuso y funcionamiento del sitio.",
           "Preferencias: elección de idioma y registro de consentimiento de cookies.",
           "Analítica, únicamente con consentimiento: identificadores en línea, páginas visitadas, interacción, datos aproximados de ubicación y características del dispositivo facilitados por Google Analytics 4.",
+          "Medición publicitaria, únicamente con consentimiento: Google Ads puede tratar identificadores en línea y datos sobre clics en anuncios y visitas al sitio para medir el rendimiento de las campañas.",
         ],
         paragraphs: [
           "No solicitamos categorías especiales de datos. Rogamos no incluir información especialmente sensible en mensajes o reservas.",
@@ -97,7 +100,7 @@ const privacy: Record<Locale, LegalDocument> = {
         id: "destinatarios",
         title: "4. Proveedores y destinatarios",
         paragraphs: [
-          "No vendemos datos ni los cedemos para publicidad. Pueden acceder a ellos proveedores que actúan como encargados del tratamiento o responsables independientes en la medida necesaria para prestar sus servicios:",
+          "No vendemos datos personales. Los siguientes proveedores pueden acceder a los datos como encargados del tratamiento o responsables independientes en la medida necesaria para prestar sus servicios:",
           "También podrán comunicarse datos a administraciones, juzgados y autoridades cuando exista una obligación legal.",
         ],
         table: {
@@ -169,6 +172,7 @@ const privacy: Record<Locale, LegalDocument> = {
           "Technical data: IP address, browser and device type, date, time and logs strictly required for security, abuse prevention and website operation.",
           "Preferences: language choice and cookie consent record.",
           "Analytics, with consent only: online identifiers, visited pages, interactions, approximate location and device information supplied through Google Analytics 4.",
+          "Advertising measurement, with consent only: Google Ads may process online identifiers and information about ad clicks and site visits to measure campaign performance.",
         ],
         paragraphs: [
           "We do not request special-category data. Please do not include particularly sensitive information in enquiries or bookings.",
@@ -196,7 +200,7 @@ const privacy: Record<Locale, LegalDocument> = {
         id: "recipients",
         title: "4. Service providers and recipients",
         paragraphs: [
-          "We do not sell personal data or disclose it for advertising. The following providers may access data as processors or independent controllers only to the extent required for their services:",
+          "We do not sell personal data. The following providers may access data as processors or independent controllers only to the extent required for their services:",
           "Data may also be disclosed to public authorities, regulators and courts where required by law.",
         ],
         table: {
@@ -250,7 +254,7 @@ const cookies: Record<Locale, LegalDocument> = {
     eyebrow: "Control y transparencia",
     title: "Política de Cookies",
     intro:
-      "Fonus Studio utiliza únicamente tecnologías esenciales, funcionales y analíticas. No empleamos cookies de marketing ni publicidad.",
+      "Fonus Studio utiliza tecnologías esenciales, funcionales, analíticas y de medición publicitaria.",
     updatedLabel: "Última actualización",
     contentsLabel: "Contenido",
     sections: [
@@ -270,6 +274,7 @@ const cookies: Record<Locale, LegalDocument> = {
             ["Esenciales", "Funcionamiento básico, seguridad y conservación de la elección de cookies.", "Siempre activas; no requieren consentimiento."],
             ["Funcionales", "Preferencia de idioma y contenido solicitado de Cal.com, Google Maps y Vimeo.", "Desactivadas hasta que el usuario las acepte."],
             ["Analíticas", "Google Analytics 4 para medir uso y rendimiento de forma agregada.", "Desactivadas hasta que el usuario las acepte."],
+            ["Medición publicitaria", "Google Ads para medir el rendimiento de las campañas publicitarias.", "Desactivada hasta que el usuario la acepte."],
           ],
         },
       },
@@ -286,10 +291,11 @@ const cookies: Record<Locale, LegalDocument> = {
             ["Vimeo", "Vimeo.com, Inc.", "Reproducir vídeos solicitados. Vimeo puede usar tecnologías propias al habilitarlo.", "Según la configuración y política de Vimeo"],
             ["_ga", "Google Analytics 4", "Distinguir usuarios de forma seudónima.", "2 años"],
             ["_ga_<ID-del-contenedor>", "Google Analytics 4", "Mantener el estado de la sesión.", "2 años"],
+            ["_gcl_*", "Google Ads", "Atribuir visitas y acciones en el sitio a clics en anuncios.", "90 días"],
           ],
         },
         paragraphs: [
-          "Las filas de Cal.com, Google Maps y Vimeo identifican servicios de terceros, no inventarios cerrados de cookies: sus tecnologías pueden variar. Ninguno de esos servicios se carga antes de aceptar la categoría funcional. Google Analytics tampoco se descarga ni envía datos antes de aceptar la categoría analítica.",
+          "Las tecnologías de Cal.com, Google Maps y Vimeo pueden variar. Estos servicios requieren consentimiento funcional. Google Analytics requiere consentimiento analítico y Google Ads requiere consentimiento para la medición publicitaria.",
         ],
       },
       {
@@ -307,7 +313,7 @@ const cookies: Record<Locale, LegalDocument> = {
           headers: ["Servicio", "Política"],
           rows: [
             ["Cal.com", "https://cal.com/privacy"],
-            ["Google Analytics y Google Maps", "https://policies.google.com/technologies/cookies"],
+            ["Google Analytics, Google Ads y Google Maps", "https://policies.google.com/technologies/cookies"],
             ["Vimeo", "https://vimeo.com/legal/privacy/cookies"],
           ],
         },
@@ -325,7 +331,7 @@ const cookies: Record<Locale, LegalDocument> = {
     eyebrow: "Control and transparency",
     title: "Cookie Policy",
     intro:
-      "Fonus Studio uses essential, functional and analytics technologies only. We do not use marketing or advertising cookies.",
+      "Fonus Studio uses essential, functional, analytics and advertising measurement technologies.",
     updatedLabel: "Last updated",
     contentsLabel: "Contents",
     sections: [
@@ -345,6 +351,7 @@ const cookies: Record<Locale, LegalDocument> = {
             ["Essential", "Core operation, security and storage of the cookie choice.", "Always active; consent is not required."],
             ["Functional", "Language preference and requested Cal.com, Google Maps and Vimeo content.", "Off until the visitor accepts."],
             ["Analytics", "Google Analytics 4 for aggregate usage and performance measurement.", "Off until the visitor accepts."],
+            ["Advertising measurement", "Google Ads to measure advertising campaign performance.", "Off until the visitor accepts."],
           ],
         },
       },
@@ -361,10 +368,11 @@ const cookies: Record<Locale, LegalDocument> = {
             ["Vimeo", "Vimeo.com, Inc.", "Plays requested videos. Vimeo may use its own technologies once enabled.", "Under Vimeo’s configuration and policy"],
             ["_ga", "Google Analytics 4", "Distinguishes users pseudonymously.", "2 years"],
             ["_ga_<container-id>", "Google Analytics 4", "Maintains session state.", "2 years"],
+            ["_gcl_*", "Google Ads", "Attributes site visits and actions to ad clicks.", "90 days"],
           ],
         },
         paragraphs: [
-          "The Cal.com, Google Maps and Vimeo rows identify third-party services, not a fixed cookie inventory: their technologies may change. None of these services loads before functional consent. Google Analytics is not downloaded and sends no data before analytics consent.",
+          "The technologies used by Cal.com, Google Maps and Vimeo may change. These services require functional consent. Google Analytics requires analytics consent, and Google Ads requires consent for advertising measurement.",
         ],
       },
       {
@@ -382,7 +390,7 @@ const cookies: Record<Locale, LegalDocument> = {
           headers: ["Service", "Policy"],
           rows: [
             ["Cal.com", "https://cal.com/privacy"],
-            ["Google Analytics and Google Maps", "https://policies.google.com/technologies/cookies"],
+            ["Google Analytics, Google Ads and Google Maps", "https://policies.google.com/technologies/cookies"],
             ["Vimeo", "https://vimeo.com/legal/privacy/cookies"],
           ],
         },

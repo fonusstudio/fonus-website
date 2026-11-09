@@ -268,7 +268,7 @@ test("publishes complete bilingual legal and cookie controls", async () => {
   assert.match(cookiesHtml, /Essential/i);
   assert.match(cookiesHtml, /Functional/i);
   assert.match(cookiesHtml, /Analytics/i);
-  assert.doesNotMatch(cookiesHtml, /Marketing cookies/i);
+  assert.match(cookiesHtml, /Advertising measurement/i);
 
   const legalNotice = await request("/en/legal-notice");
   assert.equal(legalNotice.status, 200);

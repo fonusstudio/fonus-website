@@ -16,13 +16,17 @@ import { CONSENT_COOKIE, CONSENT_VERSION, LANGUAGE_COOKIE } from "../consent";
 
 const SIX_MONTHS_SECONDS = 60 * 60 * 24 * 183;
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+const GOOGLE_ADS_ID = "AW-18555863325";
 
 export type ConsentPreferences = {
   version: number;
   functional: boolean;
   analytics: boolean;
+  advertising?: boolean;
   updatedAt: string;
 };
+
+type ConsentSelection = Required<Pick<ConsentPreferences, "functional" | "analytics" | "advertising">>;
 
 type ConsentContextValue = {
   preferences: ConsentPreferences | null;
@@ -32,7 +36,7 @@ type ConsentContextValue = {
   closePreferences: () => void;
   acceptAll: () => void;
   rejectNonEssential: () => void;
-  savePreferences: (selection: Pick<ConsentPreferences, "functional" | "analytics">) => void;
+  savePreferences: (selection: ConsentSelection) => void;
   enableFunctional: () => void;
 };
 
@@ -41,7 +45,7 @@ const ConsentContext = createContext<ConsentContextValue | null>(null);
 const ui = {
   es: {
     title: "Tu privacidad, a tu manera.",
-    text: "Usamos tecnologías esenciales y, solo si lo autorizas, contenido funcional y analítica. No utilizamos cookies publicitarias.",
+    text: "Usamos tecnologías esenciales y, solo si lo autorizas, contenido funcional, analítica y medición publicitaria.",
     accept: "Aceptar todas",
     reject: "Rechazar no esenciales",
     customise: "Personalizar",
@@ -54,6 +58,8 @@ const ui = {
     functionalText: "Idioma y contenidos de Cal.com, Google Maps y Vimeo.",
     analytics: "Analíticas",
     analyticsText: "Google Analytics 4 para comprender el uso del sitio.",
+    advertising: "Medición publicitaria",
+    advertisingText: "Google Ads para medir el rendimiento de nuestras campañas publicitarias.",
     always: "Siempre activas",
     save: "Guardar preferencias",
     cancel: "Cancelar",
@@ -62,7 +68,7 @@ const ui = {
   },
   en: {
     title: "Privacy, on your terms.",
-    text: "We use essential technologies and, only if you allow them, functional content and analytics. We do not use advertising cookies.",
+    text: "We use essential technologies and, only if you allow them, functional content, analytics and advertising measurement.",
     accept: "Accept all",
     reject: "Reject non-essential",
     customise: "Customise",
@@ -75,6 +81,8 @@ const ui = {
     functionalText: "Language and Cal.com, Google Maps and Vimeo content.",
     analytics: "Analytics",
     analyticsText: "Google Analytics 4 to understand website usage.",
+    advertising: "Advertising measurement",
+    advertisingText: "Google Ads to measure how our advertising campaigns perform.",
     always: "Always on",
     save: "Save preferences",
     cancel: "Cancel",
@@ -103,6 +111,7 @@ function parseConsent(rawCookie: string): ConsentPreferences | null {
       parsed.version !== CONSENT_VERSION ||
       typeof parsed.functional !== "boolean" ||
       typeof parsed.analytics !== "boolean" ||
+      (parsed.advertising !== undefined && typeof parsed.advertising !== "boolean") ||
       typeof parsed.updatedAt !== "string"
     ) {
       return null;
@@ -136,12 +145,18 @@ function deleteCookie(name: string) {
   }
 }
 
-function clearCategoryCookies(category: "functional" | "analytics") {
+function clearCategoryCookies(category: keyof ConsentSelection) {
   if (category === "functional") deleteCookie(LANGUAGE_COOKIE);
   if (category === "analytics") {
     for (const item of document.cookie.split("; ")) {
       const name = item.split("=")[0];
       if (name === "_ga" || name.startsWith("_ga_")) deleteCookie(name);
+    }
+  }
+  if (category === "advertising") {
+    for (const item of document.cookie.split("; ")) {
+      const name = item.split("=")[0];
+      if (name.startsWith("_gcl_") || name.startsWith("_gac_")) deleteCookie(name);
     }
   }
 }
@@ -158,12 +173,11 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = locale;
   }, [locale]);
 
-  function commit(selection: Pick<ConsentPreferences, "functional" | "analytics">) {
+  function commit(selection: ConsentSelection) {
     const previous = preferences;
     const next: ConsentPreferences = {
       version: CONSENT_VERSION,
-      functional: selection.functional,
-      analytics: selection.analytics,
+      ...selection,
       updatedAt: new Date().toISOString(),
     };
     setCookie(CONSENT_COOKIE, JSON.stringify(next), SIX_MONTHS_SECONDS);
@@ -172,9 +186,11 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
 
     const revokedFunctional = previous?.functional && !next.functional;
     const revokedAnalytics = previous?.analytics && !next.analytics;
+    const revokedAdvertising = previous?.advertising && !next.advertising;
     if (revokedFunctional) clearCategoryCookies("functional");
     if (revokedAnalytics) clearCategoryCookies("analytics");
-    if (revokedFunctional || revokedAnalytics) window.location.reload();
+    if (revokedAdvertising) clearCategoryCookies("advertising");
+    if (revokedFunctional || revokedAnalytics || revokedAdvertising) window.location.reload();
   }
 
   const value: ConsentContextValue = {
@@ -183,12 +199,13 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     modalOpen,
     openPreferences: () => setModalOpen(true),
     closePreferences: () => setModalOpen(false),
-    acceptAll: () => commit({ functional: true, analytics: true }),
-    rejectNonEssential: () => commit({ functional: false, analytics: false }),
+    acceptAll: () => commit({ functional: true, analytics: true, advertising: true }),
+    rejectNonEssential: () => commit({ functional: false, analytics: false, advertising: false }),
     savePreferences: commit,
     enableFunctional: () => commit({
       functional: true,
       analytics: preferences?.analytics ?? false,
+      advertising: preferences?.advertising ?? false,
     }),
   };
 
@@ -196,7 +213,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
     <ConsentContext.Provider value={value}>
       {children}
       <ConsentUi locale={locale} />
-      <ConsentAwareAnalytics />
+      <ConsentAwareGoogleTag />
     </ConsentContext.Provider>
   );
 }
@@ -214,7 +231,7 @@ function ConsentUi({ locale }: { locale: Locale }) {
 
   return (
     <>
-      {consent.ready && !consent.preferences && !consent.modalOpen ? (
+      {consent.ready && consent.preferences?.advertising === undefined && !consent.modalOpen ? (
         <section className="cookie-banner" aria-labelledby="cookie-banner-title">
           <div className="cookie-banner-copy">
             <p className="eyebrow">Fonus Studio · Privacy</p>
@@ -239,6 +256,7 @@ function PreferencesModal({ locale }: { locale: Locale }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const [functional, setFunctional] = useState(consent.preferences?.functional ?? false);
   const [analytics, setAnalytics] = useState(consent.preferences?.analytics ?? false);
+  const [advertising, setAdvertising] = useState(consent.preferences?.advertising ?? false);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -314,10 +332,17 @@ function PreferencesModal({ locale }: { locale: Locale }) {
               <span aria-hidden="true" />
             </span>
           </label>
+          <label className="cookie-option">
+            <div><h3>{t.advertising}</h3><p>{t.advertisingText}</p></div>
+            <span className="switch">
+              <input type="checkbox" checked={advertising} onChange={(event) => setAdvertising(event.target.checked)} />
+              <span aria-hidden="true" />
+            </span>
+          </label>
         </div>
 
         <div className="cookie-modal-actions">
-          <button className="button button-primary" type="button" onClick={() => consent.savePreferences({ functional, analytics })}>{t.save}</button>
+          <button className="button button-primary" type="button" onClick={() => consent.savePreferences({ functional, analytics, advertising })}>{t.save}</button>
           <button className="button button-secondary" type="button" onClick={consent.rejectNonEssential}>{t.reject}</button>
           <button className="cookie-text-button" type="button" onClick={consent.closePreferences}>{t.cancel}</button>
         </div>
@@ -359,67 +384,78 @@ export function LanguagePreferenceLink({
 }
 
 type Gtag = (...args: unknown[]) => void;
-type AnalyticsWindow = Window & {
+type GoogleTagWindow = Window & {
   dataLayer?: unknown[];
   gtag?: Gtag;
 };
 
-function ConsentAwareAnalytics() {
+function ConsentAwareGoogleTag() {
   const { preferences, ready } = useConsent();
   const pathname = usePathname();
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() ?? "";
-  const validMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId);
-  const loadedRef = useRef(false);
-  const initialPathRef = useRef(pathname);
+  const analytics = preferences?.analytics === true && /^G-[A-Z0-9]+$/i.test(measurementId);
+  const advertising = preferences?.advertising === true;
+  const functional = preferences?.functional === true;
+  const tagLoadedRef = useRef(false);
+  const adsConfiguredRef = useRef(false);
+  const lastAnalyticsPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!ready || !validMeasurementId) return;
-    const analyticsWindow = window as AnalyticsWindow;
+    if (!ready || (!analytics && !advertising && !tagLoadedRef.current)) return;
+    const tagWindow = window as GoogleTagWindow;
     // The root layout creates this queue before hydration so Google sees the
     // denied defaults before any config or event command.
-    if (!Array.isArray(analyticsWindow.dataLayer)) analyticsWindow.dataLayer = [];
-    if (typeof analyticsWindow.gtag !== "function") {
-      analyticsWindow.gtag = function gtag() {
+    if (!Array.isArray(tagWindow.dataLayer)) tagWindow.dataLayer = [];
+    if (typeof tagWindow.gtag !== "function") {
+      tagWindow.gtag = function gtag() {
         // Google Tag expects the function's Arguments object, not a rest array.
         // eslint-disable-next-line prefer-rest-params
-        analyticsWindow.dataLayer?.push(arguments);
+        tagWindow.dataLayer?.push(arguments);
       };
     }
-    const gtag = analyticsWindow.gtag;
+    const gtag = tagWindow.gtag;
 
-    if (!preferences?.analytics) return;
     gtag("consent", "update", {
-      analytics_storage: "granted",
-      functionality_storage: preferences.functional ? "granted" : "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
+      analytics_storage: analytics ? "granted" : "denied",
+      functionality_storage: functional ? "granted" : "denied",
+      ad_storage: advertising ? "granted" : "denied",
+      ad_user_data: advertising ? "granted" : "denied",
       ad_personalization: "denied",
     });
 
-    if (!loadedRef.current) {
-      const script = document.createElement("script");
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-      script.async = true;
-      script.dataset.fonusAnalytics = "true";
-      document.head.appendChild(script);
-      gtag("js", new Date());
+    if (!tagLoadedRef.current) gtag("js", new Date());
+    if (advertising && !adsConfiguredRef.current) {
+      gtag("config", GOOGLE_ADS_ID);
+      adsConfiguredRef.current = true;
+    }
+    if (analytics && lastAnalyticsPathRef.current === null) {
       gtag("config", measurementId, {
         anonymize_ip: true,
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
       });
-      loadedRef.current = true;
+      lastAnalyticsPathRef.current = window.location.pathname;
     }
-  }, [measurementId, preferences, ready, validMeasurementId]);
+    if (!tagLoadedRef.current) {
+      const tagId = advertising ? GOOGLE_ADS_ID : measurementId;
+      const script = document.createElement("script");
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(tagId)}`;
+      script.async = true;
+      document.head.appendChild(script);
+      tagLoadedRef.current = true;
+    }
+  }, [advertising, analytics, functional, measurementId, ready]);
 
   useEffect(() => {
-    if (!preferences?.analytics || !loadedRef.current || pathname === initialPathRef.current) return;
-    (window as AnalyticsWindow).gtag?.("event", "page_view", {
+    if (!analytics || lastAnalyticsPathRef.current === null || pathname === lastAnalyticsPathRef.current) return;
+    lastAnalyticsPathRef.current = pathname;
+    (window as GoogleTagWindow).gtag?.("event", "page_view", {
+      send_to: measurementId,
       page_path: pathname,
       page_location: window.location.href,
       page_title: document.title,
     });
-  }, [pathname, preferences?.analytics]);
+  }, [analytics, measurementId, pathname]);
 
   return null;
 }
