@@ -1,5 +1,13 @@
 # vinext-starter
 
+## Fonus Studio production
+
+[fonusstudio.com](https://www.fonusstudio.com/) is served by the Vercel project
+`fonus-website` from the `main` branch of
+[`fonusstudio/fonus-website`](https://github.com/fonusstudio/fonus-website).
+Fetch `origin/main` and check the Vercel production deployment before starting
+site edits. Use `npm run build` to check the production build locally.
+
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
 Drizzle support.

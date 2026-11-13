@@ -399,18 +399,26 @@ function PortfolioPage({ locale }: { locale: Locale }) {
         <Image
           className="portfolio-hero-photo"
           src="/images/scree-equipment.webp"
-          alt={locale === "es" ? "Equipo de iluminación, vídeo y sonido del estudio" : "Studio lighting, video, and audio equipment"}
+          alt={t.studioEquipmentAlt}
           fill
           priority
           unoptimized
           sizes="100vw"
         />
         <div className="portfolio-hero-copy section-shell">
-          <div><p className="eyebrow">{t.badge}</p><h1>{t.title}</h1><p>{t.intro}</p></div>
+          <div>
+            <p className="eyebrow">{t.badge}</p>
+            <h1>{t.title}</h1>
+            <p className="portfolio-hero-intro">{t.intro}</p>
+            <div className="button-row portfolio-hero-links">
+              <a className="button button-primary" href="#studio">{t.exploreStudio}</a>
+              <a className="button button-secondary" href="#featured-work">{t.viewWork}</a>
+            </div>
+          </div>
         </div>
       </section>
-      <section className="section-shell section-pad">
-        <p className="eyebrow portfolio-grid-eyebrow">{t.featured}</p>
+      <section id="featured-work" className="section-shell section-pad portfolio-featured" aria-labelledby="featured-work-title">
+        <h2 id="featured-work-title" className="eyebrow portfolio-grid-eyebrow">{t.featured}</h2>
         <div
           className="portfolio-full-grid"
           style={{ display: "flex", flexWrap: "wrap", gap: "18px", justifyContent: "center", alignItems: "stretch" }}
@@ -464,6 +472,55 @@ function PortfolioPage({ locale }: { locale: Locale }) {
           })}
         </div>
       </section>
+      <section id="studio" className="section-shell section-pad recording-spaces" aria-labelledby="recording-spaces-title">
+        <div className="section-heading">
+          <h2 id="recording-spaces-title">{t.studio}</h2>
+          <p className="section-lead">{t.studioText}</p>
+        </div>
+        <div className="recording-spaces-gallery">
+          <figure>
+            <Image
+              src="/images/hero-studio.webp"
+              alt={t.studioWideAlt}
+              width={2400}
+              height={1600}
+              unoptimized
+            />
+            <figcaption>
+              <strong>{t.studioMainStage}</strong>
+              <span>{t.studioMainStageDescription}</span>
+            </figcaption>
+          </figure>
+          <figure>
+            <Image
+              src="/images/scree-equipment.webp"
+              alt={t.studioEquipmentAlt}
+              width={2400}
+              height={1600}
+              unoptimized
+            />
+            <figcaption>
+              <strong>{t.studioBackdrops}</strong>
+              <span>{t.studioBackdropsDescription}</span>
+            </figcaption>
+          </figure>
+          <figure>
+            <div className="recording-spaces-coming-soon">{t.studioLoungeSoon}</div>
+            <figcaption>
+              <strong>{t.studioLounge}</strong>
+              <span>{t.studioLoungeDescription}</span>
+            </figcaption>
+          </figure>
+        </div>
+        <section className="recording-spaces-specs" aria-labelledby="recording-spaces-specs-title">
+          <h3 id="recording-spaces-specs-title">{t.studioSpecs}</h3>
+          <ul className="portfolio-bullet-list recording-spaces-features">
+            {t.studioPoints.map((point) => (
+              <li key={point}><span className="price-feature-icon" aria-hidden="true" /><span>{point}</span></li>
+            ))}
+          </ul>
+        </section>
+      </section>
       <section id="behind-scenes" className="section-shell section-pad editorial-duo">
         <div>
           <p className="eyebrow">{t.behind}</p>
@@ -474,17 +531,6 @@ function PortfolioPage({ locale }: { locale: Locale }) {
           </ul>
         </div>
         <StudioVisual label={t.behind} index="BTS" src="/images/video-production.webp" alt={t.behind} />
-      </section>
-      <section id="studio" className="section-shell section-pad editorial-duo editorial-duo-reverse">
-        <StudioVisual label={t.studio} index="ST" src="/images/studio-equipment.webp" alt={t.studio} />
-        <div>
-          <p className="eyebrow">Fonus Studio</p>
-          <h2>{t.studio}</h2>
-          <p>{t.studioText}</p>
-          <ul className="portfolio-bullet-list">
-            {t.studioPoints.map((point) => <li key={point}><span className="price-feature-icon" aria-hidden="true" /><span>{point}</span></li>)}
-          </ul>
-        </div>
       </section>
       <FinalCta locale={locale} title={t.ctaTitle} />
     </>
